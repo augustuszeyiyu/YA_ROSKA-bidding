@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+	<head>
+		<title>YA-ROSKA</title>
+		<meta charset="utf-8" />
+
+		<link rel="stylesheet" type="text/css" href="https://res.purimize.com/lib/glyphicons/glyphicon-fontawesome/glyphicon.css">
+
+		<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+		<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/JCloudYu/whelm-js@1.4.7/whelmjs.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/JCloudYu/extes@3.0/extes.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+		<script src="./external/resource.js"></script>
+
+		<!-- <script src="./script.min.js"></script> -->
+		<script src="./script.js"></script>
+	</head>
+	<body>
+		<div elm-export="viewport" elm-export-accessor class="main hide">		
+			<div elm-export="tabbar" class="navigator tabbars home_view_layout" >			
+				<div class="tabbar-item">
+					<span class="glyph-fontawesome-gear"></span>
+					<p>永康合會管理</p>
+				</div>
+				<div class="tabbar-item" elm-bind-event="click::change-page" data-page="members_view">
+					<span class="glyph-fontawesome-gear"></span>
+					<p>會員身分管理</p>
+				</div>
+				<div class="tabbar-item" elm-bind-event="click::change-page" data-page="member_pay_view">
+					<span class="glyph-fontawesome-gear"></span>
+					<p>會員繳費資訊</p>		
+				</div>
+				<div class="tabbar-item" elm-bind-event="click::change-page" data-page="roska_continue_view">
+					<span class="glyph-fontawesome-gear"></span>
+					<p>進行中的會組</p>
+				</div>
+				<div class="tabbar-item" elm-bind-event="click::change-page" data-page="roska_end_view">
+					<span class="glyph-fontawesome-gear"></span>
+					<p>已完結的會組</p>
+				</div>
+				<div class="tabbar-item" elm-bind-event="click::change-page" data-page="roska_new_view">
+					<span class="glyph-fontawesome-gear"></span>
+					<p>新增會組</p>
+				</div>
+				<div class="tabbar-item" elm-bind-event="click::change-page" data-page="roska_bid_view">
+					<span class="glyph-fontawesome-gear"></span>
+					<p>會組開標</p>
+				</div>
+				<div class="tabbar-item" elm-bind-event="click::change-page" data-page="profit_view">
+					<span class="glyph-fontawesome-gear"></span>
+					<p>損益資訊</p>
+				</div>
+				<div class="tabbar-item" elm-bind-event="click::change-page" data-page="sysvar_view">
+					<span class="glyph-fontawesome-gear"></span>
+					<p>參數設定</p>
+				</div>
+				
+			</div>
+
+			<div class="viewport " elm-export="viewport_container ">
+				<div elm-export="members_view" elm-export-accessor class="dashboard-view"></div>
+				<div elm-export="member_pay_view" elm-export-accessor class="dashboard-view"></div>
+				<div elm-export="roska_continue_view" elm-export-accessor class="dashboard-view"></div>
+				<div elm-export="roska_end_view" elm-export-accessor class="dashboard-view"></div>
+				<div elm-export="roska_new_view" elm-export-accessor class="dashboard-view"></div>
+				<div elm-export="roska_bid_view" elm-export-accessor class="dashboard-view"></div>
+				<div elm-export="profit_view" elm-export-accessor class="dashboard-view"></div>
+				<div elm-export="sysvar_view" elm-export-accessor class="dashboard-view"></div>
+			</div>
+		</div>
+
+		<div elm-export="register_overlay" elm-export-accessor class="overlay hide"></div>
+		<div elm-export="login_overlay" elm-export-accessor class="overlay"></div>
+		<div elm-export="loading_overlay" elm-export-accessor class="overlay hide">
+			<div elm-export="message" class="message-box">處理中</div>
+		</div>
+		<script>(()=>{ window.WEBSITE_URL = 'http://127.0.0.1:33688'; })();</script>
+		<script src="./script/bind-elemnt.js"></script>
+		<script src="./module/init/module.js"></script>
+	</body>
+</html>

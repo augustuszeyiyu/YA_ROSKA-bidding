@@ -1,0 +1,42 @@
+{
+  "private": true,
+  "name": "ya-roska_www",
+  "version": "0.0.1",
+  "description": "YK_ROSCA a small R.O.S.C.A. programe development",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prebuild": "npm run clear_all",
+    "build": "npm run _compile && npm run _copyres && npm run _pack",
+    "postbuild": "npm run _prep_test && npm run _clear_pack && npm run _uglify",
+    "clear_all": "npm run _clear_pack && npm run _clear_build",
+    "_compile": "tsc",
+    "_pack": "rollup --config ./rollup.config.js",
+    "_copyres": "copyfiles -e ./tsconfig.json -e ./rollup.config.js -e ./package.json -e ./package-lock.json -e \"./**/*.ts\" -e \"./_build/**/*\" -e \"./_dist/**/*\" -e \"./node_modules/**/*\" \"./**/*\" ./_dist",
+    "_prep_test": "cd ./_dist && copyfiles ./index/* ../_build && copyfiles ./index/**/* ../_build && copyfiles ./index/**/**/* ../_build && find ../_build/index -name \"*.d.ts\" -exec rm {} \\;",
+    "_uglify": "terser -c -m -o ./_build/index/script.min.js -- ./_build/index/script.js",
+    "_clear_pack": "rm -rf ./_dist",
+    "_clear_build": "rm -rf ./_build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/augustuszeyiyu/YK_ROSCA.git"
+  },
+  "keywords": [],
+  "author": "AugustusYu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/augustuszeyiyu/YK_ROSCA/issues"
+  },
+  "homepage": "https://github.com/augustuszeyiyu/YK_ROSCA#readme",
+  "dependencies": {
+    "@rollup/plugin-commonjs": "^21.0.1",
+		"@rollup/plugin-node-resolve": "^13.1.3",
+		"@types/js-cookie": "^3.0.2",
+		"copyfiles": "^2.4.1",
+		"rollup": "^2.67.2",
+		"rollup-plugin-dts": "^4.1.0",
+		"terser": "^5.10.0",
+		"typescript": "^4.5.5"
+  }
+}

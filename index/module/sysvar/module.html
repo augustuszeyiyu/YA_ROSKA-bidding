@@ -1,0 +1,65 @@
+<div class="inner_module" style="overflow:hidden;">
+	<div class="area-right" style="margin-left:2rem;">
+		<label class="grid-title" style="padding: 1rem;	font-size: 1.3rem; font-weight: bolder;">系統設定值</label>
+		<div class="grid">
+			<div class="grid-content sysvar-info" elm-export="system_sysvar" elm-export-accessor>
+				<div class="field" elm-export="level_9_ratio" elm-export-accessor>
+					<div>會期數</div>
+					<div>
+						<input elm-export="edit" type="number" min="0" max="100" step="0.1"/>
+						(<span elm-export="display"></span>期)
+					</div>
+				</div>
+				<div class="field" elm-export="level_10_ratio" elm-export-accessor>
+					<div>基本會費</div>
+					<div>
+						<input elm-export="edit" type="number" min="0" max="100" step="0.1"/>
+						<!-- (<span elm-export="display"></span>%) -->
+					</div>
+				</div>
+				<div class="field" elm-export="fuel_share_ratio" elm-export-accessor>
+					<div>服務費</div>
+					<div>
+						<input elm-export="edit" type="text"/> 
+						<!-- (<span elm-export="display"></span>%) -->
+					</div>
+				</div>
+				<div class="field" elm-export="fuel_taker_ratio" elm-export-accessor>
+					<div>標金</div>
+					<div>
+						<input elm-export="edit" type="text"/> 
+						<!-- (<span elm-export="display"></span>%) -->
+					</div>
+				</div>
+				<div class="field" elm-export="share_ratio" elm-export-accessor>
+					<div>最高標金</div>
+					<div>
+						<input elm-export="edit" type="text"/> 
+						<!-- (<span elm-export="display"></span>%) -->
+					</div>
+				</div>
+				<div class="field" elm-export="perf_bonus_ratio" elm-export-accessor>
+					<div>最低標金</div>
+					<div>
+						<input elm-export="edit" type="text"/> 
+						<!-- (<span elm-export="display"></span>%) -->
+					</div>
+				</div>
+				<div class="field" elm-export="tfr_fee_lv0" elm-export-accessor>
+					<div>開標週期</div>
+					<div>
+						<input elm-export="edit" type="text"/> 
+						<!-- (<span elm-export="display"></span> USDT) -->
+					</div>
+				</div>
+
+	
+				<div style="margin:1rem 1rem 1rem 15rem; position: fixed; bottom: 2rem;">
+					<button elm-export="btn_save" style="min-width:200px;" elm-bind-event="bubble::click::do-update-info">儲存修改</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+</div>		  
