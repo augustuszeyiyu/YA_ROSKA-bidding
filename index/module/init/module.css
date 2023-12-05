@@ -13,7 +13,7 @@ html,body {margin:0; width:100%; height:100%;}
 		.main .tabbars > div:first-child { margin-top: 1em; }
 		.main .tabbars > div:last-child { margin-bottom: 1em; }
 		.main .tabbars > div { padding:1em 0; width:100%; text-align:center; cursor: pointer; user-select: none; }
-		.main .tabbars > div > span {pointer-events: none;}
+		.main .tabbars > div > span ,p {pointer-events: none;}
 		.main .tabbars .active { background: rgb(255, 255, 255, 0.1); }
 
 		.main .tabbars .tabbar-item{ flex-direction: row; display: flex; align-items: center; }

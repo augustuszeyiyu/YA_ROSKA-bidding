@@ -1,0 +1,88 @@
+<div class="inner_module" style="overflow:hidden;">
+	<div class="area-right">
+		<div class="grid-title module_title" >新增會組序號</div>
+		<div class="grid">
+			<div class="grid-content new_group_serial" elm-export="new_group_serial" elm-export-accessor>
+				<div class="grid-title" style="padding: 1rem; font-size: 1.3rem; font-weight: bolder;">新會組參數</div>
+				<div class="grid-content group_serial_value" >
+					<div class="field" elm-export="member_count" elm-export-accessor>
+						<div>會期數(會組人數)</div>
+						<div>
+							<input elm-export="edit" type="number" min="0" max="100" step="0.1"/>
+							(<span elm-export="display"></span>期)
+						</div>
+					</div>
+					<div class="field" elm-export="basic_unit_amount" elm-export-accessor>
+						<div>基本會費</div>
+						<div>
+							<input elm-export="edit" type="number" min="0" max="10000" step="100"/>
+							<!-- (<span elm-export="display"></span>%) -->
+						</div>
+					</div>
+					<div class="field" elm-export="service_fee" elm-export-accessor>
+						<div>服務費</div>
+						<div>
+							<input elm-export="edit" type="text"/> 
+							<!-- (<span elm-export="display"></span>%) -->
+						</div>
+					</div>
+					<div class="field" elm-export="bid_unit_spacing" elm-export-accessor>
+						<div>標金間距</div>
+						<div>
+							<input elm-export="edit" type="text"/> 
+							<!-- (<span elm-export="display"></span>%) -->
+						</div>
+					</div>
+					<div class="field" elm-export="max_bid_amount" elm-export-accessor>
+						<div>最高標金</div>
+						<div>
+							<input elm-export="edit" type="text"/> 
+							<!-- (<span elm-export="display"></span>%) -->
+						</div>
+					</div>
+					<div class="field" elm-export="min_bid_amount" elm-export-accessor>
+						<div>最低標金</div>
+						<div>
+							<input elm-export="edit" type="text"/> 
+							<!-- (<span elm-export="display"></span>%) -->
+						</div>
+					</div>
+					<div class="field" elm-export="bid_start_time" elm-export-accessor>
+						<div>開標起始日期</div>
+						<div>
+							<input elm-export="edit" type="text"/> 
+							<!-- (<span elm-export="display"></span> USDT) -->
+						</div>
+					</div>
+					<div class="field" elm-export="frequency" elm-export-accessor>
+						<div>開標週期</div>
+						<div>
+							<input elm-export="edit" type="text"/> 
+							<!-- (<span elm-export="display"></span> USDT) -->
+						</div>
+					</div>		
+				</div>		
+					<!-- <div style="margin:1rem 1rem 1rem 15rem; position: fixed; bottom: 2rem;"> -->
+				<div style="margin:1.5rem 1rem; width: 100%;  display: flex; justify-content: center;">
+					<button elm-export="btn_save" style="min-width:160px; height: 2rem;" elm-bind-event="bubble::click::do-update-info">成立新會組</button>
+				</div>
+			</div>
+
+			<div class="grid-content new-list" elm-export="new-list" elm-export-accessor>
+				<div class="grid-title" style="padding: 1rem; font-size: 1.3rem; font-weight: bolder;">新會組列表</div>
+				<div class="group_list new-list table">
+					<div class="t-head">
+						<div class="t-column">編號</div>
+						<div class="t-column">會組號</div>
+						<div class="t-column">成立時間</div>
+						<div class="t-column">檢視</div>
+						<div class="t-column">刪除</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+</div>		  

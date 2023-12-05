@@ -76,10 +76,10 @@
 				// @ts-ignore
 				switch (result.code) {
 					case ROSKA_FORM.ErrorMap.LoginError.TOTP_REQUIRE.code: {
-						const totp = prompt('請輸入 奇奇怪怪 Authenticator 驗證碼');
+						const totp = prompt('請輸入 Authenticator 驗證碼');
 						
 						if (!totp) {
-							alert('請輸入 奇奇怪怪 Authenticator 驗證碼！');
+							alert('請輸入 Authenticator 驗證碼！');
 							return;
 						}
 
@@ -138,7 +138,14 @@
 
 		const modules: typeof window.modules = window.modules = [];
 		const module_names = [
-			'sysvar',
+			'members_view',
+			'member_pay_view',
+			'roska_continue_view',
+			'roska_end_view',
+			'roska_new_view',
+			'roska_bid_view',
+			'profit_view',
+			'sysvar_view',
 			// 'dashboard',
 		];
 		const paths: {

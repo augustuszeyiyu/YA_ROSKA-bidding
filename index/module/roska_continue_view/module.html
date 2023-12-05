@@ -1,0 +1,31 @@
+<div class="inner_module" style="overflow:hidden;">
+	<div class="area-right" style="margin-left:2rem;">
+		<label class="grid-title" style="padding: 1rem;	font-size: 1.3rem; font-weight: bolder;">進行中的會組</label>
+		<div class="grid">
+			<div class="grid-content sysvar-info" elm-export="system_sysvar" elm-export-accessor>
+				<div class="field" elm-export="member_count" elm-export-accessor>
+					<div>會期數</div>
+					<div>
+						<input elm-export="edit" type="number" min="0" max="100" step="0.1"/>
+						(<span elm-export="display"></span>期)
+					</div>
+				</div>
+				<div class="field" elm-export="basic_unit_amount" elm-export-accessor>
+					<div>基本會費</div>
+					<div>
+						<input elm-export="edit" type="number" min="0" max="10000" step="100"/>
+						<!-- (<span elm-export="display"></span>%) -->
+					</div>
+				</div>
+				
+
+	
+				<div style="margin:1rem 1rem 1rem 15rem; position: fixed; bottom: 2rem;">
+					<button elm-export="btn_save" style="min-width:200px;" elm-bind-event="bubble::click::do-update-info">儲存修改</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+</div>		  

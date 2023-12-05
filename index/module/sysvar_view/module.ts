@@ -1,5 +1,5 @@
 (async () => {
-	const TAG = 'sysvar';
+	const TAG = 'sysvar_view';
     const LANG_NAME_MAP = {en_us:'英文', zh_tw:'繁體中文', zh_cn:'簡體中文'};
     type QueryParam = {};
 	type PagingCursor = Awaited<ReturnType<typeof window.ROSKA_FORM.Do_Register_User_Info>>;
@@ -18,8 +18,8 @@
 	modules.push({
 		init: async function(){
 			const [{element: layout}] = await window.resources([
-				{ type: 'html', path: './module/sysvar/module.html'},
-				{ type: 'css', path: './module/sysvar/module.css' }
+				{ type: 'html', path: './module/sysvar_view/module.html'},
+				{ type: 'css', path: './module/sysvar_view/module.css' }
 			]);
 
 			view.element.innerHTML = layout.innerHTML;
@@ -51,7 +51,21 @@
 
 		async function LoadAndShowSystemSysvar() {
 			const accessor = view.system_sysvar;
-			accessor.
+			const test_data = Object.entries({
+				"member_count": 25,
+				"basic_unit_amount": 5000,
+				"min_bid_amount": 200,
+				"max_bid_amount": 1000,
+				"bid_unit_spacing": 200,
+				"bid_start_time": "2023-11-15",
+				"frequency": "monthly",
+				"service_fee":300,
+			  })
+			for( var [key,value] of test_data){
+				accessor[key].edit.value = value;
+			}
+			accessor.relink();
+
 			// const sysvars:{key:keyof typeof CONVERSION_MAP; value:[number, number]|string|number;}[] = await window.AIHunter.GetSystemSysvar();
 
 			// for(const {key, value} of sysvars) {
