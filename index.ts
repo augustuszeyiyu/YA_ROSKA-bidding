@@ -11,10 +11,12 @@ import * as DataTypeSysvar from "./api/data-type/sysvar.js";
 // import * as DataTypeSerial from "./api/data-type/serial.js";
 // import * as DataTypeRemit from "./api/data-type/remit.js";
 import * as DataTypeRegister from "./api/data-type/register.js";
+import * as DataTypeGroups from "./api/data-type/gropus.js";
 
 import * as ApiSystem from "./api/system.js";
 import * as ApiUser from "./api/user.js";
-import * as Apiregister from "./api/register.js";
+import * as ApiRegister from "./api/register.js";
+import * as ApiGroups from "./api/groups.js";
 // import * as ApiTransaction from "./api/transaction.js";
 // import * as ApiMaintenance from "./api/maintenance.js";
 // import * as ApiSerial from "./api/serial.js";
@@ -33,6 +35,7 @@ type BaseType = {
 		// typeof DataTypeTrading 
 		// & typeof DataTypeUserShareRatios 
 		& typeof DataTypeSysvar 
+		& typeof DataTypeGroups
 		// & typeof DataTypeTransaction 
 		// & typeof DataTypeMaintenance
 		// & typeof DataTypeSerial
@@ -49,6 +52,7 @@ const Base:BaseType = {
 		// DataTypeTrading, 
 		// DataTypeUserShareRatios, 
 		DataTypeSysvar, 
+		DataTypeGroups,
 		// DataTypeTransaction, 
 		// DataTypeMaintenance, 
 		// DataTypeSerial,
@@ -57,7 +61,8 @@ const Base:BaseType = {
 };
 const Exported = Object.assign(
 	Base,
-	Apiregister,
+	ApiRegister,
+	ApiGroups,
 	// ApiSystem,
 	// ApiUser,
 	// ApiTransaction,
@@ -73,7 +78,8 @@ const Exported = Object.assign(
 
 type ROSKA_FORM_Class = 
 	typeof Base
-	& typeof Apiregister
+	& typeof ApiRegister
+	& typeof ApiGroups
 	// & typeof ApiSystem 
 	// & typeof ApiUser 
 	// & typeof ApiTransaction 

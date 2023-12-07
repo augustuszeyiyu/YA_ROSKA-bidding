@@ -168,11 +168,22 @@ export default class SessionControl {
 		});
 	}
 
+	// static async Logout():Promise<boolean> {
+	// 	if ( !_RUNTIME.session_info ) return true;
+
+	// 	return fetch(`${SessionControl.endpoint_url}/api/auth/session`, {
+	// 		method:'DELETE',
+	// 		headers: {"Authorization": `Bearer ${_RUNTIME.session_info.access_token}`}
+	// 	})
+	// 	.then(ProcRemoteResponse).then(()=>false)
+	// 	.finally(async()=>_RUNTIME.session_info = null);
+	// }
+
 	static async Logout():Promise<boolean> {
 		if ( !_RUNTIME.session_info ) return true;
 
-		return fetch(`${SessionControl.endpoint_url}/api/auth/session`, {
-			method:'DELETE',
+		return fetch(`${SessionControl.endpoint_url}/api/auth/logout`, {
+			method:'get',
 			headers: {"Authorization": `Bearer ${_RUNTIME.session_info.access_token}`}
 		})
 		.then(ProcRemoteResponse).then(()=>false)

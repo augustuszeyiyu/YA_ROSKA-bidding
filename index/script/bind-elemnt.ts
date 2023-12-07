@@ -15,6 +15,7 @@
 	// REGION: [ Prepare page change events ]
 	viewport
 	.on('change-page', (e:any)=>{
+		console.log('check 01');
 		const tabbar 		= e.original.target;
 		const target_page 	= tabbar.dataset.page;
 		// ISSUE: Force to set category to avoid wrong page changes in the same page

@@ -29,7 +29,7 @@
     const captcha_getin_result = await ROSKA_FORM.Session.GetCaptcha();
     accessor.captcha_getin.innerHTML= captcha_getin_result.img;
 
-    accessor.account.value='A112345555';
+    accessor.account.value='F1123456789';
     accessor.password.value='Abcd1234';
 
     // REGION: [ Login from access_token ]
@@ -66,8 +66,6 @@
 			return;
 		}
 
-
-
 		try {
 			loading_overlay.Show();
 			let result = await ROSKA_FORM.Session.Login({ nid, password, captcha }).catch((e: Error) => e);
@@ -90,18 +88,13 @@
 						throw result;
 				}
 			}
-
-
 			resolve();
 			PageLogin.Hide();
-
-
-
 			// NOTE: Set session cookies to keep login state before current session ends
 			Cookies.set(COOKIE_ACCESS_TOKEN, result.access_token, { secure: true, sameSite: 'strict' });
 		}
 		catch (e: any) {
-			alert(`登入失敗！(${e.message})`);
+			// alert(`登入失敗！(${e.message})`);
 			console.error(`[${TAG}]`, e);
 		}
 		finally {
@@ -113,6 +106,9 @@
 		viewport
 			.on('show-login-page', () => {
 				PageLogin.Show();
+			})
+			.on('logout', async (_e:any) => {
+				do_logout();
 			});
 
 
@@ -127,6 +123,19 @@
 			}
 		};
 	}
+
+    async function do_logout() {
+        try {
+            let result = await ROSKA_FORM.Session.Logout();
+            if (result === false) {
+                window.location.reload();
+            }
+        }
+        catch (e:any) {
+            alert(`登出失敗(${e.message})`);
+            console.error(`[${TAG}]`, e);
+        }
+    }
 
 
 

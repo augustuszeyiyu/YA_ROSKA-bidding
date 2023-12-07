@@ -8,7 +8,7 @@
 					<div class="field" elm-export="member_count" elm-export-accessor>
 						<div>會期數(會組人數)</div>
 						<div>
-							<input elm-export="edit" type="number" min="0" max="100" step="0.1"/>
+							<input elm-export="edit" type="number" min="0" max="100" step="1"/>
 							(<span elm-export="display"></span>期)
 						</div>
 					</div>
@@ -22,7 +22,7 @@
 					<div class="field" elm-export="service_fee" elm-export-accessor>
 						<div>服務費</div>
 						<div>
-							<input elm-export="edit" type="text"/> 
+							<input elm-export="edit" type="text"/> </inpu>
 							<!-- (<span elm-export="display"></span>%) -->
 						</div>
 					</div>
@@ -63,12 +63,12 @@
 					</div>		
 				</div>		
 					<!-- <div style="margin:1rem 1rem 1rem 15rem; position: fixed; bottom: 2rem;"> -->
-				<div style="margin:1.5rem 1rem; width: 100%;  display: flex; justify-content: center;">
-					<button elm-export="btn_save" style="min-width:160px; height: 2rem;" elm-bind-event="bubble::click::do-update-info">成立新會組</button>
+				<div style="margin:1.5rem 1rem; display: flex; justify-content: flex-end; padding-right: 2rem;">
+					<button elm-export="btn_add_new" style="min-width:160px; height: 2rem;" elm-bind-event="bubble::click::add_new">成立新會組</button>
 				</div>
 			</div>
 
-			<div class="grid-content new-list" elm-export="new-list" elm-export-accessor>
+			<div class="grid-content new-list" elm-export="new_list" elm-export-accessor>
 				<div class="grid-title" style="padding: 1rem; font-size: 1.3rem; font-weight: bolder;">新會組列表</div>
 				<div class="group_list new-list table">
 					<div class="t-head">
@@ -78,7 +78,17 @@
 						<div class="t-column">檢視</div>
 						<div class="t-column">刪除</div>
 					</div>
-
+					<div elm-export="region_list" class='t-body'></div>
+					<template class=" hide">
+						<div elm-export="tmpl_item" elm-export-tmpl class="t-row">
+								<div class="field"><div><span elm-export="count"></span></div></div>
+								<div class="field"><div><span elm-export="sid"></span></div></div>
+								<div class="field"><div><span elm-export="create_time"></span></div></div>
+								<div class="field"><label>交易所</label><div><span elm-export="exchange"></span></div></div>
+								<div class="field"><label>交易對</label><div><span elm-export="symbol"></span></div></div>
+							<!-- <div class="time">Lv　<span elm-export="level"></span></div> -->
+						</div>
+					</template>
 				</div>
 			</div>
 		</div>
