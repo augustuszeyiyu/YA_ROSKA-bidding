@@ -14,8 +14,8 @@
     modules.push({
         init: async function () {
             const [{ element: layout }] = await window.resources([
-                { type: 'html', path: './module/roska_bid_view/module.html' },
-                { type: 'css', path: './module/roska_bid_view/module.css' }
+                { type: 'html', path: './module/roska_new_view/module.html' },
+                { type: 'css', path: './module/roska_new_view/module.css' }
             ]);
             view.element.innerHTML = layout.innerHTML;
             view.relink();
@@ -66,9 +66,7 @@
         var bid_person = "楊威力";
 
         content_501p_content01.innerHTML="本票<br>"
-        content_501p_content.innerHTML="發票取得人"+bid_person+"永康合會YA013會組，第12期得標金。須依據合會契約，自民國112年9月10日起，"+
-        "至民國113年8月10日止，於每月13日前，無條件支付會首楊勝凱先生，或其他指定人，每期會款五千元整，總計12期，匯款金額:陸萬元整。發票人如有一期未按時支付會款時，"+
-        "則其餘各期會款，均視同全部到期，無條件憑票一次支付其餘各期的全部匯款金額。如發票人未履行上述支付義務，發票人同意鍾家支付雙方法律訴訟的相關費用，新台幣三萬元整。";
+        content_501p_content.innerHTML="發票取得人"+bid_person+"永康合會YA013會組，第12期得標金。須依據合會契約，自民國112年9月10日起，至民國113年8月10日止，於每月13日前，無條件支付會首楊勝凱先生，或其他指定人，每期會款五千元整，總計12期，匯款金額:陸萬元整。發票人如有一期未按時支付會款時，則其餘各期會款，均視同全部到期，無條件憑票一次支付其餘各期的全部匯款金額。如發票人未履行上述支付義務，發票人同意鍾家支付雙方法律訴訟的相關費用，新台幣三萬元整。";
        
         content_501p.appendChild(content_501p_content01);
         content_501p.appendChild(content_501p_content);

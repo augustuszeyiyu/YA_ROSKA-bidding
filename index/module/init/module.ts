@@ -30,7 +30,7 @@
     accessor.captcha_getin.innerHTML= captcha_getin_result.img;
 
     accessor.account.value='F1123456789';
-    accessor.password.value='Abcd1234';
+    accessor.password.value='A1234567';
 
     // REGION: [ Login from access_token ]
 

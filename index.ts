@@ -11,7 +11,7 @@ import * as DataTypeSysvar from "./api/data-type/sysvar.js";
 // import * as DataTypeSerial from "./api/data-type/serial.js";
 // import * as DataTypeRemit from "./api/data-type/remit.js";
 import * as DataTypeRegister from "./api/data-type/register.js";
-import * as DataTypeGroups from "./api/data-type/gropus.js";
+import * as DataTypeGroups from "./api/data-type/groups.js";
 
 import * as ApiSystem from "./api/system.js";
 import * as ApiUser from "./api/user.js";

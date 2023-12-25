@@ -1,5 +1,5 @@
-<div class="inner_module" style="overflow:hidden;">
-	<div class="area-right">
+<div class="inner_module">
+	
 		<div class="grid-title module_title" >新增會組序號</div>
 		<div class="grid">
 			<div class="grid-content new_group_serial" elm-export="new_group_serial" elm-export-accessor>
@@ -68,9 +68,9 @@
 				</div>
 			</div>
 
-			<div class="grid-content new-list" elm-export="new_list" elm-export-accessor>
+			<div class="grid-content " elm-export="list_container" elm-export-accessor>
 				<div class="grid-title" style="padding: 1rem; font-size: 1.3rem; font-weight: bolder;">新會組列表</div>
-				<div class="group_list new-list table">
+				<div class="group_list list-container table">
 					<div class="t-head">
 						<div class="t-column">編號</div>
 						<div class="t-column">會組號</div>
@@ -84,15 +84,15 @@
 								<div class="field"><div><span elm-export="count"></span></div></div>
 								<div class="field"><div><span elm-export="sid"></span></div></div>
 								<div class="field"><div><span elm-export="create_time"></span></div></div>
-								<div class="field"><label>交易所</label><div><span elm-export="exchange"></span></div></div>
-								<div class="field"><label>交易對</label><div><span elm-export="symbol"></span></div></div>
+								<div class="field"><label></label><div><span elm-export="view_group"></span></div></div>
+								<div class="field"><label></label><div><span elm-export="delete_group"></span></div></div>
 							<!-- <div class="time">Lv　<span elm-export="level"></span></div> -->
 						</div>
 					</template>
+					
 				</div>
 			</div>
 		</div>
-	</div>
-	
-
+		
+<!-- inner_module -->
 </div>		  

@@ -1,31 +1,38 @@
-<div class="inner_module" style="overflow:hidden;">
-	<div class="area-right" style="margin-left:2rem;">
-		<label class="grid-title" style="padding: 1rem;	font-size: 1.3rem; font-weight: bolder;">會員身分管理</label>
-		<div class="grid">
-			<div class="grid-content sysvar-info" elm-export="system_sysvar" elm-export-accessor>
-				<div class="field" elm-export="member_count" elm-export-accessor>
-					<div>會期數</div>
-					<div>
-						<input elm-export="edit" type="number" min="0" max="100" step="0.1"/>
-						(<span elm-export="display"></span>期)
-					</div>
-				</div>
-				<div class="field" elm-export="basic_unit_amount" elm-export-accessor>
-					<div>基本會費</div>
-					<div>
-						<input elm-export="edit" type="number" min="0" max="10000" step="100"/>
-						<!-- (<span elm-export="display"></span>%) -->
-					</div>
-				</div>
-				
+<div class="inner_module">
 
-	
-				<div style="margin:1rem 1rem 1rem 15rem; position: fixed; bottom: 2rem;">
-					<button elm-export="btn_save" style="min-width:200px;" elm-bind-event="bubble::click::do-update-info">儲存修改</button>
+		<div class="grid-title module_title">會員身分管理</div>
+		<div class="grid">
+			<div class="grid-content" elm-export="list_container" elm-export-accessor>
+				<div class="grid-title" style="padding: 1rem; font-size: 1.3rem; font-weight: bolder;">會員列表</div>
+				<div class="group_list list-container table member_table">
+					<div class="t-head">
+						<div class="t-column">編號</div>
+						<div class="t-column">手機</div>
+						<div class="t-column">姓名</div>
+						<div class="t-column">身分證字號</div>
+						<div class="t-column">市話</div>
+						<div class="t-column">加入時間</div>
+						<div class="t-column">檢視</div>
+						<div class="t-column">資產負債資訊</div>
+					</div>
+					<div elm-export="region_list" class='t-body '></div>
+					<template class=" hide">
+						<div elm-export="tmpl_item" elm-export-tmpl class="t-row">
+								<div class="field"><div><span elm-export="count"></span></div></div>
+								<div class="field"><div><span elm-export="phone"></span></div></div>
+								<div class="field"><div><span elm-export="name"></span></div></div>
+								<div class="field"><div><span elm-export="uid"></span></div></div>
+								<div class="field"><div><span elm-export="referrer_name"></span></div></div>
+								<div class="field"><div><span elm-export="join_time"></span></div></div>
+								<div class="field"><div><span elm-export="view_member"></span></div></div>
+								<div class="field"><div><span elm-export="member_profit"></span></div></div>
+							<!-- <div class="time">Lv　<span elm-export="level"></span></div> -->
+						</div>
+					</template>
+					
 				</div>
 			</div>
 		</div>
-	</div>
 	
-
+<!-- inner_module -->
 </div>		  
