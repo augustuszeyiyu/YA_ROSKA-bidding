@@ -35,8 +35,9 @@
 	(()=>{
 		view
 		.on('view-state', (e:any) => {
-			if (e.state !== "show")
+			if (e.state !== "show"){
 				return;
+			}
 			loading_overlay.Show();
 			ResetPage();
 			init_new_group_serial_parameter()
@@ -98,20 +99,38 @@
                 // 	window.open("/admin/member/info-approval/" + button.dataset.relId,innerHeight=500,innerWidth=500);
                 // 	break;
                 // }
-                
-                case "edit": {
+                case "delete_group":{
+					var confirmed:any  = confirm("您確定要刪除此會組?\n"+button.dataset.relId);
+                    if (confirmed){
+                        delete_serial(button.dataset.relId);
+                    }else{ 
+                    }
+					ResetPage();
+					list_new_group_serial();
+                    break;
+				}
+                case "view_group": {
                     // window.location.href = "/admin/member/info/" + row.dataset.relId;
-                    window.open("./module/roska_new_view/modals.js", 'innerHeight=1600' ,'innerWidth=800',);
+                    window.open("./"+'?'+ 'sid='+button.dataset.relId , 'innerHeight=900' ,'innerWidth=1200',);
                     // window.open("./module/roska_new_view/modals.html" + button.dataset.relId, innerHeight=1600,innerWidth=800,);
                     break;
                     
                 }
                 
                 default:
-                    alert("您沒有權限使用該功能！\\n請使用更高權限等級的帳號執行此操作！");
+                    alert("您沒有權限使用該功能！\n請使用更高權限等級的帳號執行此操作！");
                     return;
             }
         })
+		// async function delete_serial(serial_number:typeof window.ROSKA_FORM.DataType) {
+		async function delete_serial(serial_number:string) {
+			try{
+			let result = await ROSKA_FORM.delete_group_serial(serial_number);
+			}catch (e: any) {
+				alert(`新增失敗!(${e.message})`);
+				console.error(`[${TAG}]`, e);
+			}
+        }
 
 		async function init_new_group_serial_parameter() {
 			const accessor = view.new_group_serial;
@@ -135,7 +154,7 @@
             var queryData = {
                 order: "DESC",
                 page: "1",
-                page_size: "25"
+                page_size: "30"
             };
 			const list_data = await ROSKA_FORM.Admin_get_new_list(queryData);
 			// const { region_list: list, total_records,tmpl_item  } = view.list_container;
@@ -143,7 +162,7 @@
 			const region_list = view.list_container.region_list;
             const tmpl_item = view.list_container.tmpl_item;
 			var count = 1;
-			console.log(list_data);
+			// console.log(list_data);
 			// const {records} = STATE.cursor;
 			const records = list_data.records;
 			for(const record of records) {
@@ -166,7 +185,7 @@
 				const button_group_detail = document.createElement("button");
 				button_group_detail.classList.add("btn-blue");
                 button_group_detail.textContent = "檢視會組";
-                button_group_detail.dataset.role = 'edit';
+                button_group_detail.dataset.role = 'view_group';
                 button_group_detail.dataset.relId = record.sid;
 				
 				elm.view_group.appendChild(button_group_detail);
@@ -174,7 +193,7 @@
 				const button_group_delete = document.createElement("button");
 				button_group_delete.classList.add("btn-red");
                 button_group_delete.textContent = "刪除會組";
-                button_group_delete.dataset.role = 'edit';
+                button_group_delete.dataset.role = 'delete_group';
                 button_group_delete.dataset.relId = record.sid;
 				
 				elm.delete_group.appendChild(button_group_delete);
@@ -182,8 +201,6 @@
 				region_list.appendChild(elm.element);
 			}
 		}
-
-
 
 		async function add_new_group_serial(){
 			const accessor = view.new_group_serial;
@@ -202,7 +219,7 @@
 					new_group_serial_data[key]=accessor[key].edit.value;
 				}
 			};
-			console.log(new_group_serial_data);
+			// console.log(new_group_serial_data);
 			try{
 				let result = await ROSKA_FORM.add_new_group_serial(new_group_serial_data);
 			}catch (e: any) {

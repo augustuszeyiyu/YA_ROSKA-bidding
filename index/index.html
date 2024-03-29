@@ -17,6 +17,11 @@
 		<script src="./script.js"></script>
 	</head>
 	<body>
+		<div elm-export="modal_view" class="main hide" elm-export-accessor>
+			余則易modal
+		</div>
+
+		
 		<div elm-export="viewport" elm-export-accessor class="main hide">		
 			<div elm-export="tabbar" class="navigator tabbars home_view_layout" >			
 				<div class="tabbar-item">
@@ -44,8 +49,12 @@
 				</div>
 				<div class="tabbar-item" elm-bind-event="click::change-page" data-page="roska_bid_view">
 					<span class="glyph-fontawesome-gear"></span>
-					<p>會組資訊模組</p>
+					<p>會款收復明細模組</p>
 				</div>
+				<!-- <div class="tabbar-item" elm-bind-event="click::change-page" data-page="roska_payment">
+					<span class="glyph-fontawesome-gear"></span>
+					<p>會組明細模組</p>
+				</div> -->
 				<div class="tabbar-item" elm-bind-event="click::change-page" data-page="profit_view">
 					<span class="glyph-fontawesome-gear"></span>
 					<p>損益資訊</p>

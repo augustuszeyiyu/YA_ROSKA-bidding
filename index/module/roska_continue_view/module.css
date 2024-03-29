@@ -1,0 +1,68 @@
+.table {}
+		.table > .t-head, .table .t-body { border:1px solid #EEE; }
+		.table > .t-head { border-bottom:0; font-weight:bolder; background-color:#DDC855;}
+			.table > .t-body > .t-row, .table > .t-head { display:grid; }
+			.table > .t-body > .t-row:first-child ~ .t-row { border-top:1px solid #EEE; }
+				.table .t-column {
+					overflow:hidden;
+					display:flex; justify-content:center; align-items:center;
+					min-width:0; padding:0.5rem;
+				}
+			.table > .t-body > .t-row:nth-child(2n+1){ background-color: #F2EBD1; }
+			.table > .t-body > .t-row:nth-child(2n){ background-color: #F9F5E9; }
+				.table .t-column.no-padding {padding:0;}
+					.table .t-column > div.text-limiter { width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+				
+				.table .t-column:first-child ~ .t-column { border-left:1px solid #EEE; }
+
+				.table.continue_table .t-row, .table.continue_table .t-head	{
+					grid-template-columns:5rem 1.5fr 1.5fr 1.5fr 1.5fr 1fr 1fr 1fr 0.5fr 1fr;
+				}
+
+		.table .t-row, .table .t-head { grid-template-columns:5rem 2.5fr 2.5fr 1fr 1fr}
+			.table .t-column { box-sizing:border-box; }
+	
+			/* 編號 */
+			.table .t-column:nth-child(1) { }
+				.table .t-column .member-state { width:1.5rem; height:1.5rem; border-radius:2rem; background:#FFF; cursor:pointer; }
+				.table .t-column .member-state[data-state="enabled"] { background:#090; }
+				.table .t-column .member-state[data-state="disabled"] { background:#900; }
+			
+			/* 會組號 */
+			.table .t-column:nth-child(2) {}
+			
+			/* 成立時間 */
+			.table .t-column:nth-child(3) {}
+			
+			/* 上次開標時間 */
+			.table .t-column:nth-child(4) {}
+			
+			/* 得標會員 */
+			.table .t-column:nth-child(5) {}
+			
+			/* 標金 */
+			.table .t-column:nth-child(6) {}
+			
+			/* 檢視 */
+			.table .t-column:nth-child(7) {}
+			
+			/* 開標 */
+			.table .t-column:nth-child(8) {}
+			
+			/* */
+			.table .t-column:nth-child(9) {}
+			
+			/* */
+			.table .t-column:nth-child(10) {}
+			
+			/* */
+			.table .t-column:nth-child(11) {}
+			
+			/* */
+			.table .t-column:nth-child(12) {}
+			
+				.table button {
+					width:100%; height:100%; border:none; border-radius:0;
+					padding:1rem!important; font-size:1.1em; font-weight:bolder;
+				}
+				.table button[data-role="forbidden"] { background:#990000; color:#FFF; }

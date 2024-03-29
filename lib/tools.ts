@@ -122,3 +122,20 @@ export async function ProcRemoteResponse(resp:Response, whitelist:number[]=[]):P
 
 	return Promise.reject(final_error);
 }
+
+
+export function TruncateFraction(number:number, fraction_digits = 0) {
+	const sign = number >= 0 ? '' : '-';
+	number = Math.abs(number);
+	
+	const enlarge_ratio = Math.pow(10, fraction_digits);
+	const fraction = pad_zero(Math.floor(number*enlarge_ratio)%enlarge_ratio, fraction_digits);
+	const integer = Math.floor(number);
+	return sign + integer + '.' + fraction;
+}
+
+export function pad_zero(i:number, num:number) {
+	const str = '' + i;
+	const repeat = num - str.length;
+	return '0'.repeat(repeat > 0 ? repeat : 0) + str;
+}

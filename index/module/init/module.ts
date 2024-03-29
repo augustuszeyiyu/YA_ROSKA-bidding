@@ -13,6 +13,7 @@
 	const viewport = window.viewport;
 	const accessor = window.login_overlay;
 	const loading_overlay = window.loading_overlay;
+	const modal_view = window.modal_view;
 	{
 		const [{ element: layout }] = await window.resources([
 			{ type: 'html', path: './module/init/module.html' },
@@ -23,17 +24,15 @@
 		accessor.relink();
 		layout.remove();	
 	}
-
-
     const PageLogin = new ROSKA_FORM.PageController({ viewport: accessor.element });
     const captcha_getin_result = await ROSKA_FORM.Session.GetCaptcha();
     accessor.captcha_getin.innerHTML= captcha_getin_result.img;
 
-    accessor.account.value='F1123456789';
+	// REGION : [ dev helper]
+    accessor.account.value='0966286789';
     accessor.password.value='A1234567';
 
     // REGION: [ Login from access_token ]
-
 	const access_token = Cookies.get(COOKIE_ACCESS_TOKEN);
 	if (access_token) {
 		try {
@@ -51,7 +50,6 @@
 			loading_overlay.Hide();
 		}
 	}
-	// ENDREGION
 	// REGION: [ Login from account and password ]
 	accessor.btn_login.onclick = async () => {
 		const nid = accessor.account.value;
@@ -136,16 +134,12 @@
             console.error(`[${TAG}]`, e);
         }
     }
-
-
-
 	// REGION: [ Wait authorization, load modules and landing to main page ]
 	{
 		await window.WaitAuthorization();
 
-
-
 		const modules: typeof window.modules = window.modules = [];
+		const modals: typeof window.modals = window.modals = [];
 		const module_names = [
 			'members_view',
 			'member_pay_view',
@@ -157,10 +151,30 @@
 			'sysvar_view',
 			// 'dashboard',
 		];
+		const modal_names = [
+			'group_view',
+		];
+		const modalsPath:{
+			path: string;
+			type: 'js';
+		}[] = [];
 		const paths: {
 			path: string;
 			type: 'js';
 		}[] = [];
+
+
+		for (const name of modal_names) {
+			modalsPath.push({ path: `./modal/${name}/modal.js`, type: 'js' });
+		}
+		await resources(modalsPath);		
+		const modalPromises = [];
+		for (const modal of modals) {
+			modalPromises.push(modal.init());
+		}
+		await Promise.wait(modalPromises);
+
+
 
 		for (const name of module_names) {
 			paths.push({ path: `./module/${name}/module.js`, type: 'js' });
@@ -172,13 +186,22 @@
 		}
 		await Promise.wait(promises);
 
-
-
-		const tabbars = document.querySelector('.tabbars');
-		if (tabbars) {
-			tabbars.children[0].emit('click');
+	
+		const InputParams = new URLSearchParams(window.location.search);
+        const searchParams: Array<string> = [];
+        InputParams.forEach((key ,value:any)=>{
+                searchParams[value]=key;
+        });
+		if ( InputParams.size != 0 ){
+			modal_view.removeClass('hide');
 		}
-		viewport.removeClass('hide');
+		else {
+			const tabbars = document.querySelector('.tabbars');
+			if (tabbars) {
+				tabbars.children[0].emit('click');
+			}
+			viewport.removeClass('hide');
+		}	
 	}
 	// ENDREGION
 })();

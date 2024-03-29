@@ -4,13 +4,18 @@
 		<div class="grid">
 			<div class="grid-content" elm-export="list_container" elm-export-accessor>
 				<div class="grid-title" style="padding: 1rem; font-size: 1.3rem; font-weight: bolder;">進行中的會組列表</div>
-				<div class="group_list list-container table">
+				<div class="group_list list-container table continue_table">
 					<div class="t-head">
 						<div class="t-column">編號</div>
 						<div class="t-column">會組號</div>
 						<div class="t-column">成立時間</div>
+						<div class="t-column">上次開標時間</div>
+						<div class="t-column">得標會員</div>
+						<div class="t-column">標金</div>
 						<div class="t-column">檢視</div>
-						<div class="t-column">開標</div>
+						<div class="t-column">自動開標</div>
+						<div class="t-column"><input type="checkbox"></div>
+						<div class="t-column">手動開標</div>
 					</div>
 					<div elm-export="region_list" class='t-body'></div>
 					<template class=" hide">
@@ -18,8 +23,13 @@
 								<div class="field"><div><span elm-export="count"></span></div></div>
 								<div class="field"><div><span elm-export="sid"></span></div></div>
 								<div class="field"><div><span elm-export="create_time"></span></div></div>
+								<div class="field"><div><span elm-export="last_time"></span></div></div>
+								<div class="field"><div><span elm-export="bid_member"></span></div></div>
+								<div class="field"><div><span elm-export="bid_amount"></span></div></div>
 								<div class="field"><label></label><div><span elm-export="view_group"></span></div></div>
 								<div class="field"><label></label><div><span elm-export="bid"></span></div></div>
+								<div class="field"><label></label><div><span elm-export="check_box"></span></div></div>
+								<div class="field"><label></label><div><span elm-export="manual_bid"></span></div></div>
 							<!-- <div class="time">Lv　<span elm-export="level"></span></div> -->
 						</div>
 					</template>

@@ -53,7 +53,7 @@ export default class SessionControl {
 	}
 	static async GetCaptcha() {
 		return fetch(`${SessionControl.endpoint_url}/api/auth/login`, {
-			method:'GET', credentials:'include', mode: 'cors'
+			method:'GET', 
 		})
 		.then(ProcRemoteResponse)
 		.then(async(resp)=>{
@@ -124,7 +124,7 @@ export default class SessionControl {
 		captcha = (param1 as TypeLoginObjAccount).captcha;
 
 		if(access_token !== undefined) {
-			return fetch(`${SessionControl.endpoint_url}/api/auth/session/`, {
+			return fetch(`${SessionControl.endpoint_url}/api/auth/session`, {
 				method:'GET',
 				headers: {"Authorization": `Bearer ${access_token}`}
 			})
@@ -147,7 +147,7 @@ export default class SessionControl {
 		return fetch(`${SessionControl.endpoint_url}/api/auth/login`, {
 			method:'POST',
 			headers: {"Content-Type": "application/json"},
-			body: JSON.stringify({ nid:account, password:password, captcha:captcha })
+			body: JSON.stringify({ mobile_number:account, password:password, captcha:captcha })
 		})		.then(ProcRemoteResponse)
 		.then(async(resp)=>{
 			const result:{

@@ -11,7 +11,11 @@ declare global {
 		modules:{
 			init:()=>Promise<void>
 		}[];
-
+// Test
+		modal_view:any;
+		modals:{
+			init:()=>Promise<void>
+		}[];
 
 		WEBSITE_URL:string;
 
