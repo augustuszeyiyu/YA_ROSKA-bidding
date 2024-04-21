@@ -13,7 +13,7 @@
 	const viewport = window.viewport;
 	const accessor = window.login_overlay;
 	const loading_overlay = window.loading_overlay;
-	const modal_view = window.modal_view;
+	const modal_view = window.modal_view;	
 	{
 		const [{ element: layout }] = await window.resources([
 			{ type: 'html', path: './module/init/module.html' },
@@ -152,7 +152,9 @@
 			// 'dashboard',
 		];
 		const modal_names = [
+			'group_payment',
 			'group_view',
+			// 'member_view',
 		];
 		const modalsPath:{
 			path: string;
@@ -162,12 +164,11 @@
 			path: string;
 			type: 'js';
 		}[] = [];
-
-
 		for (const name of modal_names) {
 			modalsPath.push({ path: `./modal/${name}/modal.js`, type: 'js' });
 		}
-		await resources(modalsPath);		
+		await resources(modalsPath);	
+
 		const modalPromises = [];
 		for (const modal of modals) {
 			modalPromises.push(modal.init());
@@ -175,6 +176,8 @@
 		await Promise.wait(modalPromises);
 
 
+
+		
 
 		for (const name of module_names) {
 			paths.push({ path: `./module/${name}/module.js`, type: 'js' });
@@ -186,22 +189,44 @@
 		}
 		await Promise.wait(promises);
 
-	
 		const InputParams = new URLSearchParams(window.location.search);
-        const searchParams: Array<string> = [];
+        const searchParams: any = {};
         InputParams.forEach((key ,value:any)=>{
                 searchParams[value]=key;
+                // console.log(value);
+                // console.log(searchParams[value]);
         });
-		if ( InputParams.size != 0 ){
-			modal_view.removeClass('hide');
-		}
-		else {
-			const tabbars = document.querySelector('.tabbars');
-			if (tabbars) {
-				tabbars.children[0].emit('click');
-			}
-			viewport.removeClass('hide');
-		}	
+
+        if (InputParams.size != 0 && searchParams['modal']) {
+            const modal_name = searchParams['modal'];
+            // console.log(modal_name);
+            // console.log(modal_view[modal_name]);
+            modal_view.removeClass('hide');
+            modal_view[modal_name].removeClass('hide');
+            modal_view[modal_name].emit('view-state',{state:'show'});
+        }
+        else {
+            const tabbars = document.querySelector('.tabbars');
+            if (tabbars) {
+                tabbars.children[0].emit('click');
+            }
+            viewport.removeClass('hide');
+        }	
+		// const InputParams = new URLSearchParams(window.location.search);
+        // const searchParams: Array<string> = [];
+        // InputParams.forEach((key ,value:any)=>{
+        //         searchParams[value]=key;
+        // });
+		// if ( InputParams.size != 0 ){
+		// 	modal_view.removeClass('hide');
+		// }
+		// else {
+		// 	const tabbars = document.querySelector('.tabbars');
+		// 	if (tabbars) {
+		// 		tabbars.children[0].emit('click');
+		// 	}
+		// 	viewport.removeClass('hide');
+		// }	
 	}
 	// ENDREGION
 })();

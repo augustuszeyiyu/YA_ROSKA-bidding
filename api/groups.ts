@@ -200,7 +200,16 @@ export async function Admin_get_past_list(query_data:any) {
 };
 
 
-
+//GET
+// /api/group/member/{sid}
+/**搜尋該團下的成員**/
+export async function Get_in_groups(query_data?:RoskaSerials){
+	SessionControl.CheckLogin();
+	return fetch(`${SessionControl.endpoint_url}/api/group/member/`+query_data, {
+		method:'GET',
+		headers: {"Authorization": SessionControl.auth_token},		
+	}).then(ProcRemoteResponse).then((resp)=>resp.json());
+}
 
 /** 管理者搜尋使用者列表 **/
 
@@ -237,8 +246,8 @@ export async function List_all_user(arg1:GetUserListQuery, arg2?:GetUserListResp
 	// 	if (page_size !== undefined)
 	// 		searchParams.set('ps', query_data.page_size + '');
 	// }
-	console.log("searchParams")
-	console.log(searchParams);
+	// console.log("searchParams")
+	// console.log(searchParams);
 	return fetch(`${SessionControl.endpoint_url}/api/admin/user/list?${searchParams}`, {
 		method:'GET',
 		headers: {"Authorization": SessionControl.auth_token},

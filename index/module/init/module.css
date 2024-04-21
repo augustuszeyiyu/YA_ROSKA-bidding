@@ -21,7 +21,7 @@ html,body {margin:0; width:100%; height:100%;}
 		.main .tabbars .tabbar-item :nth-child(1){ padding: 0 0.5rem;}
 
 	.main > .viewport { border:1px solid #000; width: 100%; height: 100%; overflow-y: auto; }
-
+	/* .main > .viewport .dashboard-view{ height: 100%; overflow: auto;} */
 
 
 .overlay {

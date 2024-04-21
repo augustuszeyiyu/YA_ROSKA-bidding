@@ -11,7 +11,7 @@
     const modals = window.modals;
     const loading_overlay = window.loading_overlay;
     const view = window.modal_view;
-    const modal_view = view.group_payment;
+    const modal_view = view.group_view;
     modals.push({
         init: async function () {
             const [{ element: layout }] = await window.resources([
