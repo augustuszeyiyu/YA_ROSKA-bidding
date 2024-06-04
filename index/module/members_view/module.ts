@@ -76,6 +76,7 @@
 	.on('view-state', (e:any) => {
 		if (e.state !== "show")
 			return;
+		ResetPage();
 		// loading_overlay.Show();
 		// LoadAndUpdateList(STATE.query)
 		// 	.catch((e) => {
@@ -86,7 +87,61 @@
 		// 	.finally(() => {
 		// 	loading_overlay.Hide();
 		// 	});
-		ResetPage();
+		
+	})
+	.on('click', async(e:any)=>{
+		const trigger = e.target;
+		const row = trigger.closest('.t-row');
+		if ( !row ) return;
+		
+		
+		// if ( trigger.closest('.member-state') !== null ) {
+		//     const {id, enabled} = member_map[row.dataset.relId];
+		//     await ToggleUserEnableState(id, !enabled);
+		//     return;
+		// }
+		
+		
+		const button = trigger.closest('button');
+		
+		if ( !button || !row ) return;
+		
+		switch(button.dataset.role) {
+			// case APPLICATION_TYPE.UPGRADE_ADVANCED:
+			// case APPLICATION_TYPE.UPGRADE_BUSINESS:
+			// case APPLICATION_TYPE.BUY_ADVERT_POINT:
+			// case APPLICATION_TYPE.WITHDRAW: {
+			//     window.location.href = "/admin/member/approval/" + button.dataset.relId;
+			//     break;
+			// }
+			
+			// case APPLICATION_TYPE.PROFILE_VERIFICATION: {
+			//     window.location.href = "/admin/member/info-approval/" + button.dataset.relId;
+			//     break;
+			// }
+			// case APPLICATION_TYPE.PROFILE_VERIFICATION: {
+			// 	window.open("/admin/member/info-approval/" + button.dataset.relId,innerHeight=500,innerWidth=500);
+			// 	break;
+			// }
+			case "edit": {
+				// window.location.href = "/admin/member/info/" + row.dataset.relId;
+				window.open("./"+'?'+ 'mid='+button.dataset.relId +'&'+'modal=member_view', 'innerHeight=800' ,'innerWidth=800',);
+				// window.open("./module/roska_new_view/modals.html" + button.dataset.relId, innerHeight=1600,innerWidth=800,);
+				break;
+				
+			}
+			case "profit": {
+				// window.location.href = "/admin/member/info/" + row.dataset.relId;
+				window.open("./"+'?'+ 'sid='+button.dataset.relId +'&'+'modal=profit_view', 'innerHeight=800' ,'innerWidth=800',);
+				// window.open("./module/roska_new_view/modals.html" + button.dataset.relId, innerHeight=1600,innerWidth=800,);
+				break;
+				
+			}
+			
+			default:
+				alert("您沒有權限使用該功能！\\n請使用更高權限等級的帳號執行此操作！");
+				return;
+		}
 	})
 	// .on('add_new', (e:any) => {
 	// 	add_new_group_serial();
@@ -164,6 +219,7 @@
 			const accessor = view.member_list_container.list_container.region_list;
             accessor.innerHTML = '';
 		}
+		var count = 1;
 		LoadAndUpdateList(STATE.query)
 		// {
 		// 	const accessor = view.region_info;

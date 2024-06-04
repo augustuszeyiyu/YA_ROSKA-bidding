@@ -264,9 +264,10 @@ export async function List_all_user(arg1:GetUserListQuery, arg2?:GetUserListResp
 // /api/admin/group/bid/{gid}
 export async function bid_group_serial(query_data:any){
 	SessionControl.CheckLogin();
-	return fetch(`${SessionControl.endpoint_url}/api/admin/group/bid/${query_data}`, {
-		method:'GET',
-		headers: {"Authorization": SessionControl.auth_token},	
+	return fetch(`${SessionControl.endpoint_url}/api/admin/group/bid`, {
+		method:'POST',
+		headers: {"Authorization": SessionControl.auth_token, "Content-Type": "application/json"},	
+		body: JSON.stringify(query_data)	
 	}).then(ProcRemoteResponse).then((resp)=>resp.json());
 }
 

@@ -73,8 +73,21 @@
 		}
 	});
 	
+	// var selectAllCheckbox = document.getElementById('select-all') as HTMLInputElement;
+	// console.log( selectAllCheckbox );
+    // selectAllCheckbox.addEventListener('change', () => {
+    //     const rowCheckboxes = document.querySelectorAll('.row-checkbox') as NodeListOf<HTMLInputElement>;
+    //     rowCheckboxes.forEach(checkbox => {
+    //         checkbox.checked = selectAllCheckbox.checked;
+    //     });
+    // });
 
 	view
+	// .on('view-state', (e:any) => {
+	// 	if (e.state !== "show")
+	// 		return;
+	// 	ResetPage();
+	// })
 	.on('view-state', (e:any) => {
 		if (e.state !== "show")
 			return;
@@ -94,6 +107,26 @@
 	.on('click', async(e:any)=>{
 		const trigger = e.target;
 		const row = trigger.closest('.t-row');
+
+		const bid_all= trigger.closest('.bid_all');
+		if(bid_all){
+			var bid_all_group = document.querySelectorAll('.row-checkbox') as NodeListOf<HTMLInputElement>;;
+			bid_all_group.forEach(checkbox => {
+				if(checkbox.checked){
+					console.log(checkbox.dataset.next_gid);
+				};
+			});
+		}
+
+        const selectAllCheckbox= trigger.closest('#select-all');   
+        if (selectAllCheckbox) {
+            console.log(selectAllCheckbox);
+            var rowCheckboxes = document.querySelectorAll('.row-checkbox') as NodeListOf<HTMLInputElement>;;
+            rowCheckboxes.forEach(checkbox => {
+            checkbox.checked = selectAllCheckbox.checked;
+            });
+        }
+
 		if ( !row ) return;
 		
 		
@@ -102,12 +135,15 @@
 		//     await ToggleUserEnableState(id, !enabled);
 		//     return;
 		// }
+
+
+		// const selectcheckbox= trigger.closest('input');	
+        // if (selectcheckbox) {
+			// console.log(selectcheckbox);
+        // }
 		
-		
-		const button = trigger.closest('button');
-		
-		if ( !button || !row ) return;
-		
+		const button = trigger.closest('button');		
+		if ( !button || !row ) return;		
 		switch(button.dataset.role) {
 			// case APPLICATION_TYPE.UPGRADE_ADVANCED:
 			// case APPLICATION_TYPE.UPGRADE_BUSINESS:
@@ -126,15 +162,34 @@
 			// 	break;
 			// }
 			case "bid": {
-				// window.location.href = "/admin/member/info/" + row.dataset.relId;
-				window.open("./"+'?'+ 'sid='+button.dataset.relId , 'innerHeight=1600' ,'innerWidth=800',);
-				// window.open("./module/roska_new_view/modals.html" + button.dataset.relId, innerHeight=1600,innerWidth=800,);
+				var query_data = { "gid" :button.dataset.next_gid} ;
+				console.log(button.dataset.next_gid );
+				console.log(query_data);
+				try{
+					console.log(button.dataset.relSid );
+					await ROSKA_FORM.bid_group_serial(query_data);
+					// let result = await ROSKA_FORM.bid_group_serial(query_data).catch((e: Error) => e);
+					alert(button.dataset.relSid+'已完成開標');
+					ResetPage();
+				}
+				catch (e: any) {
+					alert(`開標失敗(${e.message}`);
+				}
+
+				break;
+			}
+			case "bid": {
+				var query_data = { "gid" :button.dataset.next_gid} ;
+				console.log(button.dataset.next_gid );
+				console.log(query_data);
+				await ROSKA_FORM.bid_group_serial(query_data).catch((e: Error) => e);
+				ResetPage();
 				break;
 				
 			}
 			case "view_group": {
 				// window.location.href = "/admin/member/info/" + row.dataset.relId;
-				window.open("./"+'?'+ 'sid='+button.dataset.relId +'&'+'modal=group_view', 'innerHeight=800' ,'innerWidth=800',);
+				window.open("./"+'?'+ 'sid='+button.dataset.relSid +'&'+'modal=group_view', 'innerHeight=800' ,'innerWidth=800',);
 				// window.open("./module/roska_new_view/modals.html" + button.dataset.relId, innerHeight=1600,innerWidth=800,);
 				break;
 				
@@ -169,8 +224,10 @@
 				// elm.element.dataset.id = record.id;
 				// elm.id.textContent = record.id;
 				// elm.email.textContent = record.email;
-				// elm.create_time.textContent = create_t
-				elm.create_time.textContent = record.create_time.slice(0 , 10)+" "+record.create_time.slice(11 , -5);;
+				elm.create_time.textContent = record.bid_start_time.slice(0 , 10);
+				// elm.create_time.textContent = record.create_time.slice(0 , 10)+" "+record.create_time.slice(11 , -5);;
+				elm.last_duration.textContent = record.prev_gid.slice(0, 6)+"-"+record.prev_gid.slice(-3,-2).toUpperCase()+record.prev_gid.slice(-2);
+				elm.bid_member.textContent = record.uid;
 				// elm.create_time.title = create_time.format("YYYY/MM/DD HH:mm:ss");
 				// elm.level.textContent = record.level;
 				// elm.exchange.textContent = record.exchange;
@@ -184,29 +241,41 @@
 				button_group_detail.classList.add("btn-blue");
 				button_group_detail.textContent = "檢視會組";
 				button_group_detail.dataset.role = 'view_group';
-				button_group_detail.dataset.relId = record.sid;
+				button_group_detail.dataset.relSid = record.sid;
 				elm.view_group.appendChild(button_group_detail);
 
 				const button_group_bid = document.createElement("button");
 				button_group_bid.classList.add("btn-green");
 				button_group_bid.textContent = "電腦開標";
 				button_group_bid.dataset.role = 'bid';
-				button_group_bid.dataset.relId = record.sid;	
+				button_group_bid.dataset.next_gid = record.next_gid;
+				button_group_bid.dataset.relSid = record.sid;	
 				elm.bid.appendChild(button_group_bid);
 
 				const button_check_box = document.createElement("input");
+				button_check_box.classList.add("row-checkbox");
 				button_check_box.type = "checkbox";
-				button_check_box.dataset.role = 'bid';
-				button_check_box.dataset.relId = record.sid;
+				button_check_box.dataset.role = 'checkbox';
+				button_check_box.dataset.next_gid = record.next_gid;
+				button_check_box.dataset.relSid = record.sid;
 				elm.check_box.appendChild(button_check_box);
 
 
-				const button_manual_bid = document.createElement("button");
-				button_manual_bid.classList.add("btn-orange");
-				button_manual_bid.textContent = "手動開標";
-				button_manual_bid.dataset.role = 'bid';
-				button_manual_bid.dataset.relId = record.sid;
-				elm.manual_bid.appendChild(button_manual_bid);
+				const button_export = document.createElement("button");
+				button_export.classList.add("btn-orange");
+				button_export.textContent = "輸出報表";
+				button_export.dataset.role = 'bid';
+				button_export.dataset.relSid = record.sid;
+				button_export.dataset.next_gid = record.next_gid;
+				elm.export.appendChild(button_export);
+
+				// const button_manual_bid = document.createElement("button");
+				// button_manual_bid.classList.add("btn-orange");
+				// button_manual_bid.textContent = "輸出報表";
+				// button_manual_bid.dataset.role = 'bid';
+				// button_manual_bid.dataset.relSid = record.sid;
+				// button_manual_bid.dataset.next_gid = record.next_gid;
+				// elm.manual_bid.appendChild(button_manual_bid);
 
 				region_list.appendChild(elm.element);
 			}
@@ -239,6 +308,7 @@
 			const accessor = view.continue_list_container.list_container.region_list;
             accessor.innerHTML = '';
 		}
+		var count = 1;
 		list_new_group_serial(queryData);
 		// {
 		// 	const accessor = view.region_info;

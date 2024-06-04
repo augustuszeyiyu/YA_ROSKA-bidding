@@ -81,6 +81,8 @@
         if( !searchParams['sid'])
         return;
         const list_data = await ROSKA_FORM.Get_in_groups(searchParams['sid']);
+        console.log(list_data);
+
         const { total_records, tmpl_item  } = modal_view.list_container;		
         const region_list = modal_view.list_container.region_list;
         if (list_data) {
@@ -98,13 +100,14 @@
                 elm.mid.textContent = record.mid;
                 elm.name.textContent = record.name;
                 elm.gid.textContent = record.gid;
+                elm.bid_amount.textContent = record.bid_amount;
                 region_list.appendChild(elm.element);
             })
             const button_group_bid = document.createElement("button");
                 button_group_bid.classList.add("btn-green");
                 button_group_bid.textContent = "開標";
                 button_group_bid.dataset.role = 'bid';
-                button_group_bid.dataset.relId = searchParams['sid'];
+                button_group_bid.dataset.relSid = searchParams['sid'];
 
             modal_view.list_container.button_region.appendChild(button_group_bid);
         }
