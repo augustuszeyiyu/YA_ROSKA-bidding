@@ -123,9 +123,9 @@
 			// 	window.open("/admin/member/info-approval/" + button.dataset.relId,innerHeight=500,innerWidth=500);
 			// 	break;
 			// }
-			case "edit": {
+			case "edit_user": {
 				// window.location.href = "/admin/member/info/" + row.dataset.relId;
-				window.open("./"+'?'+ 'mid='+button.dataset.relId +'&'+'modal=member_view', 'innerHeight=800' ,'innerWidth=800',);
+				window.open("./"+'?'+ 'uid='+button.dataset.relUid +'&'+'modal=member_detail', 'innerHeight=800' ,'innerWidth=800',);
 				// window.open("./module/roska_new_view/modals.html" + button.dataset.relId, innerHeight=1600,innerWidth=800,);
 				break;
 				
@@ -182,9 +182,9 @@
 
 				const button_group_detail = document.createElement("button");
 				button_group_detail.classList.add("btn-blue");
-				button_group_detail.textContent = "檢視";
-				button_group_detail.dataset.role = 'edit';
-				button_group_detail.dataset.relId = record.uid;
+				button_group_detail.textContent = "會員資料";
+				button_group_detail.dataset.role = 'edit_user';
+				button_group_detail.dataset.relUid = record.uid;
 				elm.view_member.appendChild(button_group_detail);
 
 				const button_group_bid = document.createElement("button");

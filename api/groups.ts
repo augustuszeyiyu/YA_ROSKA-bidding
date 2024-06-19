@@ -200,6 +200,18 @@ export async function Admin_get_past_list(query_data:any) {
 };
 
 
+// GET
+// /api/admin/file/latest-bid-opening-record
+// 產所有開標紀錄 excel 表	
+export async function export_all(){
+	SessionControl.CheckLogin();
+	return fetch(`${SessionControl.endpoint_url}/api/admin/file/latest-bid-opening-record`, {
+		method:'GET',
+		headers: {"Authorization": SessionControl.auth_token},		
+	}).then(ProcRemoteResponse).then((resp)=>resp.json());
+}
+
+
 //GET
 // /api/group/member/{sid}
 /**搜尋該團下的成員**/
@@ -210,6 +222,7 @@ export async function Get_in_groups(query_data?:RoskaSerials){
 		headers: {"Authorization": SessionControl.auth_token},		
 	}).then(ProcRemoteResponse).then((resp)=>resp.json());
 }
+
 
 /** 管理者搜尋使用者列表 **/
 
@@ -271,6 +284,18 @@ export async function bid_group_serial(query_data:any){
 	}).then(ProcRemoteResponse).then((resp)=>resp.json());
 }
 
+
+// GET
+// /api/admin/user/{uid}
+// 管理者搜尋使用者個人資料
+
+export async function Get_user(query_data?:RoskaMembers){
+	SessionControl.CheckLogin();
+	return fetch(`${SessionControl.endpoint_url}/api/admin/user/`+query_data, {
+		method:'GET',
+		headers: {"Authorization": SessionControl.auth_token},		
+	}).then(ProcRemoteResponse).then((resp)=>resp.json());
+}
 
 
 // POST

@@ -154,7 +154,7 @@
 		const modal_names = [
 			'group_payment',
 			'group_view',
-			// 'member_view',
+			'member_detail'
 		];
 		const modalsPath:{
 			path: string;

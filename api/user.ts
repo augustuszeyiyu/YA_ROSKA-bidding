@@ -190,3 +190,5 @@ export async function ResetUserPassword(id:string):Promise<EmptyObject> {
 	})
 	.then(ProcRemoteResponse).then((resp)=>resp.json());
 }
+
+

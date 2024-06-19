@@ -114,9 +114,37 @@
 			bid_all_group.forEach(checkbox => {
 				if(checkbox.checked){
 					console.log(checkbox.dataset.next_gid);
+					var query_data = { "gid" :checkbox.dataset.next_gid} ;
+					console.log(query_data);
+					try{
+						console.log(checkbox.dataset.relSid );
+						ROSKA_FORM.bid_group_serial(query_data);
+						alert(checkbox.dataset.relSid+'已完成開標');					
+					}
+					catch (e: any) {
+						alert(`開標失敗(${e.message}`);
+					}
 				};
 			});
+			ResetPage();
+			return;
 		}
+
+		const export_all= trigger.closest('.export_all');
+        if (export_all) {
+            console.log(export_all);
+			try{
+				let result_data = await ROSKA_FORM.export_all();
+				// let result = await ROSKA_FORM.bid_group_serial(query_data).catch((e: Error) => e);
+				console.log(result_data);
+				alert(result_data);
+				ResetPage();
+			}
+			catch (e: any) {
+				alert(`輸出失敗(${e.message}`);
+			}
+
+        }
 
         const selectAllCheckbox= trigger.closest('#select-all');   
         if (selectAllCheckbox) {
@@ -178,15 +206,15 @@
 
 				break;
 			}
-			case "bid": {
-				var query_data = { "gid" :button.dataset.next_gid} ;
-				console.log(button.dataset.next_gid );
-				console.log(query_data);
-				await ROSKA_FORM.bid_group_serial(query_data).catch((e: Error) => e);
-				ResetPage();
-				break;
+			// case "bid": {
+			// 	var query_data = { "gid" :button.dataset.next_gid} ;
+			// 	console.log(button.dataset.next_gid );
+			// 	console.log(query_data);
+			// 	await ROSKA_FORM.bid_group_serial(query_data).catch((e: Error) => e);
+			// 	ResetPage();
+			// 	break;
 				
-			}
+			// }
 			case "view_group": {
 				// window.location.href = "/admin/member/info/" + row.dataset.relId;
 				window.open("./"+'?'+ 'sid='+button.dataset.relSid +'&'+'modal=group_view', 'innerHeight=800' ,'innerWidth=800',);
@@ -219,6 +247,7 @@
 		
 			const records = list_data.records;
 			for(const record of records) {
+				// console.log(record);
 				// const create_time = dayjs.unix(record.create_time);
 				const elm = tmpl_item.duplicate();
 				// elm.element.dataset.id = record.id;
@@ -226,8 +255,9 @@
 				// elm.email.textContent = record.email;
 				elm.create_time.textContent = record.bid_start_time.slice(0 , 10);
 				// elm.create_time.textContent = record.create_time.slice(0 , 10)+" "+record.create_time.slice(11 , -5);;
-				elm.last_duration.textContent = record.prev_gid.slice(0, 6)+"-"+record.prev_gid.slice(-3,-2).toUpperCase()+record.prev_gid.slice(-2);
-				elm.bid_member.textContent = record.uid;
+				elm.last_duration.textContent = record.prev_gid.gid.slice(0, 6)+"-"+record.prev_gid.gid.slice(-3,-2).toUpperCase()+record.prev_gid.gid.slice(-2);
+				elm.bid_member.textContent = record.prev_gid.mid;
+				elm.bid_name.textContent = record.prev_gid.name;
 				// elm.create_time.title = create_time.format("YYYY/MM/DD HH:mm:ss");
 				// elm.level.textContent = record.level;
 				// elm.exchange.textContent = record.exchange;
@@ -248,7 +278,7 @@
 				button_group_bid.classList.add("btn-green");
 				button_group_bid.textContent = "電腦開標";
 				button_group_bid.dataset.role = 'bid';
-				button_group_bid.dataset.next_gid = record.next_gid;
+				button_group_bid.dataset.next_gid = record.next_gid.gid;
 				button_group_bid.dataset.relSid = record.sid;	
 				elm.bid.appendChild(button_group_bid);
 
@@ -256,7 +286,7 @@
 				button_check_box.classList.add("row-checkbox");
 				button_check_box.type = "checkbox";
 				button_check_box.dataset.role = 'checkbox';
-				button_check_box.dataset.next_gid = record.next_gid;
+				button_check_box.dataset.next_gid = record.next_gid.gid;
 				button_check_box.dataset.relSid = record.sid;
 				elm.check_box.appendChild(button_check_box);
 
@@ -266,7 +296,7 @@
 				button_export.textContent = "輸出報表";
 				button_export.dataset.role = 'bid';
 				button_export.dataset.relSid = record.sid;
-				button_export.dataset.next_gid = record.next_gid;
+				button_export.dataset.next_gid = record.next_gid.gid;
 				elm.export.appendChild(button_export);
 
 				// const button_manual_bid = document.createElement("button");
