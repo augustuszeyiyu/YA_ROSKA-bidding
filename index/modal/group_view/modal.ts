@@ -52,19 +52,19 @@
             const container = document.querySelector('.wheel-container');
             
             // 3. Create the wheel in the container and initialise it with the props:
-            const wheel = new Wheel(container, props);
+            // const wheel = new Wheel(container, props);
 
-                    list_group_info()
-                        .catch((e) => {
-                        console.error(e);
-                        alert(`載入失敗！(${e.message})`);
-                        window.HandleUnauthorizedAccess(e);
-                        })
-                        .finally(() => {
-                        loading_overlay.Hide();
-                        });
+            list_group_info()
+                .catch((e) => {
+                console.error(e);
+                alert(`載入失敗！(${e.message})`);
+                window.HandleUnauthorizedAccess(e);
+                })
+                .finally(() => {
+                loading_overlay.Hide();
+                });
 
-                    })
+            })
         .on('click', async(e:any)=>{
             const trigger = e.target;
             // const card = trigger.closest('.Card'); 
