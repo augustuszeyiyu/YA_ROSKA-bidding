@@ -217,7 +217,7 @@
 			// }
 			case "view_group": {
 				// window.location.href = "/admin/member/info/" + row.dataset.relId;
-				window.open("./"+'?'+ 'sid='+button.dataset.relSid +'&'+'modal=group_view', 'innerHeight=800' ,'innerWidth=800',);
+				window.open("./"+'?'+ 'sid='+button.dataset.relSid +'&'+ "next_gid="+ button.dataset.next_gid  +'&'+'modal=group_view', 'innerHeight=800' ,'innerWidth=800',);
 				// window.open("./module/roska_new_view/modals.html" + button.dataset.relId, innerHeight=1600,innerWidth=800,);
 				break;
 				
@@ -272,6 +272,7 @@
 				button_group_detail.textContent = "檢視會組";
 				button_group_detail.dataset.role = 'view_group';
 				button_group_detail.dataset.relSid = record.sid;
+				button_group_detail.dataset.next_gid=record.next_gid.gid;
 				elm.view_group.appendChild(button_group_detail);
 
 				const button_group_bid = document.createElement("button");
