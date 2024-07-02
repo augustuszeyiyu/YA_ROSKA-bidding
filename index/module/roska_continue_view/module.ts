@@ -54,7 +54,7 @@
 				.on('mouse-scroll', (e:any) => {         
 					const target = e.target;
 					const current_pos = target.scrollTop + target.clientHeight;
-					const trigger_line = target.scrollHeight - 5;
+					const trigger_line = target.scrollHeight - 25;
 					const cursor = COTINUE_SID.cursor;
 					// console.log(cursor);
 		
@@ -190,7 +190,12 @@
 			// 	break;
 			// }
 			case "bid": {
-				var query_data = { "gid" :button.dataset.next_gid} ;
+				if(!button.dataset.next_gid){
+					console.log('會組已完結');
+					alert('會組已完結');
+					break;	
+				}
+				var query_data = { "gid" :button.dataset.next_gid} ;			
 				console.log(button.dataset.next_gid );
 				console.log(query_data);
 				try{
@@ -272,14 +277,24 @@
 				button_group_detail.textContent = "檢視會組";
 				button_group_detail.dataset.role = 'view_group';
 				button_group_detail.dataset.relSid = record.sid;
-				button_group_detail.dataset.next_gid=record.next_gid.gid;
+				if(!record.next_gid){
+					button_group_detail.dataset.next_gid=record.sid;
+				}
+				else{
+					button_group_detail.dataset.next_gid=record.next_gid.gid;
+				}
 				elm.view_group.appendChild(button_group_detail);
 
 				const button_group_bid = document.createElement("button");
 				button_group_bid.classList.add("btn-green");
 				button_group_bid.textContent = "電腦開標";
 				button_group_bid.dataset.role = 'bid';
-				button_group_bid.dataset.next_gid = record.next_gid.gid;
+				if(!record.next_gid){		
+					button_group_detail.dataset.next_gid=record.sid;
+				}
+				else{
+					button_group_bid.dataset.next_gid = record.next_gid.gid;
+				}
 				button_group_bid.dataset.relSid = record.sid;	
 				elm.bid.appendChild(button_group_bid);
 
@@ -287,7 +302,12 @@
 				button_check_box.classList.add("row-checkbox");
 				button_check_box.type = "checkbox";
 				button_check_box.dataset.role = 'checkbox';
-				button_check_box.dataset.next_gid = record.next_gid.gid;
+				if(!record.next_gid){
+					button_group_detail.dataset.next_gid=record.sid;
+				}
+				else{
+					button_check_box.dataset.next_gid = record.next_gid.gid;
+				}
 				button_check_box.dataset.relSid = record.sid;
 				elm.check_box.appendChild(button_check_box);
 
@@ -297,7 +317,12 @@
 				button_export.textContent = "輸出報表";
 				button_export.dataset.role = 'bid';
 				button_export.dataset.relSid = record.sid;
-				button_export.dataset.next_gid = record.next_gid.gid;
+				if(!record.next_gid){
+					button_group_detail.dataset.next_gid=record.sid;
+				}
+				else{
+					button_export.dataset.next_gid = record.next_gid.gid;
+				}
 				elm.export.appendChild(button_export);
 
 				// const button_manual_bid = document.createElement("button");

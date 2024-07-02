@@ -1,0 +1,37 @@
+<!-- <div class="grid-title module_title" >進行中的會組</div> -->
+<div class="grid" style="padding: 0.5rem 15%;">
+	<div class="grid-content" elm-export="list_container" elm-export-accessor>
+		<div class="grid-title" style="padding: 1rem; font-size: 1.3rem; font-weight: bolder;">
+			<div elm-export="sid">會組編號</div>
+			<div elm-export="group_leader">會首</div>
+			<div elm-export="address">會所地址</div>
+			<div elm-export="next_bid_date">下次開標日期</div>
+		</div>
+		<div class="group_list list-container table group_view_table">
+			<div class="t-head">
+				<div class="t-column">序號</div>
+				<div class="t-column">會員編號</div>
+				<div class="t-column">姓名</div>
+				<div class="t-column">電話</div>
+				<div class="t-column">得標會期</div>
+				<div class="t-column">得標金額</div>
+			</div>
+			<div elm-export="region_list" class='t-body'></div>
+			<template class=" hide">
+				<div elm-export="tmpl_item" elm-export-tmpl class="t-row">
+						<div class="field"><div><span elm-export="numb"></span></div></div>
+						<div class="field"><div><span elm-export="mid"></span></div></div>
+						<div class="field"><div><span elm-export="name"></span></div></div>
+						<div class="field"><div><span elm-export="mobil_number"></span></div></div>
+						<div class="field"><div><span elm-export="gid"></span></div></div>
+						<div class="field"><div><span elm-export="bid_amount"></span></div></div>
+				</div>
+			</template>
+			
+		</div>
+		<div class="" elm-export="button_region">
+
+		</div>
+	</div>
+	<!-- <script src="./external/roulette.js"></script> -->
+</div>

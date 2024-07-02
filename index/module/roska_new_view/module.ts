@@ -62,8 +62,9 @@
 		})
 		.on('add_new', (e:any) => {
 			add_new_group_serial();
-			ResetPage();
+			ResetPage();			
 			list_new_group_serial();
+			ResetPage();
 		})
 		.on('click', async(e:any)=>{
             const trigger = e.target;
@@ -109,13 +110,12 @@
 					list_new_group_serial();
                     break;
 				}
-                case "view_group": {
-                    // window.location.href = "/admin/member/info/" + row.dataset.relId;
-                    window.open("./"+'?'+ 'sid='+button.dataset.relId , 'innerHeight=900' ,'innerWidth=1200',);
-                    // window.open("./module/roska_new_view/modals.html" + button.dataset.relId, innerHeight=1600,innerWidth=800,);
-                    break;
-                    
-                }
+				case "new_view_group": {
+					window.open("./"+'?'+ 'sid='+button.dataset.relSid +'&'+'modal=new_group_view', 'innerHeight=800' ,'innerWidth=800',);
+					break;
+					
+					}
+
                 
                 default:
                     alert("您沒有權限使用該功能！\n請使用更高權限等級的帳號執行此操作！");
@@ -158,7 +158,7 @@
             };
 			const list_data = await ROSKA_FORM.Admin_get_new_list(queryData);
 			// const { region_list: list, total_records,tmpl_item  } = view.list_container;
-			
+			console.log(list_data);
 			const region_list = view.list_container.region_list;
             const tmpl_item = view.list_container.tmpl_item;
 			var count = 1;
@@ -185,7 +185,7 @@
 				const button_group_detail = document.createElement("button");
 				button_group_detail.classList.add("btn-blue");
                 button_group_detail.textContent = "檢視會組";
-                button_group_detail.dataset.role = 'view_group';
+                button_group_detail.dataset.role = 'new_view_group';
                 button_group_detail.dataset.relId = record.sid;
 				
 				elm.view_group.appendChild(button_group_detail);
