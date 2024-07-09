@@ -17,6 +17,8 @@ declare global {
 			init:()=>Promise<void>
 		}[];
 
+		wheel_data:any;
+		wheel_js:any;
 		WEBSITE_URL:string;
 
 		WaitAuthorization: ()=>Promise<void>;

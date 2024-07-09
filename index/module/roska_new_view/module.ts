@@ -61,8 +61,8 @@
 			
 		})
 		.on('add_new', (e:any) => {
-			add_new_group_serial();
-			ResetPage();			
+			add_new_group_serial();		
+			ResetPage();
 			list_new_group_serial();
 			ResetPage();
 		})

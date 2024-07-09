@@ -74,13 +74,16 @@
     async function list_user_info() {
         const InputParams = new URLSearchParams(window.location.search);
         // const searchParams: Array<string> = [];
-        const searchParams: any = {};
+        console.log(InputParams);
+        var searchParams: any = {};
         InputParams.forEach((key ,value:any)=>{
                 searchParams[value]=key;
                 console.log(searchParams[key]);
         });
-        if( !searchParams['uid'])
+        if(!searchParams['uid'])
         return;
+
+        
         const list_data = await ROSKA_FORM.Get_user(searchParams['uid']);
         console.log(list_data);
 

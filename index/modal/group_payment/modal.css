@@ -1,7 +1,7 @@
 .module_title { padding: 1rem; font-size: 1.3rem; font-weight: bolder; background-color: #b8dbf7;}
-.inner_module{
+/* .inner_module{
   width: 1200px;
-}
+} */
 .wrapper {
   /* display: grid; */
   width: 100%;

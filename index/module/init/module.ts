@@ -213,6 +213,11 @@
             }
             viewport.removeClass('hide');
         }	
+
+        const wheel_js = window.wheel_js;
+        // console.log('load','window: time='+ Date.now());
+        wheel_js.src = './script/rotate-wheel.js';
+
 		// const InputParams = new URLSearchParams(window.location.search);
         // const searchParams: Array<string> = [];
         // InputParams.forEach((key ,value:any)=>{

@@ -15,8 +15,8 @@
     modals.push({
         init: async function () {
             const [{ element: layout }] = await window.resources([
-                { type: 'html', path: './modal/group_view/modal.html' },
-                { type: 'css', path: './modal/group_view/modal.css' }
+                { type: 'html', path: './modal/group_payment/modal.html' },
+                { type: 'css', path: './modal/group_payment/modal.css' }
             ]);
             modal_view.element.innerHTML = layout.innerHTML;
             modal_view.relink();

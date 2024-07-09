@@ -273,8 +273,8 @@ export async function List_all_user(arg1:GetUserListQuery, arg2?:GetUserListResp
 
 
 /** 12. 開標 gid **/
-//GET
-// /api/admin/group/bid/{gid}
+//POST
+// /api/admin/group/bid
 export async function bid_group_serial(query_data:any){
 	SessionControl.CheckLogin();
 	return fetch(`${SessionControl.endpoint_url}/api/admin/group/bid`, {
@@ -283,6 +283,20 @@ export async function bid_group_serial(query_data:any){
 		body: JSON.stringify(query_data)	
 	}).then(ProcRemoteResponse).then((resp)=>resp.json());
 }
+
+// POST
+// /api/admin/group/bid/assign
+// 指定得標者
+export async function assign_bid(query_data:any){
+	SessionControl.CheckLogin();
+	return fetch(`${SessionControl.endpoint_url}/api/admin/group/bid/assign`, {
+		method:'POST',
+		headers: {"Authorization": SessionControl.auth_token, "Content-Type": "application/json"},	
+		body: JSON.stringify(query_data)	
+	}).then(ProcRemoteResponse).then((resp)=>resp.json());
+}
+
+
 
 
 // GET

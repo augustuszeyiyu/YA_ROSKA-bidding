@@ -29,34 +29,69 @@
 			</template>
 			
 		</div>
-		<div class="" elm-export="button_region">
+		<div class="" elm-export="button_region">			
+		</div>
+		<div id="final_result" class="final-result" elm-export="final_result" style="margin: 2rem 0 ; font-size: 1.25rem; font-weight: bold;">
+			抽簽結果。
+		</div>
+	</div>
 
-		</div>
-	</div>
-	<div class="" elm-export="roulette_region" style="padding: 5rem 0;">
-		<div class="roulette-container">
-			<div class="roulette" elm-export="roulette">
-				<div class="segment" data-value="1">1</div>
-				<div class="segment" data-value="2">2</div>
-				<div class="segment" data-value="3">3</div>
-				<div class="segment" data-value="4">4</div>
-				<div class="segment" data-value="5">5</div>
-				<div class="segment" data-value="6">6</div>
-				<div class="segment" data-value="7">7</div>
-				<div class="segment" data-value="8">8</div>
-				<div class="segment" data-value="9">9</div>
-				<div class="segment" data-value="10">10</div>
-				<div class="segment" data-value="11">11</div>
-				<div class="segment" data-value="12">12</div>
-				
+
+
+	 <textarea id="clipboard">.</textarea>
+			<!-- <div class="letterhead">
+			<div class="letterhead-content">
+				<div class="al-center">A Random Wheel |
+				<span style="font-size: .45em">"That's it? It's just a wheel?"</span>
+				</div>
+				<div >
+				<a href="https://github.com/AldousP/a-random-wheel" target="_blank">
+					<i style="color: white" class="fa fa-github fa-2x" aria-hidden="true"></i>
+				</a>
+				</div>
 			</div>
-			<span id="roulette-pin">▼</span>
+			</div> -->
+
+	<main>
+		<canvas id="canvas"></canvas>
+		<script>console.log("456");
+			alert("789");
+		</script>
+		<div class="right-pane">
+		  <div class="controls">
+			<div class="labeled-action name-entry">
+			  <input id="wedge-input" class="content" placeholder="Enter Values Here"/>
+			  <button id="add-wedge" >
+				<i class="fa fa-plus" aria-hidden="true"></i>
+			  </button>
+			</div>
+		  </div>
+		  <div id="wedge-list">
+		  </div>
+		  <div id="buttons">
+			<button id="clear-list" class="button stock remove-wedge">Clear</button>
+			<button id="copy-link" class="button stock remove-wedge">更新名單</button>
+		  </div>
+		  <div id="spin-container">
+			<button id="spin-wheel" class="button stock" role="spin_wheel">Spin</button>
+		  </div>
 		</div>
-		<div style="height:600px; width: 600px;">
-			<div class="wheel-container"></div>
-			<!-- <canvas id="wheel" class="" width="540" height="540" data-names="[&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;]" data-colors="[&quot;royalblue&quot;,&quot;salmon&quot;,&quot;palegreen&quot;,&quot;wheat&quot;,&quot;plum&quot;,&quot;palegreen&quot;,&quot;wheat&quot;]" style="transform: rotate(3668.86deg); transition-duration: 10s; transition-timing-function: cubic-bezier(0.6, 0, 0, 1);" data-result-idx="5"></canvas> -->
-		</div>
-		<button elm-export="spinButton" role="spin">Spin</button>
-	</div>
-	<!-- <script src="./external/roulette.js"></script> -->
+	  </main>
+	  <div id="ad-unit">
+		<span style="opacity: 0; width: 0; height: 0">Movies, Posters, Snacks</span>
+		<!-- <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=6d125496-1c40-460c-8298-926e9c90395f"></script> -->
+		<span style="opacity: 0; width: 0; height: 0">Books, Video Games, Stationary</span>
+	  </div>
+	  <!--Templates-->
+	  <div id="templates" style="display: none">
+		<!--List Item Template-->
+		<ListItem>
+		  <div class="list-item labeled-action">
+			<div class="content">Sample Content</div>
+			<button class="remove-wedge">
+			  <i class="fa fa-trash" aria-hidden="true"></i>
+			</button>
+		  </div>
+		</ListItem>
+	  </div>
 </div>

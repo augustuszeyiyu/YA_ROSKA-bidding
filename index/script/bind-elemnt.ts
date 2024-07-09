@@ -4,6 +4,7 @@
 	const main_accessor = WhelmJS(document.body);
 	const viewport = main_accessor.viewport;
 	const modal_view = main_accessor.modal_view;
+	const wheel_js  = main_accessor.wheel_js
 	// const modals = main_accessor.modals;
 
 	window.head 	= head_accessor;
@@ -11,6 +12,7 @@
 	window.modal_view = modal_view;
 	window.login_overlay = main_accessor.login_overlay;
 	window.loading_overlay = new ROSKA_FORM.PageController({viewport: main_accessor.loading_overlay});
+	window.wheel_js = wheel_js;
 	// ENDREGION
 
 
