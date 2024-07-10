@@ -152,16 +152,16 @@
                         alert('會組已完結');
                         break;	
                     }
-                    var assign_query_data = { "gid" : button.dataset.next_gid, "assign_to_uid" : suid } ;			
+                    var assign_query_data = { "gid" : button.dataset.next_gid, "assign_to_mid" : smid ,} ;			
                     try{
                         console.log(assign_query_data);
                         await ROSKA_FORM.assign_bid(assign_query_data);
                         // let result = await ROSKA_FORM.bid_group_serial(query_data).catch((e: Error) => e);
-                        alert(button.dataset.relSid+'已完成開標');
+                        alert(button.dataset.relSid+'已完成抽籤');
                         ResetPage();
                     }
                     catch (e: any) {
-                        alert(`開標失敗(${e.message})`);
+                        alert(`抽籤失敗(${e.message})`);
                     }
     
                     break;
@@ -237,7 +237,7 @@
 
             const button_manual_bid = document.createElement("button");
                 button_manual_bid.classList.add("btn-orange", "btn-modal");
-                button_manual_bid.textContent = "手動開標";
+                button_manual_bid.textContent = "指定抽籤";
                 button_manual_bid.dataset.role = 'manual_bid';
                 button_manual_bid.dataset.relSid = searchParams['sid'];
                 button_manual_bid.dataset.next_gid =searchParams['next_gid']

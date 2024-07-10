@@ -326,7 +326,7 @@ function loop() {
     if (isResultShown===true) {    
       // console.log("final anser  2");
       var selectedIndex = Math.floor((270 - (wheelRotation % 360)) / wedgeSubdiv) % nameList.length;
-      alert("Selected: " + nameList[selectedIndex]);
+      alert("中籤人員: " + nameList[selectedIndex]);
       isResultShown = false
       if(nameList[selectedIndex]){
         // console.log(final_result);
