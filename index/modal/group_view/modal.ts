@@ -205,7 +205,7 @@
                     w_data[count_1]={"mid":record.mid,"name":record.name,'uid':record.uid};
                     count_1 += 1 ;
                 }
-                else if(record.gid){
+                else if(record.gid){                   
                     last_gid = record.gid;
                 };
                 const elm = tmpl_item.duplicate();
@@ -221,7 +221,7 @@
             modal_view.list_container.sid.textContent = '會組編號 : '+searchParams['sid'];
             modal_view.list_container.group_leader.textContent = '會首 : '+list_data[0].name;
             modal_view.list_container.address.textContent = '合會地址 : '+'永康合會';
-            modal_view.list_container.next_bid_date.textContent = '前次開標會期 : '+ last_gid;
+            modal_view.list_container.next_bid_date.textContent = '本次開標會期 : '+ searchParams['next_gid'];
             window.wheel_data = w_data;
             // console.log('w_data', 'w_data: time=' + Date.now());
             // console.log(window.refreshList());
