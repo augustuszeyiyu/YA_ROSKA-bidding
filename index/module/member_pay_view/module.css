@@ -1,0 +1,34 @@
+
+		.table.member_profit_table .t-row, .table.member_profit_table .t-head { grid-template-columns:5rem 1fr 2fr 2fr 2fr 2fr 1fr 5rem 1fr}
+
+	
+			/* 編號 */
+			.table.member_profit_table .t-column:nth-child(1) { }
+				.table .t-column .member-state { width:1.5rem; height:1.5rem; border-radius:2rem; background:#FFF; cursor:pointer; }
+				.table .t-column .member-state[data-state="enabled"] { background:#090; }
+				.table .t-column .member-state[data-state="disabled"] { background:#900; }
+			
+			/* 會員姓名 */
+			.table.member_profit_table .t-column:nth-child(2) {}
+			
+			/* 總會資料 */
+			.table.member_profit_table .t-column:nth-child(3) {}
+			
+			/* 活會資料 */
+			.table.member_profit_table .t-column:nth-child(4) {}
+			
+			/* 死會資料 */
+			.table.member_profit_table .t-column:nth-child(5) {}
+			
+			/* 得標會組資料 */
+			.table.member_profit_table .t-column:nth-child(6) {}
+			
+			/* 檢視詳細資料 */
+			.table.member_profit_table .t-column:nth-child(7) {}
+			
+			/* checkbox */
+			.table.member_profit_table .t-column:nth-child(8) {}
+			
+			/*輸出報表*/
+			.table.member_profit_table .t-column:nth-child(9) {}
+			

@@ -11,7 +11,7 @@
 	type PagingCursor = Awaited<ReturnType<typeof window.ROSKA_FORM.Do_Register_User_Info>>;
 	type QueryParamTask = { token:string; state?:string; order?:{[key:string]:string;}; };
 	const members:{ query:QueryParamTask; cursor:PaginateCursor<any>|null;} = {query:{token:''}, cursor:null};
-	const queryData:{ order:string; page:string; page_size:string } = {	order: "DESC",	page: "1",	page_size: "50"	};
+
 	var count = 1;
 	///****待修改****///
 
@@ -22,6 +22,8 @@
 		query:{},
 		cursor:null
 	};
+
+
 
 	const modules = window.modules;
 	const viewport = window.viewport;	
@@ -45,7 +47,6 @@
 				// viewport.viewport_container 
 				accessor
 				.on('scroll', (e:any) => {
-					console.log("scrollXX");
 					if (!timeout) {
 						timeout = setTimeout(() => {
 							timeout = null;
@@ -57,11 +58,13 @@
 					const target = e.target;
 					const current_pos = target.scrollTop + target.clientHeight;
 					const trigger_line = target.scrollHeight - 5;
+					STATE.cursor.meta = {	order: "DESC",	page: "1",	page_size: "50"	};
 					const cursor = STATE.cursor;
+					console.log(cursor);
 					if ( current_pos >= trigger_line && cursor !== null ) {
 						const { page, page_size } = cursor.meta;
 						if (page !== undefined) {
-						LoadAndUpdateList(members.query, {page: page + 1, page_size});
+						LoadAndUpdateList(cursor.query, {page: page + 1, page_size});
 						}
 					}
 				})
@@ -178,7 +181,7 @@
 
 				elm.count.textContent = count;
 				count += 1;
-				elm.uid.textContent= record.nid;
+				elm.nid.textContent= record.nid;
 
 				const button_group_detail = document.createElement("button");
 				button_group_detail.classList.add("btn-blue");
@@ -219,7 +222,7 @@
 			const accessor = view.member_list_container.list_container.region_list;
             accessor.innerHTML = '';
 		}
-		var count = 1;
+		count = 1;
 		LoadAndUpdateList(STATE.query)
 		// {
 		// 	const accessor = view.region_info;

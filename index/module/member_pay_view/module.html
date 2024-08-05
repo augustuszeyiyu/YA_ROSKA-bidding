@@ -1,21 +1,46 @@
-<div class="inner_module">
+<div style="overflow: scroll; height: 100vh"  class="inner_module"  elm-export="member_pay_list_container" elm-export-accessor>
 
 		<div class="grid-title module_title">會員繳費資訊</div>
 		<div class="grid">
-			<div class="grid-content sysvar-info" elm-export="system_sysvar" elm-export-accessor>
-				<!-- <div class="field" elm-export="member_count" elm-export-accessor>
-					<div>會期數</div>
-					<div>
-						<input elm-export="edit" type="number" min="0" max="100" step="0.1"/>
-						(<span elm-export="display"></span>期)
-					</div>
+			<div class="grid-content sysvar-info" elm-export="list_container" elm-export-accessor>
+				<div class="head-region" style="display: flex; justify-content: space-between;">
+					<div class="grid-title" style="padding: 1rem; font-size: 1.3rem; font-weight: bolder;">會員繳費資訊(<span elm-export="total_records"></span>)</div>
+					<div class="button-section">
+						<!-- <button class="btn-green bid_all" elm-export="bid_all" style="height: 56px; width: 150px; font-weight: bold; align-self: flex-end;">電腦開標<br>(所有已勾選)</button>
+						<button class="btn-orange export_all" elm-export="export_all" style="height: 56px; width: 150px; font-weight: bold;  align-self: flex-end;">輸出報表<br>(所有會組)</button> -->
+					</div>	
 				</div>
-				<div class="field" elm-export="basic_unit_amount" elm-export-accessor>
-					<div>基本會費</div>
-					<div>
-						<input elm-export="edit" type="number" min="0" max="10000" step="100"/>
+				<div class="group_list list-container table member_profit_table">
+					<div class="t-head">
+						<div class="t-column">編號</div>
+						<div class="t-column">會員姓名</div>
+						<div class="t-column">總會組資料</div>
+						<div class="t-column">活會資料</div>
+						<div class="t-column">死會資料</div>
+						<div class="t-column">得標會組資料</div>
+						<div class="t-column">檢視詳細資料</div>
+						<div class="t-column"><input type="checkbox" id="export_select-all"></div>
+						<div class="t-column">輸出報表</div>
 					</div>
-				</div> -->
+					<div elm-export="region_list" class='t-body'></div>
+					<template class=" hide">
+						<div elm-export="tmpl_item" elm-export-tmpl class="t-row">
+								<div class="field"><div><span elm-export="count"></span></div></div>
+								<div class="field"><div><span elm-export="name"></span></div></div>
+								<div class="field"><div><span elm-export="total_group"></span></div></div>
+								<div class="field"><div><span elm-export="alive_group"></span></div></div>
+								<div class="field"><div><span elm-export="death_group"></span></div></div>
+								<div class="field"><div><span elm-export="win_group"></span></div></div>
+								<div class="field"><label></label><div><span elm-export="view_detail"></span></div></div>
+								<div class="field"><label></label><div><span elm-export="check_box"></span></div></div>
+								<div class="field"><label></label><div><span elm-export="export"></span></div></div>
+								<!-- <div class="field"><label></label><div><span elm-export="manual_bid"></span></div></div> -->
+							<!-- <div class="time">Lv　<span elm-export="level"></span></div> -->
+							
+						</div>  
+					</template>
+					
+				</div>
 				
 
 	

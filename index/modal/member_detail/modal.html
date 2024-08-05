@@ -3,31 +3,31 @@
 	<div class="grid-content" elm-export="list_container" elm-export-accessor>
 		<div class="group_list list-container table group_view_table">
 			<div class="input-tab-container">
-				<div class="input_tab" elm-export="member_content">
+				<div class="input_tab" elm-export="member_content" elm-export-accessor>
 					<div class="input_value" style="justify-content: center; background-color: steelblue; display: none;">
 						<div elm-export="help_btn" elm-bind-event="bubble::click::load_test_register_userinfo" >測試自動填值按鈕</div>
 					</div>
 					<div class="input_value" >
 						<div class="input_symbol">
-						<div class="symbol_icon"></div>
+						<div class="symbol_icon">會員姓名</div>
 						</div>
 						<div class="input_zone"><input elm-export="name" placeholder="會員姓名"></div>
 					</div>
 					<div class="input_value" >
 						<div class="input_symbol">
-						<div class="symbol_icon"></div>
+						<div class="symbol_icon">身份證字號</div>
 						</div>
 						<div class="input_zone"><input elm-export="nid" placeholder="身份證字號"></div>
 					</div>
 					<div class="input_value" >
 						<div class="input_symbol">
-						<div class="symbol_icon"></div>
+						<div class="symbol_icon">密碼</div>
 						</div>
 						<div class="input_zone"><input elm-export="password" placeholder="密碼"></div>
 					</div>
 					<div class="input_value">
 						<div class="input_symbol">
-						<div class="symbol_icon"></div>
+						<div class="symbol_icon">性別</div>
 						</div>
 						<div class="input_zone">
 							<select elm-export="gender">
@@ -39,25 +39,25 @@
 					</div>
 					<div class="input_value">
 						<div class="input_symbol">
-						<div class="symbol_icon"></div>
+						<div class="symbol_icon">連絡電話</div>
 						</div>
 						<div class="input_zone"><input elm-export="contact_home_number" placeholder="連絡電話(02-XXXXXXXX)"></div>
 					</div>
 					<div class="input_value">
 						<div class="input_symbol">
-						<div class="symbol_icon"></div>
+						<div class="symbol_icon">(帳號)手機號碼</div>
 						</div>
 						<div class="input_zone"><input elm-export="contact_mobile_number" placeholder="(帳號)手機號碼"></div>
 					</div>
 					<div class="input_value">
 						<div  class="input_symbol">
-						<div class="symbol_icon"></div>
+						<div class="symbol_icon">出生日期</div>
 						</div>
 						<div class="input_zone"><input elm-export="birth_date" placeholder="出生日期(yyyy-mm-dd)"></div>
 					</div>
 					<div class="input_value">
 						<div class="input_symbol">
-						<div class="symbol_icon"></div>
+						<div class="symbol_icon">地址</div>
 						</div>
 						<div class="input_zone"><input elm-export="address" placeholder="地址"></div>
 					</div>
@@ -69,72 +69,80 @@
 					</div> -->
 				</div>
 
-				<div class="input_tab" elm-export="recommendation_info">
+				<div class="input_tab" elm-export="recommendation_info" elm-export-accessor>
 					<div class="input_value">
 						<div class="input_symbol">
-						<div class="symbol_icon"></div>
+						<div class="symbol_icon">緊急聯絡人姓名</div>
 						</div>
 						<div class="input_zone"><input elm-export="emergency_contact" placeholder="緊急聯絡人姓名"></div>
 					</div>
 					<div class="input_value">
 						<div class="input_symbol">
-						<div class="symbol_icon"></div>
+						<div class="symbol_icon">緊急聯絡人身分證字號</div>
 						</div>
 						<div class="input_zone"><input elm-export="emergency_nid" placeholder="緊急聯絡人身分證字號"></div>
 					</div>
 					<div class="input_value" >
 						<div class="input_symbol">
-						<div class="symbol_icon"></div>
+						<div class="symbol_icon">緊急聯絡人聯絡電話</div>
 						</div>
 						<div class="input_zone"><input elm-export="emergency_contact_number" placeholder="緊急聯絡人聯絡電話"></div>
 					</div>
 					<div class="input_value">
 						<div class="input_symbol">
-						<div class="symbol_icon"></div>
+						<div class="symbol_icon">緊急聯絡人關係</div>
 						</div>
 						<div class="input_zone"><input elm-export="emergency_contact_relation" placeholder="緊急聯絡人關係"></div>
 					</div>
 					<div class="input_value" >
 						<div class="input_symbol">
-						<div class="symbol_icon"></div>
+						<div class="symbol_icon">推薦人手機號碼</div>
 						</div>
 						<div class="input_zone"><input elm-export="referrer_mobile_number" placeholder="推薦人手機號碼"></div>
 					</div>
 					<div class="input_value" >
 						<div class="input_symbol">
-						<div class="symbol_icon"></div>
+						<div class="symbol_icon">服務志工手機號碼</div>
 						</div>
 						<div class="input_zone"><input elm-export="volunteer_mobile_number" placeholder="服務志工手機號碼"></div>
 					</div>
-
 				</div>
 
-				<div class="input_tab" elm-export="bank_info_content">
+				<div class="input_tab" elm-export="bank_info_content" elm-export-accessor>
 					<div class="input_value" >
 						<div class="input_symbol">
-						<div class="symbol_icon"></div>
+						<div class="symbol_icon">銀行代號</div>
 						</div>
 						<div class="input_zone"><input elm-export="bank_code" placeholder="銀行代號"></div>
 					</div>
 					<div class="input_value" >
 						<div class="input_symbol">
-						<div class="symbol_icon"></div>
+						<div class="symbol_icon">分行代號</div>
 						</div>
 						<div class="input_zone"><input elm-export="branch_code" placeholder="分行代號"></div>
 					</div>
 					<div class="input_value" >
 						<div class="input_symbol">
-						<div class="symbol_icon"></div>
+						<div class="symbol_icon">銀行帳戶號碼</div>
 						</div>
-						<div class="input_zone"><input elm-export="bank_account_number" placeholder="帳戶號碼"></div>
+						<div class="input_zone"><input elm-export="bank_account_number" placeholder="銀行帳戶號碼"></div>
 					</div>
 					<div class="input_value" >
 						<div class="input_symbol">
-						<div class="symbol_icon"></div>
+						<div class="symbol_icon">銀行帳戶名稱</div>
 						</div>
-						<div class="input_zone"><input elm-export="bank_account_name" placeholder="帳戶名稱"></div>
+						<div class="input_zone"><input elm-export="bank_account_name" placeholder="銀行帳戶名稱"></div>
 					</div>
 				</div>
+
+
+				<div class="input_value" >
+					<div class="input_symbol">
+					<div class="symbol_icon">資料更新時間</div>
+					</div>
+					<div class="input_zone"><input elm-export="update_time" placeholder="資料更新時間"></div>
+				</div>
+
 			</div>	
 			
 		</div>

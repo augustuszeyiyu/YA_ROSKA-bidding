@@ -1,0 +1,43 @@
+.table.member_table .t-row, .table.member_table .t-head	{
+    grid-template-columns:5rem 1.5fr 1.5fr 2.5fr 1.5fr 2.5fr 1fr 2.5fr;
+}
+
+
+/* 狀態 */
+.table .t-column:nth-child(1) { }
+    .table .t-column .member-state { width:1.5rem; height:1.5rem; border-radius:2rem; background:#FFF; cursor:pointer; }
+    .table .t-column .member-state[data-state="enabled"] { background:#090; }
+    .table .t-column .member-state[data-state="disabled"] { background:#900; }
+
+/* 會員帳號 */
+.table .t-column:nth-child(2) {}
+
+/* 會員姓名 */
+.table .t-column:nth-child(3) {}
+
+/* 會員等級 */
+.table .t-column:nth-child(4) {}
+
+/* 加入時間 */
+.table .t-column:nth-child(5) {}
+
+/* 廣告點數購買 */
+.table .t-column:nth-child(6) {}
+
+/* 審核正式會員 */
+.table .t-column:nth-child(7) {}
+
+/* 審核商用會員 */
+.table .t-column:nth-child(8) {}
+
+/* 審核精睿會員 */
+.table .t-column:nth-child(9) {}
+
+/* 天幣提領 */
+.table .t-column:nth-child(10) {}
+
+/* 會員效期 */
+.table .t-column:nth-child(11) {}
+
+/* 編輯個人資料 */
+.table .t-column:nth-child(12) {}

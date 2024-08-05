@@ -8,9 +8,9 @@
 	type PagingCursor = Awaited<ReturnType<typeof window.ROSKA_FORM.Admin_get_on_list>>;
 	type QueryParamTask = { token:string; state?:string; order?:{[key:string]:string;}; };
 	const COTINUE_SID:{ query:QueryParamTask; cursor:PaginateCursor<any>|null;} = {query:{token:''}, cursor:null};
-	const queryData:{ order:string; page:string; page_size:string } = {	order: "DESC",	page: "1",	page_size: "50"	};
-	var count = 1;
+	const queryData:{ order:string; page:number; page_size:number } = {	order: "DESC",	page: 1,	page_size: 50	};
 
+	var count = 1;
 
 	///****待修改****///
 
@@ -56,14 +56,17 @@
 					const current_pos = target.scrollTop + target.clientHeight;
 					const trigger_line = target.scrollHeight - 25;
 					const cursor = COTINUE_SID.cursor;
+					queryData.page = 1;
 					// console.log(cursor);
 		
 					if ( current_pos >= trigger_line && cursor !== null ) {
 						const { page, page_size } = (cursor) as { page?:number ,page_size?: number };
 						if (page !== undefined) {
-						queryData.page = String(page + 1);
+						queryData.page = page + 1;
 						}
-						queryData.page_size = String(page_size);
+						queryData.page_size = page_size?page_size:50;
+						console.log(page);
+						console.log(queryData);
 						list_new_group_serial(queryData);
 					}
 				})
@@ -211,15 +214,9 @@
 
 				break;
 			}
-			// case "bid": {
-			// 	var query_data = { "gid" :button.dataset.next_gid} ;
-			// 	console.log(button.dataset.next_gid );
-			// 	console.log(query_data);
-			// 	await ROSKA_FORM.bid_group_serial(query_data).catch((e: Error) => e);
-			// 	ResetPage();
-			// 	break;
+			case "export": {
 				
-			// }
+			}
 			case "view_group": {
 				// window.location.href = "/admin/member/info/" + row.dataset.relId;
 				window.open("./"+'?'+ 'sid='+button.dataset.relSid +'&'+ "next_gid="+ button.dataset.next_gid  +'&'+'modal=group_view', 'innerHeight=800' ,'innerWidth=800',);
@@ -237,10 +234,12 @@
 	async function list_new_group_serial(queryData?:any) {
 
 		try {
+			loading_overlay.Show();
+			// console.log(queryData);
 			const list_data = await ROSKA_FORM.Admin_get_on_list(queryData);
 			COTINUE_SID.cursor = list_data.meta;
 			// const { region_list: list, total_records,tmpl_item  } = view.member_list_container;
-			console.log(list_data);
+			// console.log(list_data);
 			const region_list = view.continue_list_container.list_container.region_list;
 			const tmpl_item = view.continue_list_container.list_container.tmpl_item;
 
@@ -315,7 +314,7 @@
 				const button_export = document.createElement("button");
 				button_export.classList.add("btn-orange");
 				button_export.textContent = "輸出報表";
-				button_export.dataset.role = 'bid';
+				button_export.dataset.role = 'export';
 				button_export.dataset.relSid = record.sid;
 				if(!record.next_gid){
 					button_group_detail.dataset.next_gid=record.sid;
@@ -364,7 +363,11 @@
 			const accessor = view.continue_list_container.list_container.region_list;
             accessor.innerHTML = '';
 		}
-		var count = 1;
+		//renew init ifo
+		count = 1;
+		// queryData.page = 1;
+		COTINUE_SID.cursor = null;
+
 		list_new_group_serial(queryData);
 		// {
 		// 	const accessor = view.region_info;

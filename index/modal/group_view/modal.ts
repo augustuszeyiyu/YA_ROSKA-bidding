@@ -122,9 +122,12 @@
                     var query_data = { "gid" :button.dataset.next_gid} ;			
                     // console.log(button.dataset.next_gid );
                     // console.log(query_data);
+                    console.log(modal_view.button_region.button_manual_member);
                     try{
                         // console.log(button.dataset.relSid );
-                        await ROSKA_FORM.bid_group_serial(query_data);
+
+                        // await ROSKA_FORM.bid_group_serial(query_data);
+                        
                         // let result = await ROSKA_FORM.bid_group_serial(query_data).catch((e: Error) => e);
                         alert(button.dataset.relSid+'已完成開標');
                         ResetPage();
@@ -214,7 +217,7 @@
                 elm.mid.textContent = record.mid;
                 elm.name.textContent = record.name;
                 elm.gid.textContent = record.gid;
-                elm.bid_amount.textContent = record.bid_amount;
+                elm.win_amount.textContent = record.win_amount;
                 region_list.appendChild(elm.element);
             })
 
@@ -243,6 +246,33 @@
                 button_manual_bid.dataset.next_gid =searchParams['next_gid']
 
             modal_view.list_container.button_region.appendChild(button_manual_bid);
+
+
+            const  manual_bid_region = document.createElement("div")
+
+            const button_manual_member = document.createElement("button");
+            button_manual_member.classList.add("btn-bule", "btn-modal");
+            button_manual_member.textContent = "全收不轉讓";
+            // button_manual_member.dataset.role = 'manual_bid';
+            button_manual_member.dataset.relSid = searchParams['sid'];
+            button_manual_member.dataset.next_gid =searchParams['next_gid']
+
+            const manual_checkbox = document.createElement("input");
+            manual_checkbox.setAttribute("type","checkbox");
+            manual_checkbox.dataset.role = 'manual_member';
+
+            manual_bid_region.appendChild(button_manual_member);
+            manual_bid_region.appendChild(manual_checkbox);
+            modal_view.list_container.button_region.appendChild(manual_bid_region);
+
+
+
+            const group_member_list = document.createElement("button");
+            group_member_list.classList.add("btn-green", "btn-modal");
+            group_member_list.textContent = "輸出會組成員名單";
+            button_manual_bid.dataset.role = 'output_group_member_list';
+            group_member_list.dataset.relSid = searchParams['sid'];
+            modal_view.list_container.ouput_region.appendChild(group_member_list);
         }
     };
     function ResetPage() {

@@ -223,6 +223,16 @@ export async function Get_in_groups(query_data?:RoskaSerials){
 	}).then(ProcRemoteResponse).then((resp)=>resp.json());
 }
 
+//GET
+// /api/group/member/{sid}
+/**搜尋該團下的成員**/
+export async function Get_in_groups_adm(query_data?:RoskaSerials){
+	SessionControl.CheckLogin();
+	return fetch(`${SessionControl.endpoint_url}/api/adm/group/member/`+query_data, {
+		method:'GET',
+		headers: {"Authorization": SessionControl.auth_token},		
+	}).then(ProcRemoteResponse).then((resp)=>resp.json());
+}
 
 /** 管理者搜尋使用者列表 **/
 
@@ -385,3 +395,25 @@ export async function Get_user(query_data?:RoskaMembers){
 // /api/admin/group/member/{mid}
 // 15.刪除會員序號 mid??
 
+
+// GET
+// /api/admin/group/group/settlement-list/{uid}
+// 各會期結算列表
+export async function Admin_Get_settlement_list(query_data?:RoskaMembers){
+	SessionControl.CheckLogin();
+	return fetch(`${SessionControl.endpoint_url}/api/admin/group/group/settlement-list/`+query_data, {
+		method:'GET',
+		headers: {"Authorization": SessionControl.auth_token},		
+	}).then(ProcRemoteResponse).then((resp)=>resp.json());
+}
+
+// GET
+// /api/admin/file/member-pay-record
+// 會員開標付款紀錄表
+export async function export_member_settlement(query_data?:RoskaMembers){
+	SessionControl.CheckLogin();
+	return fetch(`${SessionControl.endpoint_url}/api/admin/file/member-pay-record/`+ query_data, {
+		method:'GET',
+		headers: {"Authorization": SessionControl.auth_token},		
+	}).then(ProcRemoteResponse).then((resp)=>resp.json());
+}

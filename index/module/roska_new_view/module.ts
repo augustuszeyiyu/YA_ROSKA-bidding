@@ -222,6 +222,7 @@
 			// console.log(new_group_serial_data);
 			try{
 				let result = await ROSKA_FORM.add_new_group_serial(new_group_serial_data);
+				console.log(result);
 			}catch (e: any) {
 				alert(`新增失敗!(${e.message})`);
 				console.error(`[${TAG}]`, e);

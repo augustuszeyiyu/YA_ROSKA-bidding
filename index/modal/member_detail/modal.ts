@@ -78,43 +78,36 @@
         var searchParams: any = {};
         InputParams.forEach((key ,value:any)=>{
                 searchParams[value]=key;
-                console.log(searchParams[key]);
+                console.log(searchParams[value]);
         });
         if(!searchParams['uid'])
         return;
-
-        
         const list_data = await ROSKA_FORM.Get_user(searchParams['uid']);
-        console.log(list_data);
+        let list_region = modal_view.list_container;
+        // console.log(list_data);
+        if (list_data) {
+            list_region.member_content.name.value = list_data.name;
+            list_region.member_content.nid.value = list_data.nid;   
+            list_region.member_content.gender.value = list_data.gender;
+            list_region.member_content.contact_home_number.value = list_data.contact_home_number;
+            list_region.member_content.contact_mobile_number.value = list_data.contact_mobile_number;
+            list_region.member_content.birth_date.value = list_data.birth_date.slice(0,10);
+            list_region.member_content.address.value = list_data.address;
 
-        // const { total_records, tmpl_item  } = modal_view.list_container;		
-        // const region_list = modal_view.list_container.region_list;
-        // if (list_data) {
-        //     modal_view.list_container.sid.textContent = '會組編號 : '+searchParams['sid'];
-        //     modal_view.list_container.group_leader.textContent = '會首 : '+list_data[0].name;
-        //     modal_view.list_container.address.textContent = '合會地址 : '+'永康合會';
-        //     modal_view.list_container.next_bid_date.textContent = '下次開標日期 : ';
-        //     const list_datas = list_data.slice(1);
+            list_region.recommendation_info.emergency_contact.value = list_data.emergency_contact||"";
+            list_region.recommendation_info.emergency_nid.value = list_data.emergency_contact_nid||"";
+            list_region.recommendation_info.emergency_contact_number.value = list_data.emergency_contact_number||"";
+            list_region.recommendation_info.emergency_contact_relation.value = list_data.emergency_contact_relation||"";
+            list_region.recommendation_info.referrer_mobile_number.value = list_data.referrer_mobile_number||"";
+            list_region.recommendation_info.volunteer_mobile_number.value = list_data.volunteer_mobile_number||"";
 
-        //     var count = 1;
-        //     list_datas.forEach(function(record:any){
-        //         const elm = tmpl_item.duplicate();
-        //         elm.numb.textContent = count;
-        //         count +=1;
-        //         elm.mid.textContent = record.mid;
-        //         elm.name.textContent = record.name;
-        //         elm.gid.textContent = record.gid;
-        //         elm.bid_amount.textContent = record.bid_amount;
-        //         region_list.appendChild(elm.element);
-        //     })
-        //     const button_group_bid = document.createElement("button");
-        //         button_group_bid.classList.add("btn-green");
-        //         button_group_bid.textContent = "開標";
-        //         button_group_bid.dataset.role = 'bid';
-        //         button_group_bid.dataset.relSid = searchParams['sid'];
+            list_region.bank_info_content.bank_code.value = list_data.bank_code;
+            list_region.bank_info_content.branch_code.value = list_data.branch_code;
+            list_region.bank_info_content.bank_account_number.value = list_data.bank_account_number;
+            list_region.bank_info_content.bank_account_name.value = list_data.bank_account_name;
 
-        //     modal_view.list_container.button_region.appendChild(button_group_bid);
-        // }
+            list_region.update_time.value = list_data.update_time;
+        }
     };
     function ResetPage() {
         STATE.cursor = null;
