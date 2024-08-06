@@ -109,9 +109,9 @@
 					  const download_elemet = document.createElement('a');
 					  download_elemet.href = result_data.url;
 					  download_elemet.download = '';
-					  view.appendChild(download_elemet);
+					  document.body.appendChild(download_elemet);
 					  download_elemet.click(); // 觸發下載
-					  view.removeChild(download_elemet);
+					  document.body.removeChild(download_elemet);
 					//   alert(result_data.url);
 					ResetPage();
 				}
@@ -153,6 +153,7 @@
 				elm.count.textContent = count;
 				count += 1;
 				elm.name.textContent = record.name;
+				elm.phone_number.textContent = record.phone_number;
 
 				const member_profit_list_data = await ROSKA_FORM.Admin_Get_settlement_list(record.uid);
 
@@ -178,8 +179,6 @@
 					},
 				};
 				for( const personal_record of member_profit_list_data){
-					// console.log("personal_record");
-					// console.log(personal_record);
 
 					var che = personal_record.group_info.at(-1);
 					// console.log(che);
@@ -187,7 +186,6 @@
 						continue;
 					};
 
-					// console.log(personal_record.group_info.at(-1));
 					const lastGroupInfo = personal_record.group_info.at(-1);
 					const winAmount = parseInt(lastGroupInfo.win_amount, 10);
 					switch(personal_record.group_info.at(-1).win_amount){
@@ -204,34 +202,17 @@
 							settlement_data.win_account.win_amount += winAmount;
 						}
 					}
-					// elm.pay_amount.textContent = personal_record.group_info.at(-1).win_amount||"pay_amount";
-					// elm.memebr_mid.textContent = personal_record.mid.slice(0, 6)+personal_record.mid.slice(-1, 2);
-					
-					// elm.memebr_mid.textContent = personal_record.mid.slice(-2);
-
-					// region_list.appendChild(elm.element);
 				}
 				//end for2
 
-				elm.total_group.innerHTML = "本期應繳會費 : " + ( (settlement_data.alive_account * 4000) + (settlement_data.deth_account * 5000) + -(settlement_data.win_account.win_amount) );;
-				elm.alive_group.innerHTML = "活會數 : <span style=\"color:green;\">" + settlement_data.alive_account + "</span> 。" + " 活會款總計" + settlement_data.alive_account * 4000;
-				elm.death_group.innerHTML = "死會數 : <span style=\"color:red;\">" + settlement_data.deth_account + "</span> 。" + " 死會款總計" + settlement_data.deth_account * 5000;
+				elm.total_group.innerHTML = "本期應繳會費 : <br>" + ( (settlement_data.alive_account * 4000) + (settlement_data.deth_account * 5000) + -(settlement_data.win_account.win_amount) );;
+				elm.alive_group.innerHTML = "活會數 : <span style=\"color:green;\">" + settlement_data.alive_account + "</span> 。<br>" + " 活會款總計" + settlement_data.alive_account * 4000;
+				elm.death_group.innerHTML = "死會數 : <span style=\"color:red;\">" + settlement_data.deth_account + "</span> 。<br>" + " 死會款總計" + settlement_data.deth_account * 5000;
 				// elm.win_group.innerHTML = settlement_data.win_account.win_amount;
 
 				var new_win_section = document.createElement("p");
-				elm.win_group.innerHTML = "得標會數 : <span style=\"color:green;\">" + settlement_data.win_account.gids.length + "</span>  。" + " 得標會款總計" + -(settlement_data.win_account.win_amount);
-				// elm.win_group.win_account.textContent = "";
-				// elm.win_group.win_account.appendChild(new_win_section);
+				elm.win_group.innerHTML = "得標會數 : <span style=\"color:green;\">" + settlement_data.win_account.gids.length + "</span>  。<br>" + " 得標會款總計" + -(settlement_data.win_account.win_amount);
 
-				// elm.phone.textContent = record.contact_mobile_number;
-
-				// elm.uid.textContent= record.uid;
-
-
-				// elm.create_time.title = create_time.format("YYYY/MM/DD HH:mm:ss");
-				// elm.level.textContent = record.level;
-				// elm.exchange.textContent = record.exchange;
-				// elm.symbol.textContent = record.symbol;
 
 
 

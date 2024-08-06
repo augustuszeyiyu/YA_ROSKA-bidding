@@ -1,5 +1,5 @@
 
-		.table.member_profit_table .t-row, .table.member_profit_table .t-head { grid-template-columns:5rem 1fr 2fr 2fr 2fr 2fr 1fr 5rem 1fr}
+		.table.member_profit_table .t-row, .table.member_profit_table .t-head { grid-template-columns:5rem 1fr 1.5fr 2fr 2fr 2fr 2fr 1fr 5rem 1fr}
 
 	
 			/* 編號 */
@@ -8,27 +8,29 @@
 				.table .t-column .member-state[data-state="enabled"] { background:#090; }
 				.table .t-column .member-state[data-state="disabled"] { background:#900; }
 			
-			/* 會員姓名 */
+			/*會員姓名*/
 			.table.member_profit_table .t-column:nth-child(2) {}
 			
-			/* 總會資料 */
+			/*會員手機*/
 			.table.member_profit_table .t-column:nth-child(3) {}
 			
-			/* 活會資料 */
+			/*總會資料*/
 			.table.member_profit_table .t-column:nth-child(4) {}
 			
-			/* 死會資料 */
+			/*活會資料*/
 			.table.member_profit_table .t-column:nth-child(5) {}
 			
-			/* 得標會組資料 */
+			/*死會資料*/
 			.table.member_profit_table .t-column:nth-child(6) {}
 			
-			/* 檢視詳細資料 */
+			/*得標會組資料*/
 			.table.member_profit_table .t-column:nth-child(7) {}
 			
-			/* checkbox */
+			/*檢視詳細資料*/
 			.table.member_profit_table .t-column:nth-child(8) {}
 			
-			/*輸出報表*/
+			/*checkbox*/
 			.table.member_profit_table .t-column:nth-child(9) {}
 			
+			/* 輸出報表 */
+			.table.member_profit_table .t-column:nth-child(10) {}

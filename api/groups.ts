@@ -400,6 +400,7 @@ export async function Get_user(query_data?:RoskaMembers){
 // /api/admin/group/group/settlement-list/{uid}
 // 各會期結算列表
 export async function Admin_Get_settlement_list(query_data?:RoskaMembers){
+	console.log(`${SessionControl.endpoint_url}/api/admin/group/group/settlement-list/`+query_data)
 	SessionControl.CheckLogin();
 	return fetch(`${SessionControl.endpoint_url}/api/admin/group/group/settlement-list/`+query_data, {
 		method:'GET',
@@ -411,8 +412,9 @@ export async function Admin_Get_settlement_list(query_data?:RoskaMembers){
 // /api/admin/file/member-pay-record
 // 會員開標付款紀錄表
 export async function export_member_settlement(query_data?:RoskaMembers){
+	console.log(`${SessionControl.endpoint_url}/api/admin/file/member-pay-record/`+query_data)
 	SessionControl.CheckLogin();
-	return fetch(`${SessionControl.endpoint_url}/api/admin/file/member-pay-record/`+ query_data, {
+	return fetch(`${SessionControl.endpoint_url}/api/admin/file/member-pay-record/`+query_data, {
 		method:'GET',
 		headers: {"Authorization": SessionControl.auth_token},		
 	}).then(ProcRemoteResponse).then((resp)=>resp.json());
