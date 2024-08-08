@@ -204,6 +204,7 @@
 
 		async function add_new_group_serial(){
 			const accessor = view.new_group_serial;
+			var result:any={}, added_gid:any={};
 			const new_group_serial_data: typeof ROSKA_FORM.add_new_group_serial.prototype = {
                 "member_count": '',
                 "basic_unit_amount": '',
@@ -221,10 +222,20 @@
 			};
 			// console.log(new_group_serial_data);
 			try{
-				let result = await ROSKA_FORM.add_new_group_serial(new_group_serial_data);
+				result = await ROSKA_FORM.add_new_group_serial(new_group_serial_data);
 				console.log(result);
+			
 			}catch (e: any) {
-				alert(`新增失敗!(${e.message})`);
+				alert(`Sid新增失敗!(${e.message})`);
+				console.error(`[${TAG}]`, e);
+			}
+
+
+			try{
+				added_gid = await ROSKA_FORM.add_group_id(result.sid);
+				console.log(added_gid);
+			}catch (e: any) {
+				alert(`Gid新增失敗!(${e.message})`);
 				console.error(`[${TAG}]`, e);
 			}
 		}

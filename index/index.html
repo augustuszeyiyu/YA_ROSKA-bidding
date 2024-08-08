@@ -4,7 +4,8 @@
 		<title>YA-ROSKA</title>
 		<meta charset="utf-8" />
 
-		<!-- <link rel="stylesheet" type="text/css" href="https://res.purimize.com/lib/glyphicons/glyphicon-fontawesome/glyphicon.css"> -->
+		<link rel="stylesheet" type="text/css" href="https://res.purimize.com/lib/glyphicons/glyphicon-fontawesome/glyphicon.css">
+		 
 
 		<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 		<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
@@ -25,6 +26,8 @@
 			<div elm-export="new_group_view" elm-export-accessor class="dashboard-view hide"></div>
 			<div elm-export="member_detail" elm-export-accessor class="dashboard-view hide"></div>
 			<div elm-export="member_profit_view" elm-export-accessor class="dashboard-view hide"></div>
+			<div elm-export="payment_group" elm-export-accessor class="dashboard-view hide"></div>
+			
 		</div>
 
 		
@@ -63,7 +66,7 @@
 				</div> -->
 				<div class="tabbar-item" elm-bind-event="click::change-page" data-page="profit_view">
 					<span class="glyph-fontawesome-gear"></span>
-					<p>損益資訊</p>
+					<p>系統損益資訊</p>
 				</div>
 				<div class="tabbar-item" elm-bind-event="click::change-page" data-page="sysvar_view">
 					<span class="glyph-fontawesome-gear"></span>

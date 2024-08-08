@@ -190,12 +190,12 @@
 				button_group_detail.dataset.relUid = record.uid;
 				elm.view_member.appendChild(button_group_detail);
 
-				const button_group_bid = document.createElement("button");
-				button_group_bid.classList.add("btn-green");
-				button_group_bid.textContent = "損益資訊";
-				button_group_bid.dataset.role = 'profit';
-				button_group_bid.dataset.relId = record.sid;
-				elm.member_profit.appendChild(button_group_bid);
+				// const button_group_bid = document.createElement("button");
+				// button_group_bid.classList.add("btn-green");
+				// button_group_bid.textContent = "損益資訊";
+				// button_group_bid.dataset.role = 'profit';
+				// button_group_bid.dataset.relId = record.sid;
+				// elm.member_profit.appendChild(button_group_bid);
 
 				region_list.appendChild(elm.element);
 			}	

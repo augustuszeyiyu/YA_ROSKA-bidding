@@ -93,9 +93,9 @@
 		if ( !button || !row ) return;
 		
 		switch(button.dataset.role) {
-			case "edit_user": {
+			case "view_detail": {
 				// window.location.href = "/admin/member/info/" + row.dataset.relId;
-				window.open("./"+'?'+ 'uid='+button.dataset.relUid +'&'+'modal=member_detail', 'innerHeight=800' ,'innerWidth=800',);
+				window.open("./"+'?'+ 'uid='+button.dataset.relUid +'&'+'modal=payment_group', 'innerHeight=800' ,'innerWidth=800',);
 				// window.open("./module/roska_new_view/modals.html" + button.dataset.relId, innerHeight=1600,innerWidth=800,);
 				break;
 				
@@ -153,7 +153,7 @@
 				elm.count.textContent = count;
 				count += 1;
 				elm.name.textContent = record.name;
-				elm.phone_number.textContent = record.phone_number;
+				elm.phone_number.textContent = record.contact_mobile_number;
 
 				const member_profit_list_data = await ROSKA_FORM.Admin_Get_settlement_list(record.uid);
 
@@ -205,13 +205,13 @@
 				}
 				//end for2
 
-				elm.total_group.innerHTML = "本期應繳會費 : <br>" + ( (settlement_data.alive_account * 4000) + (settlement_data.deth_account * 5000) + -(settlement_data.win_account.win_amount) );;
-				elm.alive_group.innerHTML = "活會數 : <span style=\"color:green;\">" + settlement_data.alive_account + "</span> 。<br>" + " 活會款總計" + settlement_data.alive_account * 4000;
-				elm.death_group.innerHTML = "死會數 : <span style=\"color:red;\">" + settlement_data.deth_account + "</span> 。<br>" + " 死會款總計" + settlement_data.deth_account * 5000;
+				elm.total_group.innerHTML = "本期應繳會費 : <br>" + ( (settlement_data.alive_account * 4000) + (settlement_data.deth_account * 5000) + -(settlement_data.win_account.win_amount) );
+				elm.alive_group.innerHTML = "活會數 : <span style=\"color:green;\">" + settlement_data.alive_account + "</span><br>" + " 活會款總計" + settlement_data.alive_account * 4000;
+				elm.death_group.innerHTML = "死會數 : <span style=\"color:red;\">" + settlement_data.deth_account + "</span><br>" + " 死會款總計" + settlement_data.deth_account * 5000;
 				// elm.win_group.innerHTML = settlement_data.win_account.win_amount;
 
 				var new_win_section = document.createElement("p");
-				elm.win_group.innerHTML = "得標會數 : <span style=\"color:green;\">" + settlement_data.win_account.gids.length + "</span>  。<br>" + " 得標會款總計" + -(settlement_data.win_account.win_amount);
+				elm.win_group.innerHTML = "得標會數 : <span style=\"color:green;\">" + settlement_data.win_account.gids.length + "</span><br>" + " 得標會款總計" + -(settlement_data.win_account.win_amount);
 
 
 

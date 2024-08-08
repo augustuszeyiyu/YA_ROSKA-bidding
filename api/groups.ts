@@ -360,6 +360,14 @@ export async function Get_user(query_data?:RoskaMembers){
 // /api/admin/group/group/{sid}
 // 8.產會期編號
 
+export async function add_group_id(query_data:any){
+	SessionControl.CheckLogin();
+	return fetch(`${SessionControl.endpoint_url}/api/admin/group/group/`+query_data, {
+		method:'POST',
+		headers: {"Authorization": SessionControl.auth_token, "Content-Type": "application/json"},	
+		body: JSON.stringify(query_data)	
+	}).then(ProcRemoteResponse).then((resp)=>resp.json());
+}
 
 // GET
 // /api/admin/group/group/all-list
@@ -400,7 +408,7 @@ export async function Get_user(query_data?:RoskaMembers){
 // /api/admin/group/group/settlement-list/{uid}
 // 各會期結算列表
 export async function Admin_Get_settlement_list(query_data?:RoskaMembers){
-	console.log(`${SessionControl.endpoint_url}/api/admin/group/group/settlement-list/`+query_data)
+	// console.log(`${SessionControl.endpoint_url}/api/admin/group/group/settlement-list/`+query_data)
 	SessionControl.CheckLogin();
 	return fetch(`${SessionControl.endpoint_url}/api/admin/group/group/settlement-list/`+query_data, {
 		method:'GET',
@@ -412,7 +420,7 @@ export async function Admin_Get_settlement_list(query_data?:RoskaMembers){
 // /api/admin/file/member-pay-record
 // 會員開標付款紀錄表
 export async function export_member_settlement(query_data?:RoskaMembers){
-	console.log(`${SessionControl.endpoint_url}/api/admin/file/member-pay-record/`+query_data)
+	// console.log(`${SessionControl.endpoint_url}/api/admin/file/member-pay-record/`+query_data)
 	SessionControl.CheckLogin();
 	return fetch(`${SessionControl.endpoint_url}/api/admin/file/member-pay-record/`+query_data, {
 		method:'GET',

@@ -1,0 +1,42 @@
+<div class="inner_module">
+	<div class="grid-content payment_group" elm-export="list_container" elm-export-accessor>
+		<div class="pay_info_region" style="padding: 1rem;">
+			<div class="bided_date" elm-export="bided_date"></div>
+			<div class="Container" elm-export="pay_container" >
+				<div class="title">最後一期會組統計 : </div>
+				<div class="pay_list" elm-export="pay_list" elm-export-accessor>
+					<div elm-export="should_pay"></div>
+					<div elm-export="alive_account"></div>
+					<div elm-export="death_account"></div>
+					<div elm-export="win_account"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="list_group" elm-export="pay_group_list">
+			<label class="grid-title" style="padding: 1rem;	font-size: 1.3rem; font-weight: bolder;">會組資訊列表</label>
+			<div class="grid table payment_group_table pay-list" >
+				<div class="t-head">
+					<div class="t-column">項次</div>
+					<div class="t-column">開標會期</div>
+					<div class="t-column"><samp class="glyph-fontawesome-search"></samp></div>
+					<div class="t-column">金額</div>
+					<div class="t-column">會組會員編號</div>
+				</div>
+				<div elm-export="region_list" class='t-body'></div>
+				<template class="hide">
+					<div elm-export="tmpl_item" elm-export-tmpl class="t-row">
+							<div class="field"><div><span elm-export="count"></span></div></div>
+							<div class="field"><div><span elm-export="gid"></span></div></div>
+							<div class="field"><div elm-export="view_group" class="view-group"><span elm-export="view_group_icon"></span></div></div>
+							<div class="field"><div><span elm-export="pay_amount"></span></div></div>
+							<div class="field"><div><span elm-export="memebr_mid"></span></div></div>
+					</div>
+				</template>
+			</div>
+		</div>
+	
+	
+	</div>
+		
+</div>		  

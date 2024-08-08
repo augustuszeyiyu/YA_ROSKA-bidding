@@ -1,5 +1,5 @@
 .table.member_table .t-row, .table.member_table .t-head	{
-    grid-template-columns:5rem 1.5fr 1.5fr 2.5fr 1.5fr 2.5fr 1fr 2.5fr;
+    grid-template-columns:5rem 1.5fr 1.5fr 2.5fr 1.5fr 2.5fr 1fr;
 }
 
 

@@ -155,7 +155,8 @@
 			'group_payment',
 			'group_view',
 			'new_group_view',
-			'member_detail'
+			'member_detail',
+			'payment_group'
 		];
 		const modalsPath:{
 			path: string;
