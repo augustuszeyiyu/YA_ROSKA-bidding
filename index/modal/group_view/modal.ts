@@ -120,15 +120,12 @@
                         break;	
                     }
                     var query_data = { "gid" :button.dataset.next_gid} ;			
-                    // console.log(button.dataset.next_gid );
-                    // console.log(query_data);
-                    console.log(modal_view.button_region.button_manual_member);
+
+                    console.log(query_data);
                     try{
                         // console.log(button.dataset.relSid );
 
-                        // await ROSKA_FORM.bid_group_serial(query_data);
-                        
-                        // let result = await ROSKA_FORM.bid_group_serial(query_data).catch((e: Error) => e);
+                        let result = await ROSKA_FORM.bid_group_serial(query_data).catch((e: Error) => e);
                         alert(button.dataset.relSid+'已完成開標');
                         ResetPage();
                     }
