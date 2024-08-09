@@ -146,6 +146,7 @@
                     }
                     var smid:string = finalResultElement?.dataset.mid;
                     var suid = tlast_data[smid as keyof typeof tlast_data];
+                    console.log(smid);
                     // console.log(suid);
                     if(!button.dataset.next_gid){
                         console.log('會組已完結');
@@ -267,7 +268,7 @@
             const group_member_list = document.createElement("button");
             group_member_list.classList.add("btn-green", "btn-modal");
             group_member_list.textContent = "輸出會組成員名單";
-            button_manual_bid.dataset.role = 'output_group_member_list';
+            group_member_list.dataset.role = 'output_group_member_list';
             group_member_list.dataset.relSid = searchParams['sid'];
             modal_view.list_container.ouput_region.appendChild(group_member_list);
         }
