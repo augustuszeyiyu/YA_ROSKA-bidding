@@ -219,7 +219,7 @@
 			}
 			case "view_group": {
 				// window.location.href = "/admin/member/info/" + row.dataset.relId;
-				window.open("./"+'?'+ 'sid='+button.dataset.relSid +'&'+ "next_gid="+ button.dataset.next_gid  +'&'+'modal=group_view', 'innerHeight=800' ,'innerWidth=800',);
+				window.open("./"+'?'+ 'sid='+button.dataset.relSid +'&'+ "next_gid="+ button.dataset.next_gid  +'&'+'modal=group_view', 'innerHeight=800' ,'innerWidth=1600',);
 				break;
 				
 			}
