@@ -234,7 +234,7 @@
 
 		try {
 			loading_overlay.Show();
-			// console.log(queryData);
+			console.log(queryData);
 			const list_data = await ROSKA_FORM.Admin_get_on_list(queryData);
 			COTINUE_SID.cursor = list_data.meta;
 			// const { region_list: list, total_records,tmpl_item  } = view.member_list_container;

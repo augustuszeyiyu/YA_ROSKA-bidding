@@ -139,3 +139,93 @@ export function pad_zero(i:number, num:number) {
 	const repeat = num - str.length;
 	return '0'.repeat(repeat > 0 ? repeat : 0) + str;
 }
+
+
+
+export function pad_space(i:number, num:number) {
+	const str = '' + i;
+	const repeat = num - str.length;
+	return '&ensp;'.repeat(repeat > 0 ? repeat : 0) + str;
+}
+
+export function isWeekend(date:Date) {
+	// Check if the day of the week is Saturday (6) or Sunday (0).
+	return date.getDay() === 0 || date.getDay() === 6;
+}
+export function calculateMonthlyBitStartTime(bid_start_time:Date, index:number) {
+	// console.log(bid_start_time);
+        
+	// Calculate Start Time with month and year rollover and weekend avoidance
+	const newMonth = bid_start_time.getMonth() + index;
+	//const yearOffset = Math.floor(newMonth / 12); // Calculate how many years to add
+	var yearOffset;
+	if(newMonth<0){
+		yearOffset = -1;
+	}
+	else{
+		yearOffset = 0;
+	};
+	const monthInYear = newMonth % 12; // Calculate the month within the year
+	// console.log({newMonth, yearOffset, monthInYear});
+	
+
+	const newYear = bid_start_time.getFullYear() + yearOffset;
+	let newDate = new Date(newYear, monthInYear, 10);
+	// console.log({newYear, newDate});
+		// Check if the calculated date is a weekend
+		if (isWeekend(newDate) === true) {
+			if (newDate.getDay() === 0) { // If it's Sunday
+				// Subtract 2 days to schedule it on the previous Friday.
+				newDate.setDate(newDate.getDate() - 2);
+			} else if (newDate.getDay() === 6) { // If it's Saturday
+				// Subtract 1 day to schedule it on the previous Friday.
+				newDate.setDate(newDate.getDate() - 1);
+			}
+		}
+
+	// console.log(newDate);
+	return newDate; // Return the adjusted bid_start_time
+}
+export function calculateBiWeeklyBitStartTime(bid_start_time:Date, index:number) {
+	// Calculate the number of days to add for biweekly scheduling
+	const daysToAdd = (index - 1) * 14; // 14 days for biweekly (2 weeks)
+  
+	// Add the calculated days to the start date
+	bid_start_time.setDate(bid_start_time.getDate() + daysToAdd);
+  
+
+	// Check if the calculated date is a weekend
+	if (isWeekend(bid_start_time) === true) {
+		if (bid_start_time.getDay() === 0) { // If it's Sunday
+			// Subtract 2 days to schedule it on the previous Friday.
+			bid_start_time.setDate(bid_start_time.getDate() - 2);
+		} else if (bid_start_time.getDay() === 6) { // If it's Saturday
+			// Subtract 1 day to schedule it on the previous Friday.
+			bid_start_time.setDate(bid_start_time.getDate() - 1);
+		}
+	}
+  
+	return bid_start_time;
+}
+export function getPreviousWeekday(date:Date) {
+	// Create a new Date object for the given epoch timestamp
+	const currentDate = new Date(date);
+  
+	// Get the day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+	const currentDayOfWeek = currentDate.getDay();
+  
+	// Check if the current day is a weekend (Saturday or Sunday)
+	if (currentDayOfWeek === 0 || currentDayOfWeek === 6) {
+	  // If it's a weekend, subtract the appropriate number of days to get the previous Friday (5)
+	  const daysToSubtract = currentDayOfWeek === 0 ? 2 : 1;
+	  currentDate.setDate(currentDate.getDate() - daysToSubtract);
+	}
+  
+	// Return the date of the previous weekday (which may be the same date if it's not a weekend)
+	const today = new Date(currentDate);
+	const year = `${today.getFullYear() % 100}`.padStart(2, '0'); // Ensure 2 digits for year
+	const month = (today.getMonth() + 1).toString().padStart(2, '0'); // Ensure 2 digits for month
+	const day = today.getDate().toString().padStart(2, '0'); // Ensure 2 digits for day
+	const yymmdd = `${year}${month}${day}`;
+	return yymmdd;
+  }

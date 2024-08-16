@@ -77,6 +77,10 @@
         if( !searchParams['uid'])
         return;
 
+        var today_this = new Date();
+        var next_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,0);					
+
+
         const list_data = await ROSKA_FORM.Admin_Get_settlement_list(searchParams['uid']);
         console.log(list_data);
 
@@ -125,6 +129,8 @@
                 else if(record.gid){                   
                     last_gid = record.gid;
                 };
+
+                
                 const elm = tmpl_item.duplicate();
                 elm.count.textContent = count;
                 count +=1;
@@ -134,15 +140,29 @@
                 switch(record.group_info.at(-1).win_amount){
                     case -4000:{
                         settlement_data.alive_account +=1;
+                        elm.pay_amount.textContent = che.win_amount;
                         break;
                     }
                     case -5000:{
-                        settlement_data.deth_account +=1;
+                        var record_pre_bid_end_time = new Date(record.group_info.at(-1).bid_end_time);
+                        var today_this = new Date();
+                        var next_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,0);					
+                        var inteval = Number(next_bid_date.getMonth())-Number(record_pre_bid_end_time.getMonth());
+                        console.log( inteval  );
+                        if( inteval > 0){								
+                            elm.pay_amount.textContent = 0;
+                            break;
+                        }
+                        else{
+                            settlement_data.deth_account +=1;
+                            elm.pay_amount.textContent = che.win_amount;
                         break;
+                        }
                     }
                     default : {
                         settlement_data.win_account.gids.push(lastGroupInfo);
                         settlement_data.win_account.win_amount += winAmount;
+                        elm.pay_amount.textContent = che.win_amount;
                     }
                 }
 
@@ -156,7 +176,7 @@
 
 
                 elm.gid.textContent = che.gid;
-                elm.pay_amount.textContent = che.win_amount;
+                
                 elm.memebr_mid.textContent = record.mid;
                 region_list.appendChild(elm.element);
             })

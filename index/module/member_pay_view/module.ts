@@ -13,6 +13,7 @@
 	} = {
 		query:{},
 		cursor:null
+		
 	};
 	var count = 1;
 
@@ -49,8 +50,9 @@
 					const target = e.target;
 					const current_pos = target.scrollTop + target.clientHeight;
 					const trigger_line = target.scrollHeight - 5;
-					// STATE.cursor.meta = {	order: "ASC",	page: "1",	page_size: "50"	};
+					// STATE.cursor.meta = { page_size: "50"	};
 					const cursor = STATE.cursor;
+					// STATE.cursor.meta.page_size = "50";
 					console.log("cursorA");
 					console.log(cursor);
 					if ( current_pos >= trigger_line && cursor !== null ) {
@@ -85,14 +87,39 @@
 	})
 	.on('click', async(e:any)=>{
 		const trigger = e.target;
+		console.log(trigger);
 		const row = trigger.closest('.t-row');
-		if ( !row ) return;
-		
+		// if ( !row ) return;
 		const button = trigger.closest('button');
-		
-		if ( !button || !row ) return;
+		// if ( !button || !row ) return;
+		if ( !button) return;
 		
 		switch(button.dataset.role) {
+			case "export_all": {
+				trigger.textContent = '生成中...'; // 可以顯示生成中的提示
+				console.log("export_all");
+				try {
+					let result_data = await ROSKA_FORM.export_all_member_settlement();
+					console.log(result_data);
+					// let result = await ROSKA_FORM.bid_group_serial(query_data).catch((e: Error) => e);
+					  const download_elemet = document.createElement('a');
+					  download_elemet.href = result_data.url;
+					  download_elemet.download = '';
+					  document.body.appendChild(download_elemet);
+					  download_elemet.click(); // 觸發下載
+					  document.body.removeChild(download_elemet);
+					//   alert(result_data.url);
+					ResetPage();
+				}
+				catch (e: any) {
+					alert(`輸出失敗(${e.message}`);
+				}
+				finally{
+					trigger.innerHTML= "輸出報表<br>(所有會組)" // 還原按鈕文本
+				}
+				break;		
+				
+			}
 			case "view_detail": {
 				// window.location.href = "/admin/member/info/" + row.dataset.relId;
 				window.open("./"+'?'+ 'uid='+button.dataset.relUid +'&'+'modal=payment_group', 'innerHeight=800' ,'innerWidth=800',);
@@ -141,7 +168,7 @@
 			total_records.textContent = STATE.cursor.meta.total_records;	
 
 			const {records} = STATE.cursor;
-			console.log(records)
+			// console.log(records)
 
 
 			for(const record of records) {
@@ -154,11 +181,8 @@
 				count += 1;
 				elm.name.textContent = record.name;
 				elm.phone_number.textContent = record.contact_mobile_number;
-
 				const member_profit_list_data = await ROSKA_FORM.Admin_Get_settlement_list(record.uid);
 
-				// console.log(record.uid);
-				// console.log(member_profit_list_data);
 				interface GroupInfo {
 					gid: string;
 					win_amount: number;
@@ -194,8 +218,21 @@
 							break;
 						}
 						case -5000:{
-							settlement_data.deth_account +=1;
+							console.log(count);
+							console.log(personal_record.group_info.at(-1).gid);
+							console.log(personal_record.group_info.at(-1).bid_end_time);
+							var record_pre_bid_end_time = new Date(personal_record.group_info.at(-1).bid_end_time);
+							var today_this = new Date();
+							var next_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,0);					
+							var inteval = Number(next_bid_date.getMonth())-Number(record_pre_bid_end_time.getMonth());
+							console.log( inteval  );
+							if( inteval > 0){								
+								break;
+							}
+							else{
+								settlement_data.deth_account +=1;
 							break;
+							}
 						}
 						default : {
 							settlement_data.win_account.gids.push(lastGroupInfo);

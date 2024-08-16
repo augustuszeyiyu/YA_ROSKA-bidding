@@ -150,13 +150,6 @@ export async function Admin_get_new_list(query_data:any) {
 /** 3. 進行中會組列表 **/
 export async function Admin_get_on_list(query_data:any) {
 	const searchParams = new URLSearchParams(query_data);
-	// if (arg1 && arg1 === Object(arg1)) {
-	//     const { filter_text, order } = arg1;
-	//     if (filter_text !== undefined)
-	//         searchParams.set('filter_text', filter_text);
-	//     if (order !== undefined)
-	//         searchParams.set('order', (0, tools_js_1$4.BuildQueryOrderString)(order));
-	// }
 	if (query_data && query_data === Object(query_data)) {
 		const { order, page, page_size } = query_data;
 		if (order !== undefined)
@@ -167,6 +160,7 @@ export async function Admin_get_on_list(query_data:any) {
 			searchParams.set('ps', query_data.page_size + '');
 	}
 	SessionControl.CheckLogin();	
+	console.log(searchParams);
 	return fetch(`${SessionControl.endpoint_url}/api/admin/group/serial/on-list?${searchParams}`, {
 		method:'GET',
 		headers: {"Authorization": SessionControl.auth_token},
@@ -174,15 +168,11 @@ export async function Admin_get_on_list(query_data:any) {
 };
 
 /** 4.已過期會組列表 **/
+// GET
+// /api/admin/group/serial/expired-list
+// 已過期會組列表
 export async function Admin_get_past_list(query_data:any) {
 	const searchParams = new URLSearchParams(query_data);
-	// if (arg1 && arg1 === Object(arg1)) {
-	//     const { filter_text, order } = arg1;
-	//     if (filter_text !== undefined)
-	//         searchParams.set('filter_text', filter_text);
-	//     if (order !== undefined)
-	//         searchParams.set('order', (0, tools_js_1$4.BuildQueryOrderString)(order));
-	// }
 	if (query_data && query_data === Object(query_data)) {
 		const { order, page, page_size } = query_data;
 		if (order !== undefined)
@@ -193,7 +183,8 @@ export async function Admin_get_past_list(query_data:any) {
 			searchParams.set('ps', query_data.page_size + '');
 	}
 	SessionControl.CheckLogin();
-	return fetch(`${SessionControl.endpoint_url}/api/admin/group/serial/past-list?${searchParams}`, {
+	console.log(searchParams);
+	return fetch(`${SessionControl.endpoint_url}/api/admin/group/serial/expired-list?${searchParams}`, {
 		method:'GET',
 		headers: {"Authorization": SessionControl.auth_token},
 	}).then(ProcRemoteResponse).then((resp)=>resp.json());
@@ -251,12 +242,15 @@ export async function List_all_user(arg1:GetUserListQuery, arg2?:GetUserListResp
 	// }
 	if(arg1 && arg1 === Object(arg1)) {
 		const {filter_text, order} = arg1;
+		console.log("1");
+		console.log(arg1);
 		if (filter_text !== undefined) 	searchParams.set('filter_text', filter_text);
 		if (order !== undefined) 		searchParams.set('order', BuildQueryOrderString(order));
 	}
 
 	if(arg2 && arg2 === Object(arg2)) {
 		const {page, page_size} = arg2;	
+		console.log("2");
 		if (page !== undefined) 		searchParams.set('p', arg2.page + '');
 		if (page_size !== undefined) 	searchParams.set('ps', arg2.page_size + '');
 	}
@@ -269,8 +263,7 @@ export async function List_all_user(arg1:GetUserListQuery, arg2?:GetUserListResp
 	// 	if (page_size !== undefined)
 	// 		searchParams.set('ps', query_data.page_size + '');
 	// }
-	// console.log("searchParams")
-	// console.log(searchParams);
+	console.log(searchParams);
 	return fetch(`${SessionControl.endpoint_url}/api/admin/user/list?${searchParams}`, {
 		method:'GET',
 		headers: {"Authorization": SessionControl.auth_token},
@@ -407,10 +400,22 @@ export async function add_group_id(query_data:any){
 // GET
 // /api/admin/group/group/settlement-list/{uid}
 // 各會期結算列表
-export async function Admin_Get_settlement_list(query_data?:RoskaMembers){
+export async function Admin_Get_settlement_list(query_data?:RoskaMembers,year?:number,month?:number){
 	// console.log(`${SessionControl.endpoint_url}/api/admin/group/group/settlement-list/`+query_data)
 	SessionControl.CheckLogin();
 	return fetch(`${SessionControl.endpoint_url}/api/admin/group/group/settlement-list/`+query_data, {
+		method:'GET',
+		headers: {"Authorization": SessionControl.auth_token},		
+	}).then(ProcRemoteResponse).then((resp)=>resp.json());
+}
+
+// GET
+// /api/admin/file/all-member-pay-record
+// 全部會員開標付款紀錄表
+export async function export_all_member_settlement(){
+	// console.log(`${SessionControl.endpoint_url}/api/admin/file/member-pay-record/`+query_data)
+	SessionControl.CheckLogin();
+	return fetch(`${SessionControl.endpoint_url}/api/admin/file/all-member-pay-record`, {
 		method:'GET',
 		headers: {"Authorization": SessionControl.auth_token},		
 	}).then(ProcRemoteResponse).then((resp)=>resp.json());
