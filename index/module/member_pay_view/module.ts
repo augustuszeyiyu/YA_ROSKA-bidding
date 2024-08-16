@@ -181,7 +181,15 @@
 				count += 1;
 				elm.name.textContent = record.name;
 				elm.phone_number.textContent = record.contact_mobile_number;
-				const member_profit_list_data = await ROSKA_FORM.Admin_Get_settlement_list(record.uid);
+
+					var today_this = new Date();
+					var next_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,0);	
+		
+					const testdate = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(new Date() , 1);
+					const year:number = Number(testdate.getFullYear()); 
+					const month:number = Number(testdate.getMonth()); 
+
+				const member_profit_list_data = await ROSKA_FORM.Admin_Get_settlement_list(record.uid, year, month);
 
 				interface GroupInfo {
 					gid: string;
@@ -206,33 +214,31 @@
 
 					var che = personal_record.group_info.at(-1);
 					// console.log(che);
-					if( Number(che.win_amount) === 0 ){
+					// if( Number(che.win_amount) === 0 ){
+					// 	continue;
+					// };
+					var record_pre_bid_end_time = new Date(personal_record.group_info.at(-1).bid_end_time);
+					var today_this = new Date();
+					var this_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,0);					
+					var inteval = Number(this_bid_date.getMonth())-Number(record_pre_bid_end_time.getMonth());
+					if( inteval > 0){								
 						continue;
-					};
+					}
 
 					const lastGroupInfo = personal_record.group_info.at(-1);
 					const winAmount = parseInt(lastGroupInfo.win_amount, 10);
 					switch(personal_record.group_info.at(-1).win_amount){
+						case 0:{
+							break;
+						}
 						case -4000:{
 							settlement_data.alive_account +=1;
 							break;
 						}
-						case -5000:{
-							console.log(count);
-							console.log(personal_record.group_info.at(-1).gid);
-							console.log(personal_record.group_info.at(-1).bid_end_time);
-							var record_pre_bid_end_time = new Date(personal_record.group_info.at(-1).bid_end_time);
-							var today_this = new Date();
-							var next_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,0);					
-							var inteval = Number(next_bid_date.getMonth())-Number(record_pre_bid_end_time.getMonth());
-							console.log( inteval  );
-							if( inteval > 0){								
-								break;
-							}
-							else{
-								settlement_data.deth_account +=1;
+						case -5000:{						
+							settlement_data.deth_account +=1;
 							break;
-							}
+							
 						}
 						default : {
 							settlement_data.win_account.gids.push(lastGroupInfo);

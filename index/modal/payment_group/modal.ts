@@ -77,11 +77,13 @@
         if( !searchParams['uid'])
         return;
 
-        var today_this = new Date();
-        var next_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,0);					
+            var today_this = new Date();
+            var next_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,0);	
 
-
-        const list_data = await ROSKA_FORM.Admin_Get_settlement_list(searchParams['uid']);
+            const testdate = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(new Date() , 1);
+            const year:number = Number(testdate.getFullYear()); 
+            const month:number = Number(testdate.getMonth()); 
+        const list_data = await ROSKA_FORM.Admin_Get_settlement_list(searchParams['uid'],year,month);
         console.log(list_data);
 
         interface GroupInfo {
@@ -101,9 +103,9 @@
             win_account:{
                 gids:[],
                 win_amount:0,
-            },
+            }
         };
-
+        console.log(settlement_data.win_account.gids);
 
         const { total_records, tmpl_item  } = modal_view.list_container;		
         const region_list = modal_view.list_container.region_list;
@@ -119,67 +121,73 @@
             var w_data:any = [];
             var last_gid = ' ';
 
-            list_data.forEach(function(record:any) {
+            // list_data.forEach(function(record:any) {
+            for(const record of list_data) {
                 var che = record.group_info.at(-1);
                 tlast_data[record.mid]=record.uid;
-                if(!record.gid) {
-                    w_data[count_1]={"mid":record.mid,"name":record.name,'uid':record.uid};
-                    count_1 += 1 ;
+                var record_pre_bid_end_time = new Date(record.group_info.at(-1).bid_end_time);
+                var today_this = new Date();
+                var this_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,0);					
+                var inteval = Number(this_bid_date.getMonth())-Number(record_pre_bid_end_time.getMonth());
+                console.log( inteval  );
+                if( inteval > 0){								
+                    continue;
                 }
-                else if(record.gid){                   
-                    last_gid = record.gid;
-                };
+                else {
+                    // if(!record.gid) {
+                    //     w_data[count_1]={"mid":record.mid,"name":record.name,'uid':record.uid};
+                    //     count_1 += 1 ;
+                    // }
+                    // else if(record.gid){                   
+                    //     last_gid = record.gid;
+                    // };
 
-                
-                const elm = tmpl_item.duplicate();
-                elm.count.textContent = count;
-                count +=1;
+                    
+                    const elm = tmpl_item.duplicate();
+                    elm.count.textContent = count;
+                    count +=1;
 
-                const lastGroupInfo = record.group_info.at(-1);
-                const winAmount = parseInt(lastGroupInfo.win_amount, 10);
-                switch(record.group_info.at(-1).win_amount){
-                    case -4000:{
-                        settlement_data.alive_account +=1;
-                        elm.pay_amount.textContent = che.win_amount;
-                        break;
-                    }
-                    case -5000:{
-                        var record_pre_bid_end_time = new Date(record.group_info.at(-1).bid_end_time);
-                        var today_this = new Date();
-                        var next_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,0);					
-                        var inteval = Number(next_bid_date.getMonth())-Number(record_pre_bid_end_time.getMonth());
-                        console.log( inteval  );
-                        if( inteval > 0){								
-                            elm.pay_amount.textContent = 0;
+                    const lastGroupInfo = record.group_info.at(-1);
+                    const winAmount = parseInt(lastGroupInfo.win_amount, 10);
+                    switch(record.group_info.at(-1).win_amount){
+                        case 0:{
+                            elm.pay_amount.innerHTML = "轉讓";
                             break;
                         }
-                        else{
-                            settlement_data.deth_account +=1;
+                        case -4000:{
+                            settlement_data.alive_account +=1;
                             elm.pay_amount.textContent = che.win_amount;
-                        break;
+                            break;
+                        }
+                        case -5000:{                  
+                                settlement_data.deth_account +=1;
+                                elm.pay_amount.textContent = che.win_amount;
+                                break;
+                        }
+                        default : {
+                            console.log("defaut");
+                            settlement_data.win_account.gids.push(lastGroupInfo);
+                            settlement_data.win_account.win_amount += winAmount;
+                            elm.pay_amount.textContent = che.win_amount;
                         }
                     }
-                    default : {
-                        settlement_data.win_account.gids.push(lastGroupInfo);
-                        settlement_data.win_account.win_amount += winAmount;
-                        elm.pay_amount.textContent = che.win_amount;
-                    }
+
+
+                    elm.view_group.dataset.role = 'view_group';
+                    elm.view_group.dataset.relSid = record.sid;
+                    elm.view_group.dataset.relNext_gid = String(che.gid.slice(0,-2)+ROSKA_FORM.Tools.pad_zero((Number(che.gid.slice(-2))+1),2));
+                    const button_group_detail =  document.createElement("samp")
+                    button_group_detail.classList.add("glyph-fontawesome-search");
+                    elm.view_group_icon.appendChild(button_group_detail);
+
+
+                    elm.gid.textContent = che.gid;
+                    
+                    elm.memebr_mid.textContent = record.mid;
+                    region_list.appendChild(elm.element);
+
                 }
-
-
-				elm.view_group.dataset.role = 'view_group';
-				elm.view_group.dataset.relSid = record.sid;
-                elm.view_group.dataset.relNext_gid = String(che.gid.slice(0,-2)+ROSKA_FORM.Tools.pad_zero((Number(che.gid.slice(-2))+1),2));
-				const button_group_detail =  document.createElement("samp")
-				button_group_detail.classList.add("glyph-fontawesome-search");
-				elm.view_group_icon.appendChild(button_group_detail);
-
-
-                elm.gid.textContent = che.gid;
-                
-                elm.memebr_mid.textContent = record.mid;
-                region_list.appendChild(elm.element);
-            })
+            }
             console.log(pay_list_region.should_pay);
             pay_list_region.should_pay.innerHTML = "本期應繳會費 : <br>" + ( (settlement_data.alive_account * 4000) + (settlement_data.deth_account * 5000) + -(settlement_data.win_account.win_amount) );
             pay_list_region.alive_account.innerHTML = "活會數 : <span style=\"color:green;\">" + settlement_data.alive_account + "</span><br>" + " 活會款總計" + settlement_data.alive_account * 4000;
@@ -187,6 +195,8 @@
             // elm.win_group.innerHTML = settlement_data.win_account.win_amount;
 
             var new_win_section = document.createElement("p");
+            console.log("settlement_data.win_account.gids.length");
+            console.log(settlement_data.win_account.gids.length);
             pay_list_region.win_account.innerHTML = "得標會數 : <span style=\"color:green;\">" + settlement_data.win_account.gids.length + "</span><br>" + " 得標會款總計" + -(settlement_data.win_account.win_amount);
         }
     };
