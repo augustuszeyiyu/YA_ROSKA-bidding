@@ -250,21 +250,15 @@
 		
 			const records = list_data.records;
 			for(const record of records) {
-				// console.log(record);
+				console.log(record);
 				// const create_time = dayjs.unix(record.create_time);
 				const elm = tmpl_item.duplicate();
-				// elm.element.dataset.id = record.id;
-				// elm.id.textContent = record.id;
-				// elm.email.textContent = record.email;
 				elm.create_time.textContent = record.bid_start_time.slice(0 , 10);
-				// elm.create_time.textContent = record.create_time.slice(0 , 10)+" "+record.create_time.slice(11 , -5);;
 				elm.last_duration.textContent = record.prev_gid.gid.slice(0, 6)+"-"+record.prev_gid.gid.slice(-3,-2).toUpperCase()+record.prev_gid.gid.slice(-2);
 				elm.bid_member.textContent = record.prev_gid.mid;
 				elm.bid_name.textContent = record.prev_gid.name;
-				// elm.create_time.title = create_time.format("YYYY/MM/DD HH:mm:ss");
-				// elm.level.textContent = record.level;
-				// elm.exchange.textContent = record.exchange;
-				// elm.symbol.textContent = record.symbol;
+				elm.win_amount.textContent  = record.prev_gid.win_amount;
+				elm.transition.textContent  = record.prev_gid.transition;
 
 				elm.count.textContent = ROSKA_FORM.Tools.pad_zero(count ,3);
 				count += 1;

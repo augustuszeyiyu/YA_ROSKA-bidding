@@ -243,12 +243,12 @@
 				//end for2
 
 				elm.total_group.innerHTML = "本期應繳會費 : <br>" + ( (settlement_data.alive_account * 4000) + (settlement_data.deth_account * 5000) + -(settlement_data.win_account.win_amount) );
-				elm.alive_group.innerHTML = "活會數 : <span style=\"color:green;\">" + settlement_data.alive_account + "</span><br>" + " 活會款總計" + settlement_data.alive_account * 4000;
-				elm.death_group.innerHTML = "死會數 : <span style=\"color:red;\">" + settlement_data.deth_account + "</span><br>" + " 死會款總計" + settlement_data.deth_account * 5000;
+				elm.alive_group.innerHTML = "活會數 :  <br><span style=\"color:green;\">" + settlement_data.alive_account + "</span><br>" + " 活會款總計  : <br>" + settlement_data.alive_account * 4000;
+				elm.death_group.innerHTML = "死會數 :  <br><span style=\"color:red;\">" + settlement_data.deth_account + "</span><br>" + " 死會款總計  : <br>" + settlement_data.deth_account * 5000;
 				// elm.win_group.innerHTML = settlement_data.win_account.win_amount;
 
 				var new_win_section = document.createElement("p");
-				elm.win_group.innerHTML = "得標會數 : <span style=\"color:green;\">" + settlement_data.win_account.gids.length + "</span><br>" + " 得標會款總計" + -(settlement_data.win_account.win_amount);
+				elm.win_group.innerHTML = "得標會數 :  <br><span style=\"color:green;\">" + settlement_data.win_account.gids.length + "</span><br>" + " 得標會款總計  : <br>" + -(settlement_data.win_account.win_amount);
 
 
 

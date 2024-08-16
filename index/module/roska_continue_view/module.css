@@ -16,7 +16,7 @@
 				.table .t-column:first-child ~ .t-column { border-left:1px solid #EEE; }
 
 				.table.continue_table .t-row, .table.continue_table .t-head	{
-					grid-template-columns:5rem 1.5fr 1.5fr 1.5fr 1.5fr 1fr 1fr 1fr 0.5fr 1fr;
+					grid-template-columns:5rem 1.5fr 1.5fr 1.5fr 1.5fr 1fr 1fr 1fr 1fr 1fr 0.5fr 1fr;
 				}
 
 		.table .t-row, .table .t-head { grid-template-columns:5rem 2.5fr 2.5fr 1fr 1fr}

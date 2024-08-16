@@ -58,7 +58,7 @@
 					const target = e.target;
 					const current_pos = target.scrollTop + target.clientHeight;
 					const trigger_line = target.scrollHeight - 5;
-					STATE.cursor.meta = {	order: "DESC",	page: "1",	page_size: "50"	};
+					// STATE.cursor.meta = {	order: "DESC",	page: "1",	page_size: "50"	};
 					const cursor = STATE.cursor;
 					console.log(cursor);
 					if ( current_pos >= trigger_line && cursor !== null ) {
