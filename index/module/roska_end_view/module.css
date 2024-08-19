@@ -1,0 +1,3 @@
+.table.end_table .t-row, .table.end_table .t-head	{
+    grid-template-columns:5rem 1.5fr 1.5fr 1.5fr 1.5fr 1fr 1fr 1fr 1fr 1fr ;
+}

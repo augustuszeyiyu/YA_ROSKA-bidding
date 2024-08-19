@@ -110,6 +110,7 @@
         const { total_records, tmpl_item  } = modal_view.list_container;		
         const region_list = modal_view.list_container.region_list;
         const pay_list_region = modal_view.list_container.pay_list;
+        const pay_container = modal_view.list_container.pay_container;
 
         console.log(pay_list_region);
         if (list_data) {
@@ -188,7 +189,8 @@
 
                 }
             }
-            console.log(pay_list_region.should_pay);
+
+            // pay_container.member_name.textContent = searchParams.name;
             pay_list_region.should_pay.innerHTML = "本期應繳會費 : <br>" + ( (settlement_data.alive_account * 4000) + (settlement_data.deth_account * 5000) + -(settlement_data.win_account.win_amount) );
             pay_list_region.alive_account.innerHTML = "活會數 : <span style=\"color:green;\">" + settlement_data.alive_account + "</span><br>" + " 活會款總計" + settlement_data.alive_account * 4000;
             pay_list_region.death_account.innerHTML = "死會數 : <span style=\"color:red;\">" + settlement_data.deth_account + "</span><br>" + " 死會款總計" + settlement_data.deth_account * 5000;

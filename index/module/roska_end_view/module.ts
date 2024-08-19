@@ -167,25 +167,29 @@
 			const records = list_data.records;
 			for(const record of records) {
 				// console.log(record);
-				// const create_time = dayjs.unix(record.create_time);
 				const elm = tmpl_item.duplicate();
-				// elm.element.dataset.id = record.id;
-				// elm.id.textContent = record.id;
-				// elm.email.textContent = record.email;
 				elm.create_time.textContent = record.bid_start_time.slice(0 , 10);
-				// elm.create_time.textContent = record.create_time.slice(0 , 10)+" "+record.create_time.slice(11 , -5);;
-
-				// elm.last_duration.textContent = record.prev_gid.gid.slice(0, 6)+"-"+record.prev_gid.gid.slice(-3,-2).toUpperCase()+record.prev_gid.gid.slice(-2);
-
-				// elm.bid_member.textContent = record.prev_gid.mid;
-				// elm.bid_name.textContent = record.prev_gid.name;
-
-
-
-				// elm.create_time.title = create_time.format("YYYY/MM/DD HH:mm:ss");
-				// elm.level.textContent = record.level;
-				// elm.exchange.textContent = record.exchange;
-				// elm.symbol.textContent = record.symbol;
+				elm.last_duration.textContent = record.prev_gid.gid.slice(0, 6)+"-"+record.prev_gid.gid.slice(-3,-2).toUpperCase()+record.prev_gid.gid.slice(-2);
+				elm.bid_member.textContent = record.prev_gid.mid;
+				elm.bid_name.textContent = record.prev_gid.name;
+				elm.win_amount.textContent  = record.prev_gid.win_amount;
+				switch (record.prev_gid.transition){
+					case 1:{
+						elm.transition.textContent  = "轉讓";
+						break;
+					}
+					case 0:{
+						elm.transition.textContent  = "全收";
+						break;
+					}
+					case 2:{
+						elm.transition.textContent  = "結清";
+						break;
+					}
+					default:{
+						elm.transition.textContent  = "請確認";
+					}
+				};
 
 				elm.count.textContent = ROSKA_FORM.Tools.pad_zero(count ,3);
 				count += 1;
@@ -204,33 +208,6 @@
 				}
 				elm.view_group.appendChild(button_group_detail);
 
-				const button_group_bid = document.createElement("button");
-				button_group_bid.classList.add("btn-green");
-				button_group_bid.textContent = "電腦開標";
-				button_group_bid.dataset.role = 'bid';
-				if(!record.next_gid){		
-					button_group_detail.dataset.next_gid=record.sid;
-				}
-				else{
-					button_group_bid.dataset.next_gid = record.next_gid.gid;
-				}
-				button_group_bid.dataset.relSid = record.sid;	
-				elm.bid.appendChild(button_group_bid);
-
-				const button_check_box = document.createElement("input");
-				button_check_box.classList.add("row-checkbox");
-				button_check_box.type = "checkbox";
-				button_check_box.dataset.role = 'checkbox';
-				if(!record.next_gid){
-					button_group_detail.dataset.next_gid=record.sid;
-				}
-				else{
-					button_check_box.dataset.next_gid = record.next_gid.gid;
-				}
-				button_check_box.dataset.relSid = record.sid;
-				elm.check_box.appendChild(button_check_box);
-
-
 				const button_export = document.createElement("button");
 				button_export.classList.add("btn-orange");
 				button_export.textContent = "輸出報表";
@@ -244,14 +221,8 @@
 				}
 				elm.export.appendChild(button_export);
 
-				// const button_manual_bid = document.createElement("button");
-				// button_manual_bid.classList.add("btn-orange");
-				// button_manual_bid.textContent = "輸出報表";
-				// button_manual_bid.dataset.role = 'bid';
-				// button_manual_bid.dataset.relSid = record.sid;
-				// button_manual_bid.dataset.next_gid = record.next_gid;
-				// elm.manual_bid.appendChild(button_manual_bid);
 
+				//
 				region_list.appendChild(elm.element);
 			}
 		}

@@ -265,6 +265,7 @@
 				button_group_detail.textContent = "詳細資訊";
 				button_group_detail.dataset.role = 'view_detail';
 				button_group_detail.dataset.relUid = record.uid;
+				button_group_detail.dataset.relName = record.name;
 				elm.view_detail.appendChild(button_group_detail);
 
 				const button_export = document.createElement("button");

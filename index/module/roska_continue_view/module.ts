@@ -149,14 +149,20 @@
 
         }
 
+
         const selectAllCheckbox= trigger.closest('#select-all');   
         if (selectAllCheckbox) {
             console.log(selectAllCheckbox);
-            var rowCheckboxes = document.querySelectorAll('.row-checkbox') as NodeListOf<HTMLInputElement>;;
+            var rowCheckboxes = document.querySelectorAll('.row-checkbox') as NodeListOf<HTMLInputElement>;
             rowCheckboxes.forEach(checkbox => {
             checkbox.checked = selectAllCheckbox.checked;
             });
         }
+
+
+		const export_groups_table_btn =  trigger.closest('export_group_table');
+		const target_table = document.querySelectorAll('.continue_table') as NodeListOf<HTMLInputElement>;
+		console.log(target_table);
 
 		if ( !row ) return;
 		
@@ -258,7 +264,25 @@
 				elm.bid_member.textContent = record.prev_gid.mid;
 				elm.bid_name.textContent = record.prev_gid.name;
 				elm.win_amount.textContent  = record.prev_gid.win_amount;
-				elm.transition.textContent  = record.prev_gid.transition;
+
+				switch (record.prev_gid.transition){
+					case 1:{
+						elm.transition.textContent  = "轉讓";
+						break;
+					}
+					case 0:{
+						elm.transition.textContent  = "全收";
+						break;
+					}
+					case 2:{
+						elm.transition.textContent  = "結清";
+						break;
+					}
+					default:{
+						elm.transition.textContent  = "請確認";
+					}
+				};
+
 
 				elm.count.textContent = ROSKA_FORM.Tools.pad_zero(count ,3);
 				count += 1;
