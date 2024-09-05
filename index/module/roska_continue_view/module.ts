@@ -3,12 +3,14 @@
     const LANG_NAME_MAP = {en_us:'英文', zh_tw:'繁體中文', zh_cn:'簡體中文'};
     type QueryParam = {};
 
+
+
 	///****待修改****///
 	// type PagingCursor = Awaited<ReturnType<typeof window.ROSKA_FORM.Do_Register_User_Info>>;
 	type PagingCursor = Awaited<ReturnType<typeof window.ROSKA_FORM.Admin_get_on_list>>;
 	type QueryParamTask = { token:string; state?:string; order?:{[key:string]:string;}; };
 	const COTINUE_SID:{ query:QueryParamTask; cursor:PaginateCursor<any>|null;} = {query:{token:''}, cursor:null};
-	const queryData:{ order:string; page:number; page_size:number } = {	order: "DESC",	page: 1,	page_size: 50	};
+	const queryData:{ order:string; page:number; page_size:number } = {	order: "DESC",	page: 1,	page_size: 100	};
 
 	var count = 1;
 
@@ -64,7 +66,7 @@
 						if (page !== undefined) {
 						queryData.page = page + 1;
 						}
-						queryData.page_size = page_size?page_size:50;
+						queryData.page_size = page_size?page_size:100;
 						console.log(page);
 						console.log(queryData);
 						list_new_group_serial(queryData);
@@ -96,7 +98,7 @@
 			return;
 		// loading_overlay.Show();
 		ResetPage();
-		// ResetPage();
+		list_new_group_serial(queryData);
 		// list_new_group_serial()
 		// 	.catch((e) => {
 		// 	console.error(e);
@@ -161,8 +163,45 @@
 
 
 		const export_groups_table_btn =  trigger.closest('export_group_table');
-		const target_table = document.querySelectorAll('.continue_table') as NodeListOf<HTMLInputElement>;
-		console.log(target_table);
+		const target_table = document.querySelector('.continue_table');
+		// console.log(target_table);
+		// // console.log(TestData);
+		// if(target_table){
+		// 		const ExcelJS = window.ExcelJS;
+		// 		const workbook = new ExcelJS.Workbook();
+		// 		const worksheet = workbook.addWorksheet('報表');
+
+		// 		// const table = document.getElementById('myTable');
+		// 		const table = target_table;
+		// 		const rows = table.querySelectorAll('div');
+
+		// 		// 複製表格標題
+		// 		rows[0].querySelectorAll('.t-row').forEach((div, index) => {
+		// 			worksheet.getRow(1).getCell(index + 1).value = div.innerHTML;
+		// 		});
+		// 		// console.log(worksheet);
+
+		// 		// 複製表格資料
+		// 		for (let i = 1; i < rows.length; i++) {
+		// 			const cells = rows[i].querySelectorAll('.t-row');
+		// 			cells.forEach((div, index) => {
+		// 				console.log(index);
+		// 				worksheet.getRow(i + 1).getCell(index + 1).value = div.innerHTML;
+		// 			});
+		// 		}
+
+		// 		// 將 Excel 文件轉換為 blob，並觸發下載
+		// 		const buffer = await workbook.xlsx.writeBuffer();
+		// 		const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+		// 		const url = URL.createObjectURL(blob);
+
+		// 		const a = document.createElement('a');
+		// 		a.href = url;
+		// 		a.download = 'report.xlsx';
+		// 		document.body.appendChild(a);
+		// 		a.click();
+		// 		document.body.removeChild(a);
+		// }
 
 		if ( !row ) return;
 		
@@ -256,7 +295,9 @@
 		
 			const records = list_data.records;
 			for(const record of records) {
-				console.log(record);
+				// console.log(record);
+
+
 				// const create_time = dayjs.unix(record.create_time);
 				const elm = tmpl_item.duplicate();
 				elm.create_time.textContent = record.bid_start_time.slice(0 , 10);
@@ -264,6 +305,9 @@
 				elm.bid_member.textContent = record.prev_gid.mid;
 				elm.bid_name.textContent = record.prev_gid.name;
 				elm.win_amount.textContent  = record.prev_gid.win_amount;
+
+				var shetdata:any[] = [];
+				// TestData.ContinueGroup_data.push(record);
 
 				switch (record.prev_gid.transition){
 					case 1:{
@@ -385,7 +429,6 @@
 		// queryData.page = 1;
 		COTINUE_SID.cursor = null;
 
-		list_new_group_serial(queryData);
 		// {
 		// 	const accessor = view.region_info;
 		// 	accessor.element.addClass('hide');

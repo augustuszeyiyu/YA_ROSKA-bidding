@@ -47,7 +47,14 @@ declare global {
 // ENDREGION
 
 // REGION: [ Types for User]
-declare global {
+// interface
 
-	
+
+declare global {
+	var ExcelJS:any;
+	var TestData = {
+		ContinueGroup_data:[{}],
+		OtherData,
+	};	
 }
+export { TestData }; 

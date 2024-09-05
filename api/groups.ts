@@ -232,18 +232,9 @@ export async function List_all_user(query:GetUserListQuery, paging:GetUserListRe
 export async function List_all_user(arg1:GetUserListQuery, arg2?:GetUserListResponse['meta']):Promise<GetUserListResponse> {
 // export async function List_all_user(query_data:any) {
 	SessionControl.CheckLogin();	
-	const searchParams = new URLSearchParams();
-	// if (arg1 && arg1 === Object(arg1)) {
-	//     const { filter_text, order } = arg1;
-	//     if (filter_text !== undefined)
-	//         searchParams.set('filter_text', filter_text);
-	//     if (order !== undefined)
-	//         searchParams.set('order', (0, tools_js_1$4.BuildQueryOrderString)(order));
-	// }
+	const searchParams = new URLSearchParams();	
 	if(arg1 && arg1 === Object(arg1)) {
 		const {filter_text, order} = arg1;
-		console.log("1");
-		console.log(arg1);
 		if (filter_text !== undefined) 	searchParams.set('filter_text', filter_text);
 		if (order !== undefined) 		searchParams.set('order', BuildQueryOrderString(order));
 	}
@@ -254,15 +245,7 @@ export async function List_all_user(arg1:GetUserListQuery, arg2?:GetUserListResp
 		if (page !== undefined) 		searchParams.set('p', arg2.page + '');
 		if (page_size !== undefined) 	searchParams.set('ps', arg2.page_size + '');
 	}
-	// if (query_data && query_data === Object(query_data)) {
-	// 	const { order, page, page_size } = query_data;
-	// 	if (order !== undefined)
-	// 		searchParams.set('o', query_data.order + '');
-	// 	if (page !== undefined)
-	// 		searchParams.set('p', query_data.page + '');
-	// 	if (page_size !== undefined)
-	// 		searchParams.set('ps', query_data.page_size + '');
-	// }
+	
 	console.log(searchParams);
 	return fetch(`${SessionControl.endpoint_url}/api/admin/user/list?${searchParams}`, {
 		method:'GET',

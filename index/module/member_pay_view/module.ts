@@ -35,8 +35,6 @@
 			{
 				let timeout:any = null;
 				const accessor = view.member_pay_list_container ;
-				// console.log(accessor.region_list);
-				// viewport.viewport_container 
 				accessor
 				.on('scroll', (e:any) => {
 					if (!timeout) {
@@ -49,16 +47,14 @@
 				.on('mouse-scroll', (e:any) => {         
 					const target = e.target;
 					const current_pos = target.scrollTop + target.clientHeight;
-					const trigger_line = target.scrollHeight - 5;
-					// STATE.cursor.meta = { page_size: "50"	};
+					const trigger_line = target.scrollHeight - 25;
 					const cursor = STATE.cursor;
-					// STATE.cursor.meta.page_size = "50";
 					console.log("cursorA");
 					console.log(cursor);
 					if ( current_pos >= trigger_line && cursor !== null ) {
-						const { page, page_size } = cursor.meta;
-						if (page !== undefined) {
-						LoadAndUpdateList(cursor.query, {page: page + 1, page_size});
+						const { page ,page_size} = cursor.meta;
+						if (page !== undefined) {		
+							LoadAndUpdateList(cursor.query, {page: page + 1, page_size});
 						}
 					}
 				})
@@ -67,14 +63,15 @@
 		}
 	});
 
-	(()=>{	})();
+	// (()=>{	})();
 	view
 	.on('view-state', (e:any) => {
 		if (e.state !== "show")
 			return;
 		ResetPage();
 		// loading_overlay.Show();
-		// LoadAndUpdateList(STATE.query)
+		console.log(STATE.cursor);
+		LoadAndUpdateList(STATE.query, {page_size:150})
 		// 	.catch((e) => {
 		// 	console.error(e);
 		// 	// alert(`載入失敗！(${e.message})`);
@@ -183,11 +180,14 @@
 				elm.phone_number.textContent = record.contact_mobile_number;
 
 					var today_this = new Date();
-					var next_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,0);	
+					var next_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,-1);	
 		
 					const testdate = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(new Date() , 1);
 					const year:number = Number(testdate.getFullYear()); 
-					const month:number = Number(testdate.getMonth()); 
+					const month:number = Number(next_bid_date.getMonth()); 
+					
+					console.log({"next_bid_date":next_bid_date});
+					console.log({"testdate":testdate});
 
 				const member_profit_list_data = await ROSKA_FORM.Admin_Get_settlement_list(record.uid, year, month);
 
@@ -213,7 +213,7 @@
 				for( const personal_record of member_profit_list_data){
 
 					var che = personal_record.group_info.at(-1);
-					// console.log(che);
+					console.log(che);
 					// if( Number(che.win_amount) === 0 ){
 					// 	continue;
 					// };
@@ -221,7 +221,7 @@
 					var today_this = new Date();
 					var this_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,0);					
 					var inteval = Number(this_bid_date.getMonth())-Number(record_pre_bid_end_time.getMonth());
-					if( inteval > 0){								
+					if( inteval > 1){								
 						continue;
 					}
 
@@ -297,9 +297,7 @@
 			const accessor = view.member_pay_list_container.list_container.region_list;
             accessor.innerHTML = '';
 		}
-
 		count = 1;
-		LoadAndUpdateList(STATE.query)
 		// {
 		// 	const accessor = view.region_info;
 		// 	accessor.element.addClass('hide');
