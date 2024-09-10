@@ -180,7 +180,9 @@
 				elm.phone_number.textContent = record.contact_mobile_number;
 
 					var today_this = new Date();
-					var next_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,-1);	
+					var next_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,-1);
+					console.log(next_bid_date);	
+					console.log(next_bid_date.getMonth);	
 		
 					const testdate = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(new Date() , 1);
 					const year:number = Number(testdate.getFullYear()); 
@@ -188,7 +190,7 @@
 					
 					console.log({"next_bid_date":next_bid_date});
 					console.log({"testdate":testdate});
-
+					console.log(year,month);
 				const member_profit_list_data = await ROSKA_FORM.Admin_Get_settlement_list(record.uid, year, month);
 
 				interface GroupInfo {
@@ -221,7 +223,7 @@
 					var today_this = new Date();
 					var this_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,0);					
 					var inteval = Number(this_bid_date.getMonth())-Number(record_pre_bid_end_time.getMonth());
-					if( inteval > 1){								
+					if( inteval > 0){								
 						continue;
 					}
 
