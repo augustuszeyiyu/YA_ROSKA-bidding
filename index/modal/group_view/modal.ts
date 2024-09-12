@@ -189,7 +189,9 @@
         });
         if( !searchParams['sid'])
         return;
-        const list_data = await ROSKA_FORM.Get_in_groups(searchParams['sid']);
+        console.log(searchParams['sid']+"/"+null);
+        // const list_data = await ROSKA_FORM.Get_in_groups_admin('sid':searchParams['sid']+'gid':null});
+        const list_data = await ROSKA_FORM.Get_in_groups_admin(searchParams['sid']+"/"+null);
         console.log(list_data);
 
         const { total_records, tmpl_item  } = modal_view.list_container;		
@@ -216,6 +218,27 @@
                 elm.name.textContent = record.name;
                 elm.gid.textContent = record.gid;
                 elm.win_amount.textContent = record.win_amount;
+
+                if(record.win_amount!=0){
+                    switch(record.transition){
+                        case 0:{
+                            elm.transition.textContent = "全收";
+                            break;
+                        }
+                        case 1:{
+                            elm.transition.textContent = "轉讓";
+                            break;
+                        }
+                        case 2:{
+                            elm.transition.textContent = "結清";
+                            break;
+                        }
+                        default:{
+                            elm.transition.textContent = "請聯繫工作人員";
+                        }
+                    }
+                }
+
                 region_list.appendChild(elm.element);
             })
 

@@ -208,6 +208,7 @@ export async function export_all(){
 /**搜尋該團下的成員**/
 export async function Get_in_groups(query_data?:RoskaSerials){
 	SessionControl.CheckLogin();
+	console.log("not_admin");
 	return fetch(`${SessionControl.endpoint_url}/api/group/member/`+query_data, {
 		method:'GET',
 		headers: {"Authorization": SessionControl.auth_token},		
@@ -217,9 +218,11 @@ export async function Get_in_groups(query_data?:RoskaSerials){
 //GET
 // /api/group/member/{sid}
 /**搜尋該團下的成員**/
-export async function Get_in_groups_adm(query_data?:RoskaSerials){
+export async function Get_in_groups_admin(query_data?:any){
 	SessionControl.CheckLogin();
-	return fetch(`${SessionControl.endpoint_url}/api/adm/group/member/`+query_data, {
+	console.log("admin");
+	console.log(query_data);
+	return fetch(`${SessionControl.endpoint_url}/api/admin/group/member/`+query_data, {
 		method:'GET',
 		headers: {"Authorization": SessionControl.auth_token},		
 	}).then(ProcRemoteResponse).then((resp)=>resp.json());
