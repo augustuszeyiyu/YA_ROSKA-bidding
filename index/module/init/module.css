@@ -142,3 +142,7 @@ html,body {margin:0; width:100%; height:100%;}
 					padding:1rem!important; font-size:1.1em; font-weight:bolder;
 				}
 				.table button[data-role="forbidden"] { background:#990000; color:#FFF; }
+
+.init_container > input{
+	padding: 0.5rem 0;
+}
