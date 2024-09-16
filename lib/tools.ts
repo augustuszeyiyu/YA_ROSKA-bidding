@@ -1,3 +1,6 @@
+
+
+
 export function BuildQueryOrderString(order:{[key:string]: DataQueryOrder}):string {
 	const conditions:string[] = [];
 	for(const key in order) {
@@ -74,8 +77,14 @@ export function ToUSDT(value:string|number|BigInt):string {
 	return `${integer}${(remaining.length > 0 ? '.' : '') + remaining}`;
 }
 
-
-
+interface TestDataForm {
+	ContinueGroup_data: Array<{ [key: string]: any }>,
+	MemberPayment: Array<{ [key: string]: any }>
+}
+export const TestData:TestDataForm = {
+	ContinueGroup_data:[],
+	MemberPayment:[]
+}
 
 
 interface ROSKA_FORMErrorStruct {

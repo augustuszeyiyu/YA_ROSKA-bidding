@@ -165,7 +165,7 @@
 		const export_groups_table_btn =  trigger.closest('export_group_table');
 		const target_table = document.querySelector('.continue_table');
 		// console.log(target_table);
-		// // console.log(TestData);
+		// console.log(ROSKA_FORM.Tools.TestData);
 		// if(target_table){
 		// 		const ExcelJS = window.ExcelJS;
 		// 		const workbook = new ExcelJS.Workbook();
@@ -294,8 +294,9 @@
 			// {total_records.textContent = COTINUE_SID.cursor.total_records};	
 		
 			const records = list_data.records;
+			console.log(records);
 			for(const record of records) {
-				// console.log(record);
+				console.log(record);
 
 
 				// const create_time = dayjs.unix(record.create_time);
@@ -306,8 +307,8 @@
 				elm.bid_name.textContent = record.prev_gid.name;
 				elm.win_amount.textContent  = record.prev_gid.win_amount;
 
-				var shetdata:any[] = [];
-				// TestData.ContinueGroup_data.push(record);
+				ROSKA_FORM.Tools.TestData.ContinueGroup_data.push(record.prev_gid);
+			
 
 				switch (record.prev_gid.transition){
 					case 1:{
@@ -395,6 +396,7 @@
 
 				region_list.appendChild(elm.element);
 			}
+			console.log(ROSKA_FORM.Tools.TestData.ContinueGroup_data);
 		}
 		catch(e:any) {
 			console.error(e);
