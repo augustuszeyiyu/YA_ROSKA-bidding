@@ -301,6 +301,18 @@ export async function Get_user(query_data?:RoskaMembers){
 }
 
 
+// GET
+// /api/admin/sysvar
+// 系統設定檔列表
+
+export async function Get_sysvar(){
+	SessionControl.CheckLogin();
+	return fetch(`${SessionControl.endpoint_url}/api/admin/sysvar`, {
+		method:'GET',
+		headers: {"Authorization": SessionControl.auth_token},		
+	}).then(ProcRemoteResponse).then((resp)=>resp.json());
+}
+
 // POST
 // /api/admin/group/serial
 // 1.產會組序號，比如: YA0034，和一組新的會組編號
