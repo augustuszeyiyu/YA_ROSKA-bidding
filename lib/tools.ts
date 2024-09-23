@@ -77,11 +77,11 @@ export function ToUSDT(value:string|number|BigInt):string {
 	return `${integer}${(remaining.length > 0 ? '.' : '') + remaining}`;
 }
 
-interface TestDataForm {
+interface StoreDataForm {
 	ContinueGroup_data: Array<{ [key: string]: any }>,
 	MemberPayment: Array<{ [key: string]: any }>
 }
-export const TestData:TestDataForm = {
+export const StoreData:StoreDataForm = {
 	ContinueGroup_data:[],
 	MemberPayment:[]
 }
