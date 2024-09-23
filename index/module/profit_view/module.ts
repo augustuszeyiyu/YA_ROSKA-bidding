@@ -10,7 +10,7 @@
 	const COTINUE_SID:{ query:QueryParamTask; cursor:PaginateCursor<any>|null;} = {query:{token:''}, cursor:null};
 	const queryData:{ order:string; page:number; page_size:number } = {	order: "DESC",	page: 1,	page_size: 100	};
 	///****待修改****///
-	var count = 1;
+	var count = 1, total_expected_profit = 0;
 
 	const STATE:{
 		query:QueryParam;
@@ -97,11 +97,11 @@
 
 		try {
 			loading_overlay.Show();
-			console.log(queryData);
+			// console.log(queryData);
 			const sysvar = await ROSKA_FORM.Get_sysvar();
 			const {handling_fee ,interest_bonus,transition_fee,members_range}= sysvar;
-			console.log(sysvar);
-			console.log(handling_fee ,interest_bonus,transition_fee,members_range);
+			// console.log(sysvar);
+			// console.log(handling_fee ,interest_bonus,transition_fee,members_range);
 			var income, expenditure, next_duration = 0;
 
 			const list_data = await ROSKA_FORM.Admin_get_on_list(queryData);
@@ -113,7 +113,7 @@
 
 
 			const { total_records } = view.expected_profit_list.list_container;	
-			total_records.textContent =list_data.meta.total_records;	
+			
 			// if( COTINUE_SID.cursor && COTINUE_SID.cursor.total_records !== undefined)
 			// {total_records.textContent = COTINUE_SID.cursor.total_records};	
 		
@@ -130,32 +130,63 @@
 				// elm.last_duration.textContent = record.prev_gid.gid.slice(0, 6)+"-"+record.prev_gid.gid.slice(-3,-2).toUpperCase()+record.prev_gid.gid.slice(-2);
 				elm.next_duration.textContent = record.next_gid.gid.slice(-2);
 				next_duration= Number( record.next_gid.gid.slice(-2));
-				ROSKA_FORM.Tools.TestData.ContinueGroup_data.push(record.prev_gid);
+				ROSKA_FORM.Tools.StoreData.ContinueGroup_data.push(record.prev_gid);
 				
 
 				// income = (next_duration * 5000) +((Number(members_range[1])-next_duration-1)*4000);
-				income =((Number(members_range[1])-next_duration-1)*4000);
+				income = claclate_income(next_duration);
 				
-				if(next_duration<20)
-					{ expenditure = (next_duration * (5000-Number(handling_fee))) + interest_bonus - transition_fee }
-				else{ 
-					expenditure = (next_duration * (5000-Number(handling_fee)))  - (Number(members_range[1]) - next_duration - 1)* (5000-4000)
-				};
-				
-				
+				expenditure = claclate_expenditure(next_duration);
+								
 				elm.expenditure.textContent = expenditure;
 				elm.income.textContent = income;
 
 				elm.expected_profit.textContent = income - expenditure;
 
+				total_expected_profit += (income - expenditure);
+
 				elm.count.textContent = ROSKA_FORM.Tools.pad_zero(count ,3);
 				count += 1;
 				elm.sid.textContent= record.sid;
 
+				// 保留功能
+				// elm.next_2th.textContent = expenditure = claclate_income(next_duration+1)-claclate_expenditure(next_duration+1);
+				// elm.next_3th.textContent = expenditure = claclate_income(next_duration+2)-claclate_expenditure(next_duration+2);
+				// elm.next_4th.textContent = expenditure = claclate_income(next_duration+3)-claclate_expenditure(next_duration+3);
+				// elm.next_5th.textContent = expenditure = claclate_income(next_duration+4)-claclate_expenditure(next_duration+4);
+				// elm.next_6th.textContent = expenditure = claclate_income(next_duration+5)-claclate_expenditure(next_duration+5);
 
 				region_list.appendChild(elm.element);
 			}
-			console.log(ROSKA_FORM.Tools.TestData.ContinueGroup_data);
+
+			total_records.textContent = "下期預期損益 : "+ total_expected_profit;	
+			// console.log(ROSKA_FORM.Tools.TestData.ContinueGroup_data);
+
+
+			function claclate_income(duration:number){
+				if(duration<25){ 
+					income = ((Number(members_range[1])-duration-1)*4000)
+					return income;
+				}
+				else{
+					income= 0;
+					return income;
+				}
+			}
+			function claclate_expenditure(duration:number){
+				if(duration<20){ 
+					expenditure = (duration * (5000-Number(handling_fee))) + interest_bonus - transition_fee 
+					return expenditure;
+				}
+				else if(duration<25){ 
+					expenditure = (duration * (5000-Number(handling_fee)))  - (Number(members_range[1]) - duration - 1)* (5000-4000)
+					return expenditure;
+				}
+				else{
+					expenditure= 0;
+					return expenditure;
+				}
+			}
 		}
 		catch(e:any) {
 			console.error(e);
@@ -165,8 +196,8 @@
 		finally{
 			loading_overlay.Hide();
 		}
+		
 	}
-
 
 
 	(()=>{
@@ -186,7 +217,7 @@
             accessor.innerHTML = '';
 		}
 		//renew init ifo
-		count = 1;
+		count = 1, total_expected_profit = 0;
 		// queryData.page = 1;
 		COTINUE_SID.cursor = null;
 
