@@ -302,31 +302,42 @@
 				// const create_time = dayjs.unix(record.create_time);
 				const elm = tmpl_item.duplicate();
 				elm.create_time.textContent = record.bid_start_time.slice(0 , 10);
-				elm.last_duration.textContent = record.prev_gid.gid.slice(0, 6)+"-"+record.prev_gid.gid.slice(-3,-2).toUpperCase()+record.prev_gid.gid.slice(-2);
-				elm.bid_member.textContent = record.prev_gid.mid;
-				elm.bid_name.textContent = record.prev_gid.name;
-				elm.win_amount.textContent  = record.prev_gid.win_amount;
+				if(record.prev_gid){
+					elm.last_duration.textContent = (record.prev_gid.gid.slice(0, 6)+"-"+record.prev_gid.gid.slice(-3,-2).toUpperCase()+record.prev_gid.gid.slice(-2));
+					elm.bid_member.textContent = record.prev_gid.mid;
+					elm.bid_name.textContent = record.prev_gid.name;
+					elm.win_amount.textContent  = record.prev_gid.win_amount;
+	
+					ROSKA_FORM.Tools.StoreData.ContinueGroup_data.push(record.prev_gid);
+				
+					
+					switch (record.prev_gid.transition){
+						case 1:{
+							elm.transition.textContent  = "轉讓";
+							break;
+						}
+						case 0:{
+							elm.transition.textContent  = "全收";
+							break;
+						}
+						case 2:{
+							elm.transition.textContent  = "結清";
+							break;
+						}
+						default:{
+							elm.transition.textContent  = "請確認";
+						}
+					};
+				}
+				else{
+					elm.last_duration.textContent = " ";
+					elm.transition.textContent  = "新會組";
+				}
+				
+				
 
-				ROSKA_FORM.Tools.TestData.ContinueGroup_data.push(record.prev_gid);
 			
 
-				switch (record.prev_gid.transition){
-					case 1:{
-						elm.transition.textContent  = "轉讓";
-						break;
-					}
-					case 0:{
-						elm.transition.textContent  = "全收";
-						break;
-					}
-					case 2:{
-						elm.transition.textContent  = "結清";
-						break;
-					}
-					default:{
-						elm.transition.textContent  = "請確認";
-					}
-				};
 
 
 				elm.count.textContent = ROSKA_FORM.Tools.pad_zero(count ,3);
@@ -396,7 +407,7 @@
 
 				region_list.appendChild(elm.element);
 			}
-			console.log(ROSKA_FORM.Tools.TestData.ContinueGroup_data);
+			console.log(ROSKA_FORM.Tools.StoreData.ContinueGroup_data);
 		}
 		catch(e:any) {
 			console.error(e);
