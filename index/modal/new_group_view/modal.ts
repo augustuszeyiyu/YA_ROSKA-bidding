@@ -93,11 +93,13 @@
                 const elm = tmpl_item.duplicate();
                 elm.numb.textContent = count;
                 count +=1;
-                elm.mid.textContent = record.mid;
-                elm.name.textContent = record.name;
-                elm.gid.textContent = record.gid;
-                elm.bid_amount.textContent = record.bid_amount;
+                elm.mid.textContent = record.mid||" ";
+                elm.name.textContent = record.name||" ";
+                elm.gid.textContent = record.gid||" ";
+                elm.bid_amount.textContent = record.bid_amount||" ";
                 region_list.appendChild(elm.element);
+
+               
             })
         }
     };

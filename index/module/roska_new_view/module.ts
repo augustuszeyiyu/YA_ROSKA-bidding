@@ -62,7 +62,7 @@
 		})
 		.on('add_new', (e:any) => {
 			add_new_group_serial();		
-			ResetPage();
+			// ResetPage();
 			list_new_group_serial();
 			ResetPage();
 		})
@@ -186,7 +186,7 @@
 				button_group_detail.classList.add("btn-blue");
                 button_group_detail.textContent = "檢視會組";
                 button_group_detail.dataset.role = 'new_view_group';
-                button_group_detail.dataset.relId = record.sid;
+                button_group_detail.dataset.relSid = record.sid;
 				
 				elm.view_group.appendChild(button_group_detail);
 
