@@ -288,11 +288,6 @@
 			const tmpl_item = view.continue_list_container.list_container.tmpl_item;
 
 
-			const { total_records } = view.continue_list_container.list_container;	
-			total_records.textContent =list_data.meta.total_records;	
-			// if( COTINUE_SID.cursor && COTINUE_SID.cursor.total_records !== undefined)
-			// {total_records.textContent = COTINUE_SID.cursor.total_records};	
-		
 			const records = list_data.records;
 			console.log(records);
 			for(const record of records) {
@@ -407,6 +402,15 @@
 
 				region_list.appendChild(elm.element);
 			}
+
+			const { total_records } = view.continue_list_container.list_container;	
+
+			total_records.textContent =list_data.meta.total_records;	
+			// total_records.textContent = ROSKA_FORM.Tools.pad_zero(count ,3);
+			
+			// if( COTINUE_SID.cursor && COTINUE_SID.cursor.total_records !== undefined)
+			// {total_records.textContent = COTINUE_SID.cursor.total_records};	
+		
 			console.log(ROSKA_FORM.Tools.StoreData.ContinueGroup_data);
 		}
 		catch(e:any) {
