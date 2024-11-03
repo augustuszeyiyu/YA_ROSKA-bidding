@@ -131,7 +131,7 @@
                 var this_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,0);					
                 var inteval = Number(this_bid_date.getMonth())-Number(record_pre_bid_end_time.getMonth());
                 console.log( inteval  );
-                if( inteval > 0){								
+                if( inteval > 1){								
                     continue;
                 }
                 else {
