@@ -2,9 +2,9 @@ var CANVAS_MID_X;
 var CANVAS_MID_Y;
 var WHEEL_PERCENTAGE = .975;
 var WHEEL_RADIUS;
-var ROTATION_RESISTANCE =  -45;
+var ROTATION_RESISTANCE =  -300;//-45
 var ENTER_KEY = 13;
-var MAX_ROTATION_SPEED = 450;
+var MAX_ROTATION_SPEED = 1350; //450
 
 var lastTime;
 var delta;
@@ -325,8 +325,11 @@ function loop() {
     rotationSpeed = 0;
     if (isResultShown===true) {    
       // console.log("final anser  2");
-      var selectedIndex = Math.floor((270 - (wheelRotation % 360)) / wedgeSubdiv) % nameList.length;
+      // var selectedIndex = Math.floor((270 - (wheelRotation % 360)) / wedgeSubdiv) % nameList.length;      
+      var selectedIndex = Math.floor((270 - (wheelRotation % 360) + 360)% 360 / wedgeSubdiv) % (nameList.length);
       alert("中籤人員: " + nameList[selectedIndex]);
+      // alert("中籤人員: " + nameList[selectedIndex] +"###"+ selectedIndex + "###"+wheelRotation % 360);
+
       isResultShown = false
       if(nameList[selectedIndex]){
         // console.log(final_result);

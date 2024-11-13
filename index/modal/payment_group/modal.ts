@@ -130,8 +130,11 @@
                 var today_this = new Date();
                 var this_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,0);					
                 var inteval = Number(this_bid_date.getMonth())-Number(record_pre_bid_end_time.getMonth());
+
+                console.log({"A":"this_bid_date","B" : this_bid_date.getMonth(),"c": this_bid_date,"d":today_this});
+                console.log({"A":"record_pre_bid_end_time","B" : record_pre_bid_end_time.getMonth(),"c":record_pre_bid_end_time	});
                 console.log( inteval  );
-                if( inteval > 1){								
+                if( inteval > 0){								
                     continue;
                 }
                 else {
@@ -191,6 +194,7 @@
             }
 
             // pay_container.member_name.textContent = searchParams.name;
+            pay_list_region.user_name.innerHTML = searchParams.name;
             pay_list_region.should_pay.innerHTML = "本期應繳會費 : <br>" + ( (settlement_data.alive_account * 4000) + (settlement_data.deth_account * 5000) + -(settlement_data.win_account.win_amount) );
             pay_list_region.alive_account.innerHTML = "活會數 : <span style=\"color:green;\">" + settlement_data.alive_account + "</span><br>" + " 活會款總計" + settlement_data.alive_account * 4000;
             pay_list_region.death_account.innerHTML = "死會數 : <span style=\"color:red;\">" + settlement_data.deth_account + "</span><br>" + " 死會款總計" + settlement_data.deth_account * 5000;

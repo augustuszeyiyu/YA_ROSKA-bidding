@@ -119,7 +119,7 @@
 			}
 			case "view_detail": {
 				// window.location.href = "/admin/member/info/" + row.dataset.relId;
-				window.open("./"+'?'+ 'uid='+button.dataset.relUid +'&'+'modal=payment_group', 'innerHeight=800' ,'innerWidth=800',);
+				window.open("./"+'?'+ 'uid='+button.dataset.relUid +'name='+button.dataset.relName+'&'+'modal=payment_group', 'innerHeight=800' ,'innerWidth=800',);
 				// window.open("./module/roska_new_view/modals.html" + button.dataset.relId, innerHeight=1600,innerWidth=800,);
 				break;
 				
@@ -220,10 +220,13 @@
 					// 	continue;
 					// };
 					var record_pre_bid_end_time = new Date(personal_record.group_info.at(-1).bid_end_time);
-					var today_this = new Date();
+					// var today_this = new Date();
+					var today_this = new Date(2024, 10, 12 );
 					var this_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,0);					
 					var inteval = Number(this_bid_date.getMonth())-Number(record_pre_bid_end_time.getMonth());
-					if( inteval > 1){								
+					console.log({"A":"this_bid_date","B" : this_bid_date.getMonth(),"c": this_bid_date,"d":today_this});
+					console.log({"A":"record_pre_bid_end_time","B" : record_pre_bid_end_time.getMonth(),"c":record_pre_bid_end_time	});
+					if( inteval > 0){								
 						continue;
 					}
 
