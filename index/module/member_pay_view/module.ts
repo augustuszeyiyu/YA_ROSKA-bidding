@@ -119,7 +119,7 @@
 			}
 			case "view_detail": {
 				// window.location.href = "/admin/member/info/" + row.dataset.relId;
-				window.open("./"+'?'+ 'uid='+button.dataset.relUid +'name='+button.dataset.relName+'&'+'modal=payment_group', 'innerHeight=800' ,'innerWidth=800',);
+				window.open("./"+'?'+ 'uid='+button.dataset.relUid +'&'+'name='+button.dataset.relName+'&'+'modal=payment_group', 'innerHeight=800' ,'innerWidth=800',);
 				// window.open("./module/roska_new_view/modals.html" + button.dataset.relId, innerHeight=1600,innerWidth=800,);
 				break;
 				
