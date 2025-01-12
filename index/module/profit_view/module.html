@@ -6,6 +6,7 @@
 			<div class="grid-content sysvar-info" elm-export="list_container" elm-export-accessor>
 				<div class="head-region" style="display: flex; justify-content: space-between;">
 					<div class="grid-title" style="padding: 1rem; font-size: 1.3rem; font-weight: bolder;">(<span elm-export="total_records"></span>)</div>
+					<div class="grid-title" style="padding: 1rem; font-size: 1.3rem; font-weight: bolder;">(<span elm-export="this_total_records"></span>)</div>
 					<div class="button-section" style="display: flex;">
 						<!-- <button class="btn-green bid_all" elm-export="bid_all" style="height: 56px; width: 150px; font-weight: bold; align-self: flex-end;">電腦開標<br>(所有已勾選)</button>
 						<button class="btn-orange export_all" elm-export="export_all" style="height: 56px; width: 150px; font-weight: bold;  align-self: flex-end;">輸出報表<br>(所有會組)</button>
@@ -16,12 +17,14 @@
 					<div class="t-head">
 						<div class="t-column">編號</div>
 						<div class="t-column">會組號</div>
-						<div class="t-column">預計開標會期</div>
-						<div class="t-column">預期損益</div>
-						<div class="t-column">預計標金支出</div>
-						<div class="t-column">預期收入</div>
-						<div class="t-column"></div>
-						<div class="t-column"></div>
+						<div class="t-column">下期預計開標會期</div>
+						<div class="t-column">下期預期損益</div>
+						<div class="t-column">下期預計標金支出</div>
+						<div class="t-column">下期預期收入</div>
+						<div class="t-column">本期開標會期</div>
+						<div class="t-column">本期預期損益</div>
+						<div class="t-column">本期預計標金支出</div>
+						<div class="t-column">本期預期收入</div>
 						<div class="t-column"></div>
 						<div class="t-column"></div>
 						<div class="t-column"></div>
@@ -29,7 +32,7 @@
 						<!-- <div class="t-column">次二期</div>
 						<div class="t-column">次三期</div>
 						<div class="t-column">次四期</div>
-						<div class="t-column">次五期</div>
+						<div class="t-column">次五期</div>	
 						<div class="t-column">次六期</div> -->
 					</div>
 					<div elm-export="region_list" class='t-body'></div>
@@ -41,7 +44,10 @@
 								<div class="field"><div><span elm-export="expected_profit"></span></div></div>
 								<div class="field"><div><span elm-export="expenditure"></span></div></div>
 								<div class="field"><div><span elm-export="income"></span></div></div>
-								<div class="field"><div><span elm-export="amount"></span></div></div>
+								<div class="field"><div><span elm-export="this_duration"></span></div></div>
+								<div class="field"><div><span elm-export="this_expected_profit"></span></div></div>
+								<div class="field"><div><span elm-export="this_expenditure"></span></div></div>
+								<div class="field"><div><span elm-export="this_income"></span></div></div>
 								<div class="field"><div><span elm-export="next_2th"></span></div></div>
 								<div class="field"><div><span elm-export="next_3th"></span></div></div>
 								<div class="field"><div><span elm-export="next_4th"></span></div></div>

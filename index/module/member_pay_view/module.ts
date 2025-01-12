@@ -219,14 +219,14 @@
 					// if( Number(che.win_amount) === 0 ){
 					// 	continue;
 					// };
+					
 					var record_pre_bid_end_time = new Date(personal_record.group_info.at(-1).bid_end_time);
-					// var today_this = new Date();
 					var today_this = new Date();
 					var this_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,0);					
 					var inteval = Number(this_bid_date.getMonth())-Number(record_pre_bid_end_time.getMonth());
 					console.log({"A":"this_bid_date","B" : this_bid_date.getMonth(),"c": this_bid_date,"d":today_this});
 					console.log({"A":"record_pre_bid_end_time","B" : record_pre_bid_end_time.getMonth(),"c":record_pre_bid_end_time	});
-					if( inteval > 0){								
+					if( inteval > 0 ||inteval<0){								
 						continue;
 					}
 
