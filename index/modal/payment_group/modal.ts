@@ -135,6 +135,7 @@
                 console.log({"A":"this_bid_date","B" : this_bid_date.getMonth(),"c": this_bid_date,"d":today_this});
                 console.log({"A":"record_pre_bid_end_time","B" : record_pre_bid_end_time.getMonth(),"c":record_pre_bid_end_time	});
                 console.log( inteval  );
+                console.log(inteval,"break point 2",inteval_year);
                 if( inteval > 0 ||inteval<0 ||inteval_year>0){							
                     continue;
                 }
