@@ -106,7 +106,7 @@
 					  download_elemet.click(); // 觸發下載
 					  document.body.removeChild(download_elemet);
 					//   alert(result_data.url);
-					ResetPage();
+					// ResetPage();
 				}
 				catch (e: any) {
 					alert(`輸出失敗(${e.message}`);
