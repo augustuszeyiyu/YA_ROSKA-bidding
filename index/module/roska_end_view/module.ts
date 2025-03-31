@@ -176,14 +176,20 @@
 				switch (record.prev_gid.transition){
 					case 1:{
 						elm.transition.textContent  = "轉讓";
+						elm.management_fee.textContent  = (record.prev_gid.gid.slice(-2))*250;
+						elm.transfer_fee.textContent  = 300;
 						break;
 					}
 					case 0:{
 						elm.transition.textContent  = "全收";
+						elm.management_fee.textContent  = 6000;
+						elm.transfer_fee.textContent  = 300;
 						break;
 					}
 					case 2:{
 						elm.transition.textContent  = "結清";
+						elm.management_fee.textContent  = (record.prev_gid.gid.slice(-2))*250;
+						elm.transfer_fee.textContent  = 300;
 						break;
 					}
 					default:{

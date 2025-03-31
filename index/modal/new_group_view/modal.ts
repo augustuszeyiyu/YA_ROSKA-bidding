@@ -89,18 +89,30 @@
             
 
             var count = 1;
-            list_datas.forEach(function(record:any){
+            for(let i=1;i<25;i++){
                 const elm = tmpl_item.duplicate();
-                elm.numb.textContent = count;
+                elm.numb.textContent = count;           
+                elm.mid.textContent = searchParams['sid']+"-"+ROSKA_FORM.Tools.pad_zero(count,2) ;
+                elm.name.textContent = " ";
+                    const input_mobild_number = document.createElement("input");
+                    input_mobild_number.textContent="請輸入電話號碼";
+                    input_mobild_number.role="input_mobild_number";
+                elm.mobil_number.appendChild(input_mobild_number);
                 count +=1;
-                elm.mid.textContent = record.mid||" ";
-                elm.name.textContent = record.name||" ";
-                elm.gid.textContent = record.gid||" ";
-                elm.bid_amount.textContent = record.bid_amount||" ";
-                region_list.appendChild(elm.element);
+                region_list.appendChild(elm.element);             
+            }
+            // list_datas.forEach(function(record:any){
+            //     const elm = tmpl_item.duplicate();
+            //     elm.numb.textContent = count;
+            //     count +=1;
+            //     elm.mid.textContent = record.mid||" ";
+            //     elm.name.textContent = record.name||" ";
+            //     elm.gid.textContent = record.gid||" ";
+            //     elm.bid_amount.textContent = record.bid_amount||" ";
+            //     region_list.appendChild(elm.element);
 
                
-            })
+            // })
         }
     };
     function ResetPage() {

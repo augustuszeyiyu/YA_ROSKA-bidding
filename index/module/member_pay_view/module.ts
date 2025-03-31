@@ -224,12 +224,28 @@
 					var today_this = new Date();
 					var this_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,0);					
 					var inteval = Number(this_bid_date.getMonth())-Number(record_pre_bid_end_time.getMonth());
-					console.log({"A":"this_bid_date","B" : this_bid_date.getMonth(),"c": this_bid_date,"d":today_this});
-					console.log({"A":"record_pre_bid_end_time","B" : record_pre_bid_end_time.getMonth(),"c":record_pre_bid_end_time	});
-					if( inteval > 0 ||inteval<0){								
+					var inteval_year = Number(this_bid_date.getFullYear())-Number(record_pre_bid_end_time.getFullYear());
+					var inteval_day = Number(this_bid_date.getDate()) > Number(record_pre_bid_end_time.getDate());
+
+					// console.log({"A":"this_bid_date","B" : this_bid_date.getMonth(),"c": this_bid_date,"d":today_this});
+					// console.log({"A":"record_pre_bid_end_time","B" : record_pre_bid_end_time.getMonth(),"c":record_pre_bid_end_time	});
+					// console.log("today this", today_this,this_bid_date);
+					// console.log( {inteval,this_bid_date,record_pre_bid_end_time});
+					// console.log(record.mid);
+					// console.log(inteval,"break point 2",inteval_year);
+					// console.log(inteval_day,Number(today_this.getDate()),Number(this_bid_date.getDate()));
+					if (inteval < 0 || inteval_year > 0) {
+						console.log("A");
 						continue;
 					}
-
+					if (inteval == 1 && inteval_day !== false) {
+						console.log("B");
+						continue;
+					}
+					if (inteval > 1 ) {
+						console.log("C");
+						continue;
+					}
 					const lastGroupInfo = personal_record.group_info.at(-1);
 					const winAmount = parseInt(lastGroupInfo.win_amount, 10);
 					switch(personal_record.group_info.at(-1).win_amount){

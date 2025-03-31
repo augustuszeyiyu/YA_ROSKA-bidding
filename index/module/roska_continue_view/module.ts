@@ -303,32 +303,42 @@
 					elm.bid_name.textContent = record.prev_gid.name;
 					elm.win_amount.textContent  = record.prev_gid.win_amount;
 	
+					
+
 					ROSKA_FORM.Tools.StoreData.ContinueGroup_data.push(record.prev_gid);
 				
 					
 					switch (record.prev_gid.transition){
 						case 1:{
 							elm.transition.textContent  = "轉讓";
+							elm.management_fee.textContent  = (record.prev_gid.gid.slice(-2))*250;
+							elm.transfer_fee.textContent  = 300;
 							break;
 						}
 						case 0:{
 							elm.transition.textContent  = "全收";
+							elm.management_fee.textContent  = 6000;
+							elm.transfer_fee.textContent  = 300;
 							break;
 						}
 						case 2:{
 							elm.transition.textContent  = "結清";
+							elm.management_fee.textContent  = (record.prev_gid.gid.slice(-2))*250;
+							elm.transfer_fee.textContent  = 300;
 							break;
 						}
 						default:{
 							elm.transition.textContent  = "請確認";
 						}
 					};
+
+					
 				}
 				else{
 					elm.last_duration.textContent = " ";
 					elm.transition.textContent  = "新會組";
 				}
-				
+				 
 				
 
 			

@@ -16,10 +16,10 @@
 				.table .t-column:first-child ~ .t-column { border-left:1px solid #EEE; }
 
 				.table.group_view_table .t-row, .table.group_view_table .t-head	{
-					grid-template-columns:0.5fr 1.5fr 1fr 1fr 1fr 1fr;
+					grid-template-columns:0.6fr 1fr 1fr 1fr ;
 				}
 
-		.table .t-row, .table .t-head { grid-template-columns:0.5fr 1.5fr 1fr 1fr 1fr 1fr}
+		.table .t-row, .table .t-head { grid-template-columns:0.6fr 1fr 1fr 1fr }
 			.table .t-column { box-sizing:border-box; }
 	
 			/* 編號 */
