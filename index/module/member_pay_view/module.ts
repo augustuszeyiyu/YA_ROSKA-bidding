@@ -225,7 +225,7 @@
 					var this_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,0);					
 					var inteval = Number(this_bid_date.getMonth())-Number(record_pre_bid_end_time.getMonth());
 					var inteval_year = Number(this_bid_date.getFullYear())-Number(record_pre_bid_end_time.getFullYear());
-					var inteval_day = Number(this_bid_date.getDate()) > Number(record_pre_bid_end_time.getDate());
+					var inteval_day = Number(this_bid_date.getDate()) - Number(record_pre_bid_end_time.getDate());
 
 					// console.log({"A":"this_bid_date","B" : this_bid_date.getMonth(),"c": this_bid_date,"d":today_this});
 					// console.log({"A":"record_pre_bid_end_time","B" : record_pre_bid_end_time.getMonth(),"c":record_pre_bid_end_time	});
@@ -238,7 +238,7 @@
 						console.log("A");
 						continue;
 					}
-					if (inteval == 1 && inteval_day !== false) {
+					if (inteval == 1 && inteval_day <= 0) {
 						console.log("B");
 						continue;
 					}

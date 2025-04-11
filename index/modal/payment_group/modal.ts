@@ -84,7 +84,7 @@
             const year:number = Number(testdate.getFullYear()); 
             const month:number = Number(testdate.getMonth()); 
         const list_data = await ROSKA_FORM.Admin_Get_settlement_list(searchParams['uid'],year,month);
-        console.log(list_data);
+        console.log("list_data",list_data);
 
         interface GroupInfo {
             gid: string;
@@ -105,14 +105,14 @@
                 win_amount:0,
             }
         };
-        console.log(settlement_data.win_account.gids);
+        console.log('gids',settlement_data.win_account.gids);
 
         const { total_records, tmpl_item  } = modal_view.list_container;		
         const region_list = modal_view.list_container.region_list;
         const pay_list_region = modal_view.list_container.pay_list;
         const pay_container = modal_view.list_container.pay_container;
 
-        console.log(pay_list_region);
+        console.log('pay_list_region',pay_list_region);
         if (list_data) {
             // const list_datas = list_data.slice(1);
             
@@ -131,7 +131,7 @@
                 var this_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,0);					
                 var inteval = Number(this_bid_date.getMonth())-Number(record_pre_bid_end_time.getMonth());
                 var inteval_year = Number(this_bid_date.getFullYear())-Number(record_pre_bid_end_time.getFullYear());
-                var inteval_day = Number(this_bid_date.getDate()) > Number(record_pre_bid_end_time.getDate());
+                var inteval_day = Number(this_bid_date.getDate()) - Number(record_pre_bid_end_time.getDate());
 
                 // console.log({"A":"this_bid_date","B" : this_bid_date.getMonth(),"c": this_bid_date,"d":today_this});
                 // console.log({"A":"record_pre_bid_end_time","B" : record_pre_bid_end_time.getMonth(),"c":record_pre_bid_end_time	});
@@ -141,18 +141,34 @@
                 // console.log(inteval,"break point 2",inteval_year);
                 // console.log(inteval_day,Number(today_this.getDate()),Number(this_bid_date.getDate()));
                 if (inteval < 0 || inteval_year > 0) {
-                    console.log("A");
+                    // console.log("A",record);
+                    // console.log(this_bid_date);
+                    // console.log(record_pre_bid_end_time);
+                    // console.log(inteval,inteval_year,inteval_day);
                     continue;
                 }
-                if (inteval == 1 && inteval_day !== false) {
-                    console.log("B");
+                if (inteval == 1 && inteval_day <= 0 ) {
+                    // console.log("B");                 
+                    // console.log(this_bid_date);
+                    // console.log(record_pre_bid_end_time);
+                    // console.log(inteval,inteval_year,inteval_day);
                     continue;
                 }
                 if (inteval > 1 ) {
-                    console.log("C");
+                    // console.log("C");
+                    
+                    // console.log(this_bid_date);
+                    // console.log(record_pre_bid_end_time);
+                    // console.log(inteval,inteval_year,inteval_day);
                     continue;
                 }
                 else {
+                    // console.log("Def",record);
+                    
+                    // console.log(this_bid_date);
+                    // console.log(record_pre_bid_end_time);
+                    // console.log(inteval,inteval_year,inteval_day);
+
                     // if(!record.gid) {
                     //     w_data[count_1]={"mid":record.mid,"name":record.name,'uid':record.uid};
                     //     count_1 += 1 ;
