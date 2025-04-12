@@ -323,13 +323,13 @@
 							case 0:{
 								elm.transition.textContent  = "全收";
 								elm.management_fee.textContent  = 6000;
-								elm.transfer_fee.textContent  = 300;
+								elm.transfer_fee.textContent  = 0;
 								break;
 							}
 							case 2:{
 								elm.transition.textContent  = "結清";
 								elm.management_fee.textContent  = (record.prev_gid.gid.slice(-2))*250;
-								elm.transfer_fee.textContent  = 300;
+								elm.transfer_fee.textContent  = 0;
 								break;
 							}
 							default:{
