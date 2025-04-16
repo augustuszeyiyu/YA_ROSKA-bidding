@@ -101,7 +101,7 @@
 
 		try {
 			loading_overlay.Show();
-			// console.log(queryData);
+
 			const sysvar = await ROSKA_FORM.Get_sysvar();
 			const {handling_fee ,interest_bonus,transition_fee,members_range}= sysvar;
 			// console.log(sysvar);
@@ -111,63 +111,62 @@
 			const list_data = await ROSKA_FORM.Admin_get_on_list(queryData);
 			COTINUE_SID.cursor = list_data.meta;
 			// const { region_list: list, total_records,tmpl_item  } = view.member_list_container;
-			// console.log(list_data);
 			const region_list = view.expected_profit_list.list_container.region_list;
 			const tmpl_item = view.expected_profit_list.list_container.tmpl_item;
-
-
 			const { total_records ,this_total_records} = view.expected_profit_list.list_container;	
 			
 			// if( COTINUE_SID.cursor && COTINUE_SID.cursor.total_records !== undefined)
 			// {total_records.textContent = COTINUE_SID.cursor.total_records};	
 		
 			const records = list_data.records;
-			// console.log(records);
 			for(const record of records) {
-				// console.log(record);
-
-
 				// const create_time = dayjs.unix(record.create_time);
 				const elm = tmpl_item.duplicate();
 				// elm.create_time.textContent = record.bid_start_time.slice(0 , 10);
 
 				// elm.last_duration.textContent = record.prev_gid.gid.slice(0, 6)+"-"+record.prev_gid.gid.slice(-3,-2).toUpperCase()+record.prev_gid.gid.slice(-2);
-				if(!record.next_gid){ break; }
-				elm.next_duration.textContent = record.next_gid.gid.slice(-2)||0;
-				next_duration= Number( record.next_gid.gid.slice(-2));
-				ROSKA_FORM.Tools.StoreData.ContinueGroup_data.push(record.prev_gid);
-				
+				if(!record.next_gid){ 
+					next_duration = 25; 
+					this_duration = 24;
+					elm.next_duration.textContent = "00"
+				}
+				else{ 
+					elm.next_duration.textContent = record.next_gid.gid.slice(-2)||0;
+					
+					next_duration = Number( record.next_gid.gid.slice(-2));
+					this_duration = ((Number(record.next_gid.gid.slice(-2)))-1);
 
-				// income = (next_duration * 5000) +((Number(members_range[1])-next_duration-1)*4000);
-				income = claclate_income(next_duration);
-				
+				}
+
+				income = claclate_income(next_duration);				
 				expenditure = claclate_expenditure(next_duration);
+				total_expected_profit += (income - expenditure);	
 								
 				elm.expenditure.textContent = expenditure;
 				elm.income.textContent = income;
-
-				elm.expected_profit.textContent = income - expenditure;
-
-				total_expected_profit += (income - expenditure);
-
-				this_duration = ((Number(record.next_gid.gid.slice(-2)))-1);
 				
-				this_income = claclate_income(next_duration-1)
-				this_expenditure = claclate_expenditure(next_duration-1)
+				elm.expected_profit.textContent = income - expenditure;
+					
+
+				this_income = claclate_income((next_duration-1)>0?(next_duration-1):0);
+				console.log(next_duration,this_income);
+				this_expenditure = claclate_expenditure((next_duration-1)>0?(next_duration-1):0)	
+				this_total_expected_profit += (this_income-this_expenditure);
 
 				elm.this_duration.textContent = ROSKA_FORM.Tools.pad_zero(this_duration,2);
 				elm.this_income.textContent = this_income;
 				elm.this_expenditure.textContent = this_expenditure;
+					
+				elm.this_expected_profit.textContent = this_income-this_expenditure;
 
 
-				this_total_expected_profit += (this_income-this_expenditure);
-
+				ROSKA_FORM.Tools.StoreData.ContinueGroup_data.push(record.prev_gid);
+				
 				elm.count.textContent = ROSKA_FORM.Tools.pad_zero(count ,3);
 				count += 1;
 				elm.sid.textContent= record.sid;
 
-				// 保留功能
-				elm.this_expected_profit.textContent = claclate_income(next_duration-1)-claclate_expenditure(next_duration-1);
+				// 保留功能				
 				// elm.next_2th.textContent = expenditure = claclate_income(next_duration+1)-claclate_expenditure(next_duration+1);
 				// elm.next_3th.textContent = expenditure = claclate_income(next_duration+2)-claclate_expenditure(next_duration+2);
 				// elm.next_4th.textContent = expenditure = claclate_income(next_duration+3)-claclate_expenditure(next_duration+3);
@@ -183,16 +182,25 @@
 
 
 			function claclate_income(duration:number){
-				if(duration<25){ 
+				if(duration==0){
+					income = 0;
+					return income;
+				}
+				else if(duration<25){ 
 					income = ((Number(members_range[1])-duration-1)*4000)
 					return income;
 				}
 				else{
-					income= 0;
+					income = 0;
 					return income;
 				}
 			}
 			function claclate_expenditure(duration:number){
+				if (duration==0){
+					expenditure = (24 * (5000-Number(handling_fee)))  - (Number(members_range[1]) - 24 -1)* (5000-4000);
+					// expenditure =0
+					return expenditure;
+				}
 				if(duration<20){ 
 					expenditure = (duration * (5000-Number(handling_fee))) + interest_bonus - transition_fee 
 					return expenditure;
