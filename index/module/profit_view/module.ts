@@ -38,6 +38,7 @@
 
 			{
 				let timeout:any = null;
+				let isLoading = false;
 				// const accessor =  viewport.viewport_container;
 				const accessor =  view.expected_profit_list;
 				accessor
@@ -47,7 +48,7 @@
 						timeout = setTimeout(() => {
 							timeout = null;
 							accessor.emit('mouse-scroll');
-						}, 100);
+						}, 1000);
 					}
 				})
 				.on('mouse-scroll', (e:any) => {         
@@ -66,7 +67,10 @@
 						queryData.page_size = page_size?page_size:100;
 						// console.log(page);
 						// console.log(queryData);
-						list_new_group_serial(queryData);
+						isLoading = true;
+						list_new_group_serial(queryData).finally(() => {
+						isLoading = false;
+						});
 					}
 				})
 			}
