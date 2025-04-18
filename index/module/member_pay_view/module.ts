@@ -178,7 +178,7 @@
 				count += 1;
 				elm.name.textContent = record.name;
 				elm.phone_number.textContent = record.contact_mobile_number;
-
+					////
 					var today_this = new Date();
 					var next_bid_date = ROSKA_FORM.Tools.calculateMonthlyBitStartTime(today_this,-1);
 					console.log(next_bid_date);	
@@ -191,7 +191,10 @@
 					console.log({"next_bid_date":next_bid_date});
 					console.log({"testdate":testdate});
 					console.log(year,month);
-				const member_profit_list_data = await ROSKA_FORM.Admin_Get_settlement_list(record.uid, year, month);
+					///
+
+				// const member_profit_list_data = await ROSKA_FORM.Admin_Get_settlement_list(record.uid, year, month);
+				const member_profit_list_data = await ROSKA_FORM.Admin_Get_settlement_list(record.uid);
 
 				interface GroupInfo {
 					gid: string;
@@ -204,6 +207,9 @@
 						gids:GroupInfo[],
 						win_amount:number,
 					},
+					member_asset:number,
+					member_debts:number,
+					member_paied:number,
 				} = {
 					alive_account:0,
 					deth_account:0,
@@ -211,6 +217,9 @@
 						gids:[],
 						win_amount:0,
 					},
+					member_asset: 0,
+                    member_debts:0,
+					member_paied: 0,
 				};
 				for( const personal_record of member_profit_list_data){
 
@@ -254,12 +263,20 @@
 						}
 						case -4000:{
 							settlement_data.alive_account +=1;
+							settlement_data.member_asset += ((Number(che.gid.slice(-2)) * 4000) + 5000);
 							break;
 						}
 						case -5000:{						
 							settlement_data.deth_account +=1;
-							break;
-							
+							for (const group of personal_record.group_info) {
+                                if(group.win_amount!=-5000 && group.win_amount != -4000){
+                                    settlement_data.member_debts += (24 - group.gid.slice(-2)) * 5000;
+                                } 
+                                if(group.gid.slice(-2) != "00" && group.win_amount == -5000) {
+                                    settlement_data.member_paied +=group.win_amount;
+                                }        
+                            }
+							break;							
 						}
 						default : {
 							settlement_data.win_account.gids.push(lastGroupInfo);
@@ -278,6 +295,7 @@
 				elm.win_group.innerHTML = "得標會數 :  <br><span style=\"color:green;\">" + settlement_data.win_account.gids.length + "</span><br>" + " 得標會款總計  : <br>" + -(settlement_data.win_account.win_amount);
 
 
+				elm.asset_debt.innerHTML = "已繳會費 : <br><span style=\"color:green;\">" + settlement_data.member_asset+"</span><br>" +"會員負債 : <br>" +settlement_data.member_debts +"<br>"+ " 已繳死會款  : <br>"+settlement_data.member_paied;
 
 
 
