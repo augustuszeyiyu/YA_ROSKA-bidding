@@ -1,4 +1,4 @@
-.table{}
+/* .table{}
 		.table > .t-head, .table .t-body { border:1px solid #EEE; }
 		.table > .t-head { border-bottom:0; font-weight:bolder; background-color:#DDC855;}
 			.table > .t-body > .t-row, .table > .t-head { display:grid; }
@@ -13,14 +13,14 @@
 				.table .t-column.no-padding {padding:0;}
 					.table .t-column > div.text-limiter { width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 				
-				.table .t-column:first-child ~ .t-column { border-left:1px solid #EEE; }
+				.table .t-column:first-child ~ .t-column { border-left:1px solid #EEE; } */
 
 				.table.group_view_table .t-row, .table.group_view_table .t-head	{
 					grid-template-columns:0.5fr 1.5fr 1fr 1fr 1fr 1fr;
 				}
-
+/* 
 		.table .t-row, .table .t-head { grid-template-columns:0.5fr 1.5fr 1fr 1fr 1fr 1fr}
-			.table .t-column { box-sizing:border-box; }
+			.table .t-column { box-sizing:border-box; } */
 	
 			/* 編號 */
 			.table .t-column:nth-child(1) { }

@@ -1,5 +1,5 @@
 
-		.table.member_profit_table .t-row, .table.member_profit_table .t-head { grid-template-columns:2rem 1fr 1.5fr 2fr 2fr 2fr 2fr 2fr 1fr 2rem 1fr}
+		.table.member_profit_table .t-row, .table.member_profit_table >.t-head { grid-template-columns:2rem 1fr 1.5fr 2fr 2fr 2fr 2fr 2fr 1fr 2rem 1fr}
 
 	
 			/* 編號 */
